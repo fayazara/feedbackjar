@@ -4,6 +4,20 @@
       <UIcon name="i-heroicons-envelope" class="text-3xl" />
       <p class="ml-2 text-lg font-semibold">EmailJar</p>
     </div>
-    <UButton to="/login" color="primary" variant="soft">Login</UButton>
+    <UButton
+      :to="loggedIn ? '/dashboard' : '/login'"
+      color="primary"
+      variant="soft"
+      >{{ loggedIn ? "Dashboard &rarr;" : "Login" }}</UButton
+    >
   </UContainer>
 </template>
+
+<script setup>
+const props = defineProps({
+  loggedIn: {
+    type: Boolean,
+    required: true,
+  },
+});
+</script>

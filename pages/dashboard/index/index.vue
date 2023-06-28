@@ -1,22 +1,53 @@
 <template>
-  <header>
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-900">
-        Dashboard
-      </h1>
-    </div>
-  </header>
-  <main>
-    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <code>
-        {{ user }}
-      </code>
-    </div>
-  </main>
+  <DashboardHeader
+    title="Email Lists"
+    subtitle="Create and manage email lists."
+  >
+    <UButton
+      icon="i-heroicons-plus-small-20-solid"
+      color="white"
+      variant="solid"
+      label="New List"
+      @click="isOpen = true"
+    />
+  </DashboardHeader>
+  <DashboardPageContainer> </DashboardPageContainer>
+  <UModal v-model="isOpen">
+    <form @submit.prevent="saveList">
+      <UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+        <template #header> Add a new Email List </template>
+
+        <UFormGroup name="name" label="List name" required :error="error">
+          <UInput v-model="listName" />
+        </UFormGroup>
+
+        <template #footer>
+          <div class="flex items-center justify-end w-full space-x-2">
+            <UButton type="button" @click="isOpen = false" variant="soft"
+              >Cancel</UButton
+            >
+            <UButton type="submit">Save</UButton>
+          </div>
+        </template>
+      </UCard>
+    </form>
+  </UModal>
 </template>
 
 <script setup>
-const { user } = useUserSession();
+const isOpen = ref(false);
+const listName = ref("");
+const error = ref("");
+async function saveList() {
+  try {
+    if (!listName.value) {
+      error.value = "List name is required";
+      return;
+    }
+    console.log("Saving list", listName.value);
+    error.value;
+  } catch (error) {
+    console.error(error);
+  }
+}
 </script>
-
-<style></style>
