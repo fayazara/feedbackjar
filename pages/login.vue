@@ -2,15 +2,25 @@
   <div class="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <div class="flex items-center justify-center">
-        <Logo class="h-12 w-12" />
+        <UIcon name="i-heroicons-envelope" class="text-3xl" />
       </div>
       <h2 class="mt-2 text-center text-2xl font-bold leading-9 tracking-tight">
         Sign in to your account
       </h2>
+      <p class="text-center text-slate-500">
+        You need to sign in to your account to continue using Emailjar
+      </p>
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <UButton color="gray" variant="solid" block size="lg">
+      <UButton
+        to="/api/auth/github"
+        color="gray"
+        variant="solid"
+        block
+        size="lg"
+        external
+      >
         <template #leading>
           <svg
             xmlns="http://www.w3.org/2000/svg"

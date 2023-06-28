@@ -3122,7 +3122,7 @@ esbuild@^0.17.5, esbuild@~0.17.6:
     "@esbuild/win32-ia32" "0.17.19"
     "@esbuild/win32-x64" "0.17.19"
 
-esbuild@^0.18.5, esbuild@^0.18.6, esbuild@^0.18.9:
+esbuild@^0.18.10, esbuild@^0.18.6, esbuild@^0.18.9:
   version "0.18.10"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.18.10.tgz#f0e99e8a957990241be04f2454d7e2cb0d78b43f"
   integrity sha512-33WKo67auOXzZHBY/9DTJRo7kIvfU12S+D4sp2wIz39N88MDIaCGyCwbW01RR70pK6Iya0I74lHEpyLfFqOHPA==
@@ -5061,10 +5061,10 @@ next-tick@1, next-tick@^1.1.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
   integrity sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==
 
-nitropack@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/nitropack/-/nitropack-2.5.1.tgz#cff6ff3b1e58c57e3a6fb2c251768afc961281b3"
-  integrity sha512-RKq++lLrs7m/hlkEkYezL119Lu7LzseaDh/6UzmXqYD8/fx896Bou4CJpe775iHiHDzASiCmVKtlkBJxSiRi5w==
+nitropack@^2.5.1, "nitropack@npm:nitropack-edge@latest":
+  version "2.5.2-28131518.dfd8bbd"
+  resolved "https://registry.yarnpkg.com/nitropack-edge/-/nitropack-edge-2.5.2-28131518.dfd8bbd.tgz#8eb308bba1d9499d4c46ea5d0141555f04545def"
+  integrity sha512-+7eNMlFXP/SdhcpFUowW5fwrzFBWasRAKN37pf5Xp9+lAh59wbLQ5t4oAcEjfCppp1eSryPF3Bs4C8CqIlH0bg==
   dependencies:
     "@cloudflare/kv-asset-handler" "^0.3.0"
     "@netlify/functions" "^1.6.0"
@@ -5089,7 +5089,7 @@ nitropack@^2.5.1:
     defu "^6.1.2"
     destr "^2.0.0"
     dot-prop "^7.2.0"
-    esbuild "^0.18.5"
+    esbuild "^0.18.10"
     escape-string-regexp "^5.0.0"
     etag "^1.8.1"
     fs-extra "^11.1.1"
@@ -5117,10 +5117,10 @@ nitropack@^2.5.1:
     pkg-types "^1.0.3"
     pretty-bytes "^6.1.0"
     radix3 "^1.0.1"
-    rollup "^3.25.1"
+    rollup "^3.25.3"
     rollup-plugin-visualizer "^5.9.2"
     scule "^1.0.0"
-    semver "^7.5.2"
+    semver "^7.5.3"
     serve-placeholder "^2.0.1"
     serve-static "^1.15.0"
     source-map-support "^0.5.21"
@@ -5128,7 +5128,7 @@ nitropack@^2.5.1:
     ufo "^1.1.2"
     uncrypto "^0.1.3"
     unenv "^1.5.1"
-    unimport "^3.0.8"
+    unimport "^3.0.10"
     unstorage "^1.7.0"
 
 node-abi@^3.3.0:
@@ -6378,7 +6378,7 @@ rollup-plugin-visualizer@^5.9.2:
     source-map "^0.7.4"
     yargs "^17.5.1"
 
-rollup@^3.21.0, rollup@^3.25.1:
+rollup@^3.21.0, rollup@^3.25.3:
   version "3.25.3"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.25.3.tgz#f9a8986f0f244bcfde2208da91ba46b8fd252551"
   integrity sha512-ZT279hx8gszBj9uy5FfhoG4bZx8c+0A1sbqtr7Q3KNWIizpTdDEPZbV2xcbvHsnFp4MavCQYZyzApJ+virB8Yw==
@@ -6452,7 +6452,7 @@ semver@^6.0.0, semver@^6.3.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
-semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.5.0, semver@^7.5.2, semver@^7.5.3:
+semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.5.0, semver@^7.5.3:
   version "7.5.3"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.3.tgz#161ce8c2c6b4b3bdca6caadc9fa3317a4c4fe88e"
   integrity sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ==
