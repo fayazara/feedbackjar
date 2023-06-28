@@ -1,18 +1,47 @@
-# Nuxt 3 Minimal Starter
+# Emailjar
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+An example open source application built with Nuxt 3.
 
-## Setup
+> **Warning**
+> This app is a work in progress. I'm building this in public. You can follow the progress on Twitter [@fayazara](https://twitter.com/fayazara).
+> See the roadmap below.
+
+## About this project
+
+This project is inspired by [@shadcn's](https://twitter.com/shadcn) Taxonomy [Project](https://tx.shadcn.com/). I wanted to build something similar with Nuxt 3, Turso, and Vue.
+
+## What does this app do btw?
+A simple CRUD app app, which will save email lists. You can create a list, add emails to it. Maybe for forms, newsletter subscription forms etc. 
+
+## Features (WIP)
+
+- Routing, Layouts, Nested Layouts and Layout Groups
+- Data Fetching, Caching and Mutation
+- Loading UI
+- Metadata files
+- Server and Client Components
+- API Routes and Middlewares
+- ORM using **Drizzle ORM**
+- Database on **Turso**
+- UI Components built using **Nuxt UI**
+- Subscriptions using **Stripe**
+- Styled using **Tailwind CSS**
+- Validations using **Zod**
+- Written in **TypeScript**
+
+## Roadmap
+
+- [ ] Add lists
+- [ ] Add Emails
+- [ ] Subscriptions using Stripe
+- [ ] Make the api public to add new emails
+- [ ] Api key management
+
+## Local Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
 # yarn
 yarn install
 ```
@@ -22,12 +51,6 @@ yarn install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
 # yarn
 yarn dev
 ```
