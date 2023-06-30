@@ -31,8 +31,5 @@
     "h3-zod": "^0.5.1",
     "utf-8-validate": "^6.0.3",
     "zod": "^3.21.4"
-  },
-  "resolutions": {
-    "nitropack": "npm:nitropack-edge@latest"
   }
 }
