@@ -40,8 +40,8 @@
             </p>
           </section>
         </div>
-        <div class="flex flex-none items-center gap-x-4">
-          <UButton color="white" variant="solid" label="View Collection" />
+        <div class="flex flex-none items-center gap-x-2">
+          <UButton color="white" variant="solid" size="xs" label="View Collection" />
           <DashboardCollectionActionMenu
             @edit="emit('edit', collection)"
             @delete="emit('delete', collection)"
