@@ -1,4 +1,4 @@
-import { and, eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { useValidatedParams, zh } from "h3-zod";
 
 export default eventHandler(async (event) => {
@@ -7,12 +7,22 @@ export default eventHandler(async (event) => {
   });
   const session = await requireUserSession(event);
 
-  // delete the specific collection for the user.
-  const collection = await useDb()
+  const deletedCollection = await useDb()
     .delete(tables.collections)
     .where(
-      and(eq(tables.collections.id, id), eq(tables.collections.userId, session.user.id))
-    );
+      and(
+        eq(tables.collections.id, id),
+        eq(tables.collections.userId, session.user.id)
+      )
+    )
+    .returning()
+    .get();
 
-  return collection;
+  if (!deletedCollection) {
+    throw createError({
+      statusCode: 404,
+      message: "Collection not found",
+    });
+  }
+  return deletedCollection;
 });

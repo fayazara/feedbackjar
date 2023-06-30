@@ -42,65 +42,10 @@
         </div>
         <div class="flex flex-none items-center gap-x-4">
           <UButton color="white" variant="solid" label="View Collection" />
-
-          <Menu as="div" class="relative flex-none">
-            <MenuButton
-              class="-m-2.5 block p-2.5 text-slate-500 hover:text-slate-900"
-            >
-              <span class="sr-only">Open options</span>
-              <UIcon
-                name="i-heroicons-ellipsis-vertical"
-                class="text-2xl"
-                aria-hidden="true"
-              />
-            </MenuButton>
-            <transition
-              enter-active-class="transition ease-out duration-100"
-              enter-from-class="transform opacity-0 scale-95"
-              enter-to-class="transform opacity-100 scale-100"
-              leave-active-class="transition ease-in duration-75"
-              leave-from-class="transform opacity-100 scale-100"
-              leave-to-class="transform opacity-0 scale-95"
-            >
-              <MenuItems
-                class="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-slate-900/5 focus:outline-none"
-              >
-                <MenuItem v-slot="{ active }">
-                  <button
-                    @click="emit('edit', collection)"
-                    :class="[
-                      active ? 'bg-slate-50' : '',
-                      'block px-3 py-1 text-sm leading-6 text-slate-900 w-full text-left',
-                    ]"
-                  >
-                    Edit<span class="sr-only">, {{ collection.name }}</span>
-                  </button>
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                  <a
-                    href="#"
-                    :class="[
-                      active ? 'bg-slate-50' : '',
-                      'block px-3 py-1 text-sm leading-6 text-slate-900',
-                    ]"
-                    >Move<span class="sr-only">, {{ collection.name }}</span></a
-                  >
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                  <a
-                    href="#"
-                    :class="[
-                      active ? 'bg-slate-50' : '',
-                      'block px-3 py-1 text-sm leading-6 text-slate-900',
-                    ]"
-                    >Delete<span class="sr-only"
-                      >, {{ collection.name }}</span
-                    ></a
-                  >
-                </MenuItem>
-              </MenuItems>
-            </transition>
-          </Menu>
+          <DashboardCollectionActionMenu
+            @edit="emit('edit', collection)"
+            @delete="emit('delete', collection)"
+          />
         </div>
       </li>
     </ul>
@@ -108,8 +53,7 @@
 </template>
 
 <script setup>
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-const emit = defineEmits(["editCollection"]);
+const emit = defineEmits(["editCollection", "deleteCollection"]);
 
 const props = defineProps({
   collections: {

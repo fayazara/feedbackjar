@@ -15,6 +15,7 @@
     <DashboardCollectionList
       :collections="collections"
       @edit="editCollection"
+      @delete="deleteCollection"
     />
   </DashboardPageContainer>
   <UModal v-model="isOpen">
@@ -32,10 +33,11 @@ const { data: collections } = await useFetch("/api/collections");
 const isOpen = ref(false);
 const selectedCollection = ref(null);
 const mode = ref("create");
+const toast = useToast();
 
 function updateCollection(collection) {
   if (mode.value === "create") {
-    collections.value.push(collection);
+    collections.value.push({ ...collection, emailsCount: 0 });
   }
   if (mode.value === "edit") {
     const index = collections.value.findIndex((c) => c.id === collection.id);
@@ -55,5 +57,26 @@ function editCollection(collection) {
   mode.value = "edit";
   selectedCollection.value = collection;
   isOpen.value = true;
+}
+
+function deleteCollection(collection) {
+  $fetch(`/api/collections/${collection.id}`, { method: "DELETE" })
+    .then(() => {
+      const index = collections.value.findIndex((c) => c.id === collection.id);
+      collections.value.splice(index, 1);
+      toast.add({
+        icon: "i-heroicons-trash",
+        title: `Collection "${collection.name}" deleted.`,
+        color: "red",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.add({
+        icon: "i-heroicons-x-circle",
+        title: `Error deleting collection "${collection.name}".`,
+        color: "red",
+      });
+    });
 }
 </script>
