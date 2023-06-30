@@ -8,6 +8,34 @@
       "when": 1687947590172,
       "tag": "0000_pale_tenebrous",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1688103380603,
+      "tag": "0001_flat_earthquake",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1688107728404,
+      "tag": "0002_wealthy_loners",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1688108783622,
+      "tag": "0003_amazing_zaran",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1688109771874,
+      "tag": "0004_ancient_harpoon",
+      "breakpoints": true
     }
   ]
 }

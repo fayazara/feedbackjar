@@ -35,6 +35,7 @@
     <div class="py-10">
       <NuxtPage />
     </div>
+    <UNotifications />
   </div>
 </template>
 
@@ -46,7 +47,7 @@ definePageMeta({
 
 const links = [
   {
-    name: "Lists",
+    name: "Collections",
     url: "/dashboard",
   },
   {
@@ -66,10 +67,6 @@ watch(loggedIn, () => {
     navigateTo("/");
   }
 });
-
-function toggleColorMode() {
-  colorMode.preference = colorMode.preference === "dark" ? "light" : "dark";
-}
 
 useHead({
   title: "EmailJar",

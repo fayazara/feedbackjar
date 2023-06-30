@@ -4,11 +4,11 @@
   >
     <div>
       <h1
-        class="text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white"
+        class="text-xl sm:text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white"
       >
         {{ title }}
       </h1>
-      <p v-if="subtitle" class="text-slate-500">{{ subtitle }}</p>
+      <p v-if="subtitle" class="text-sm sm:text-base text-slate-500">{{ subtitle }}</p>
     </div>
     <slot />
   </header>

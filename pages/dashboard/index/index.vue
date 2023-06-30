@@ -1,53 +1,59 @@
 <template>
   <DashboardHeader
-    title="Email Lists"
-    subtitle="Create and manage email lists."
+    title="Email Collections"
+    subtitle="Create and manage email collections."
   >
     <UButton
       icon="i-heroicons-plus-small-20-solid"
       color="white"
       variant="solid"
-      label="New List"
+      label="New Collection"
       @click="isOpen = true"
     />
   </DashboardHeader>
-  <DashboardPageContainer> </DashboardPageContainer>
+  <DashboardPageContainer>
+    <DashboardCollectionList
+      :collections="collections"
+      @edit="editCollection"
+    />
+  </DashboardPageContainer>
   <UModal v-model="isOpen">
-    <form @submit.prevent="saveList">
-      <UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
-        <template #header> Add a new Email List </template>
-
-        <UFormGroup name="name" label="List name" required :error="error">
-          <UInput v-model="listName" />
-        </UFormGroup>
-
-        <template #footer>
-          <div class="flex items-center justify-end w-full space-x-2">
-            <UButton type="button" @click="isOpen = false" variant="soft"
-              >Cancel</UButton
-            >
-            <UButton type="submit">Save</UButton>
-          </div>
-        </template>
-      </UCard>
-    </form>
+    <DashboardCollectionForm
+      :mode="mode"
+      @close="closeModal"
+      :selectedCollection="selectedCollection"
+      @updateCollection="updateCollection"
+    />
   </UModal>
 </template>
 
 <script setup>
+const { data: collections } = await useFetch("/api/collections");
 const isOpen = ref(false);
-const listName = ref("");
-const error = ref("");
-async function saveList() {
-  try {
-    if (!listName.value) {
-      error.value = "List name is required";
-      return;
-    }
-    console.log("Saving list", listName.value);
-    error.value;
-  } catch (error) {
-    console.error(error);
+const selectedCollection = ref(null);
+const mode = ref("create");
+
+function updateCollection(collection) {
+  if (mode.value === "create") {
+    collections.value.push(collection);
   }
+  if (mode.value === "edit") {
+    const index = collections.value.findIndex((c) => c.id === collection.id);
+    collections.value[index] = collection;
+  }
+  isOpen.value = false;
+  selectedCollection.value = null;
+  mode = "create";
+}
+
+function closeModal() {
+  isOpen.value = false;
+  selectedCollection.value = null;
+}
+
+function editCollection(collection) {
+  mode.value = "edit";
+  selectedCollection.value = collection;
+  isOpen.value = true;
 }
 </script>

@@ -7,12 +7,12 @@ export default eventHandler(async (event) => {
   });
   const session = await requireUserSession(event);
 
-  // delete the specific list for the user.
-  const list = await useDb()
-    .delete(tables.lists)
+  // delete the specific collection for the user.
+  const collection = await useDb()
+    .delete(tables.collections)
     .where(
-      and(eq(tables.lists.id, id), eq(tables.lists.userId, session.user.id))
+      and(eq(tables.collections.id, id), eq(tables.collections.userId, session.user.id))
     );
 
-  return list;
+  return collection;
 });

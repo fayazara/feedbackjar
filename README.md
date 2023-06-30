@@ -11,7 +11,7 @@ An example open source application built with Nuxt 3.
 This project is inspired by [@shadcn's](https://twitter.com/shadcn) Taxonomy [Project](https://tx.shadcn.com/). I wanted to build something similar with Nuxt 3, Turso, and Vue.
 
 ## What does this app do btw?
-A simple CRUD app app, which will save email lists. You can create a list, add emails to it. Maybe for forms, newsletter subscription forms etc. 
+A simple CRUD app app, which will save email collections. You can create a collection add emails to it. Maybe for forms, newsletter subscription forms etc. 
 
 ## Features (WIP)
 
@@ -31,7 +31,7 @@ A simple CRUD app app, which will save email lists. You can create a list, add e
 
 ## Roadmap
 
-- [ ] Add lists
+- [ ] Add Collections
 - [ ] Add Emails
 - [ ] Subscriptions using Stripe
 - [ ] Make the api public to add new emails

@@ -1,0 +1,1 @@
+ALTER TABLE lists ADD `description` text;
