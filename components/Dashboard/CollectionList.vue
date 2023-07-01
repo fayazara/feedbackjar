@@ -42,6 +42,7 @@
         </div>
         <div class="flex flex-none items-center gap-x-2">
           <UButton
+            :to="`/dashboard/${collection.id}`"
             color="white"
             variant="solid"
             size="xs"
