@@ -23,10 +23,11 @@
 
 export const useEmail = () => {
   const route = useRoute();
-  const { data: emailCollection } = useFetch(
+  const { data: emailCollection, pending } = useFetch(
     `/api/collections/${route.params.collectionId}/emails`
   );
   return {
     emailCollection,
+    pending,
   };
 };
