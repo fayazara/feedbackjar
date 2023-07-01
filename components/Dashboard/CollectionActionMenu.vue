@@ -1,11 +1,15 @@
 <template>
   <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">
-    <UButton size="xs" color="white" trailing-icon="i-heroicons-ellipsis-vertical" />
+    <UButton
+      size="xs"
+      color="white"
+      trailing-icon="i-heroicons-ellipsis-vertical"
+    />
   </UDropdown>
 </template>
 
 <script setup>
-const emit = defineEmits(["edit", "delete"]);
+const emit = defineEmits(["edit", "delete", "duplicate"]);
 const items = [
   [
     {
@@ -20,6 +24,9 @@ const items = [
       label: "Duplicate",
       icon: "i-heroicons-document-duplicate-20-solid",
       shortcuts: ["C"],
+      click: () => {
+        emit("duplicate");
+      },
     },
   ],
   [

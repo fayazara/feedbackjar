@@ -41,10 +41,16 @@
           </section>
         </div>
         <div class="flex flex-none items-center gap-x-2">
-          <UButton color="white" variant="solid" size="xs" label="View Collection" />
+          <UButton
+            color="white"
+            variant="solid"
+            size="xs"
+            label="View Collection"
+          />
           <DashboardCollectionActionMenu
-            @edit="emit('edit', collection)"
-            @delete="emit('delete', collection)"
+            @edit="emit('editCollection', collection)"
+            @delete="emit('deleteCollection', collection)"
+            @duplicate="emit('duplicateCollection', collection)"
           />
         </div>
       </li>
@@ -53,7 +59,11 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["editCollection", "deleteCollection"]);
+const emit = defineEmits([
+  "editCollection",
+  "deleteCollection",
+  "duplicateCollection",
+]);
 
 const props = defineProps({
   collections: {

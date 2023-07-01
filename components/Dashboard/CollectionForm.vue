@@ -50,11 +50,6 @@
 </template>
 
 <script setup>
-const newCollection = ref({ name: "", description: "", status: "active" });
-const error = ref("");
-const loading = ref(false);
-const toast = useToast();
-
 const props = defineProps({
   mode: {
     type: String,
@@ -68,73 +63,19 @@ const props = defineProps({
 
 const emit = defineEmits(["updateCollection"]);
 
-const statuses = [
-  { name: "Active", value: "active" },
-  { name: "Archived", value: "archived" },
-  { name: "Draft", value: "draft" },
-];
-
-function saveCollection() {
-  error.value = "";
-
-  if (!newCollection.value.name.trim()) {
-    error.value = "Collection name is required";
-    return;
-  }
-  loading.value = true;
-  const url =
-    props.mode === "edit"
-      ? `/api/collections/${props.selectedCollection.id}`
-      : "/api/collections";
-
-  const method = props.mode === "edit" ? "PATCH" : "POST";
-  const title =
-    props.mode === "edit"
-      ? `Collection "${props.selectedCollection.name}" updated.`
-      : `Collection "${newCollection.value.name}" created.`;
-
-  const body = JSON.stringify(newCollection.value);
-
-  $fetch(url, { method, body })
-    .then((collection) => {
-      toast.add({ icon: "i-heroicons-check-circle", title });
-      newCollection.value.name = "";
-      newCollection.value.description = "";
-      emit("updateCollection", collection);
-    })
-    .catch((err) => {
-      console.log(err);
-      if (err.data?.data?.issues) {
-        const title = err.data.data.issues
-          .map((issue) => issue.message)
-          .join("\n");
-        toast.add({ title, color: "red" });
-      }
-    })
-    .finally(() => {
-      loading.value = false;
-    });
-}
-
-const headerText = computed(() => {
-  return props.mode === "edit" && props.selectedCollection.name
-    ? props.selectedCollection.name
-    : "Add a new Email Collection";
-});
-
-const isSaveDisabled = computed(() => {
-  return newCollection.value.name.trim().length === 0 || loading.value;
-});
-
-const saveButtonText = computed(() => {
-  return props.mode === "edit" ? "Update" : "Save";
-});
+const {
+  newCollection,
+  error,
+  loading,
+  saveCollection,
+  headerText,
+  isSaveDisabled,
+  saveButtonText,
+  initEditMode,
+  statuses,
+} = useCollection(props, emit);
 
 onMounted(() => {
-  if (props.mode === "edit") {
-    newCollection.value.name = props.selectedCollection.name;
-    newCollection.value.description = props.selectedCollection.description;
-    newCollection.value.status = props.selectedCollection.status;
-  }
+  initEditMode();
 });
 </script>
