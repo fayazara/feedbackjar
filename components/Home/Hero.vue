@@ -20,8 +20,16 @@
           Follow along as we figure this out together.
         </p>
         <div class="mt-6 flex items-center justify-center gap-x-2">
-          <UButton size="lg">Get started</UButton>
-          <UButton size="lg" variant="soft">Github</UButton>
+          <UButton to="/dashboard" size="lg" color="white" variant="solid">Get started</UButton>
+          <UButton
+            size="lg"
+            external
+            to="https://github.com/fayazara/emailjar"
+            target="_blank"
+            color="white"
+            variant="soft"
+            >Github</UButton
+          >
         </div>
       </div>
     </UContainer>

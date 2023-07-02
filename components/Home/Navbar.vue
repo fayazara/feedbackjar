@@ -1,15 +1,19 @@
 <template>
   <UContainer as="nav" class="h-16 flex items-center justify-between">
-    <div class="flex items-center">
-      <UIcon name="i-heroicons-envelope" class="text-3xl" />
+    <div class="flex items-center justify-between">
+      <img height="32" width="32" src="/logo.png" alt="EmailJar Logo" />
       <p class="ml-2 text-lg font-semibold">EmailJar</p>
     </div>
+    <div class="flex-grow"></div>
+    <ThemeToggle />
     <UButton
       :to="loggedIn ? '/dashboard' : '/login'"
       color="primary"
       variant="soft"
-      >{{ loggedIn ? "Dashboard &rarr;" : "Login" }}</UButton
+      class="ml-3"
     >
+      {{ loggedIn ? "Dashboard &rarr;" : "Login" }}
+    </UButton>
   </UContainer>
 </template>
 

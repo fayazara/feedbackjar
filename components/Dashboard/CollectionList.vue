@@ -1,8 +1,8 @@
 <template>
   <div
-    class="bg-white dark:bg-slate-950 px-5 border dark:border-slate-800 rounded-xl"
+    class="bg-white dark:bg-slate-1000 px-5 border dark:border-slate-900 rounded-xl"
   >
-    <ul role="list" class="divide-y divide-slate-100 dark:divide-slate-800">
+    <ul role="list" class="divide-y divide-slate-100 dark:divide-slate-900">
       <li
         v-for="collection in collections"
         :key="collection.id"

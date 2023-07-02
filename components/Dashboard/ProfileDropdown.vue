@@ -15,7 +15,7 @@
       leave-to-class="transform opacity-0 scale-95"
     >
       <MenuItems
-        class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-slate-100 dark:divide-slate-800 rounded-md bg-white dark:bg-slate-950 border dark:border-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-slate-100 dark:divide-slate-900 rounded-md bg-white dark:bg-slate-1000 border dark:border-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       >
         <div class="px-4 py-3">
           <p class="text-sm">Signed in as</p>

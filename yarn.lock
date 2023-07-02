@@ -645,6 +645,13 @@
     kolorist "^1.8.0"
     local-pkg "^0.4.3"
 
+"@iconify/vue@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@iconify/vue/-/vue-4.1.1.tgz#c143c2973a4990ba2b47b766f80a9bca97937305"
+  integrity sha512-RL85Bm/DAe8y6rT6pux7D2FJSiUEM/TPfyK7GrbAOfTSwrhvwJW+S5yijdGcmtXouA8MtuH9C7l4hiSE4mLMjg==
+  dependencies:
+    "@iconify/types" "^2.0.0"
+
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@ioredis/commands/-/commands-1.2.0.tgz#6d61b3097470af1fdbbe622795b8921d42018e11"
@@ -2428,6 +2435,11 @@ consola@^3.0.1, consola@^3.1.0:
   resolved "https://registry.yarnpkg.com/consola/-/consola-3.2.1.tgz#e5176be3d131d468340a52a2e7bb1d8d1e7bac4a"
   integrity sha512-p4cjcr/NHr2pbmXcTBcdNwIWEyQIzavKkZt6d0rDPQXta+oilM9j9Folao2REulksBZhYX39vF+HlIm7QRTeWA==
 
+consola@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/consola/-/consola-3.2.2.tgz#be9b295e1e556355a09ac475b4394016144e0c32"
+  integrity sha512-r921u0vbF4lQsoIqYvSSER+yZLPQGijOHrYcWoCNVNBZmn/bRR+xT/DgerTze/nLD9TTGzdDa378TVhx7RDOYg==
+
 console-control-strings@^1.0.0, console-control-strings@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
@@ -3766,6 +3778,19 @@ h3@^1.6.6, h3@^1.7.0:
     ufo "^1.1.2"
     uncrypto "^0.1.3"
 
+h3@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/h3/-/h3-1.7.1.tgz#fc9328adf5da1d29cbb2d97b81ae3dd9b426463e"
+  integrity sha512-A9V2NEDNHet7v1gCg7CMwerSigLi0SRbhTy7C3lGb0N4YKIpPmLDjedTUopqp4dnn7COHfqUjjaz3zbtz4QduA==
+  dependencies:
+    cookie-es "^1.0.0"
+    defu "^6.1.2"
+    destr "^2.0.0"
+    iron-webcrypto "^0.7.0"
+    radix3 "^1.0.1"
+    ufo "^1.1.2"
+    uncrypto "^0.1.3"
+
 hanji@^0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/hanji/-/hanji-0.0.5.tgz#22a5092e53b2a83ed6172c488ae0d68eb3119213"
@@ -5068,10 +5093,10 @@ next-tick@1, next-tick@^1.1.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
   integrity sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==
 
-nitropack@^2.5.1, "nitropack@npm:nitropack-edge@latest":
-  version "2.5.2-28131518.dfd8bbd"
-  resolved "https://registry.yarnpkg.com/nitropack-edge/-/nitropack-edge-2.5.2-28131518.dfd8bbd.tgz#8eb308bba1d9499d4c46ea5d0141555f04545def"
-  integrity sha512-+7eNMlFXP/SdhcpFUowW5fwrzFBWasRAKN37pf5Xp9+lAh59wbLQ5t4oAcEjfCppp1eSryPF3Bs4C8CqIlH0bg==
+nitropack@^2.5.1:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/nitropack/-/nitropack-2.5.2.tgz#d5fab06a64ecd15dead5e968783a9a1badebdf71"
+  integrity sha512-hXEHY9NJmOOETFFTPCBB9PB0+txoAbU/fB2ovUF6UMRo4ucQZztYnZdX+YSxa6FVz6eONvcxXvf9/9s6t08KWw==
   dependencies:
     "@cloudflare/kv-asset-handler" "^0.3.0"
     "@netlify/functions" "^1.6.0"
@@ -5091,7 +5116,7 @@ nitropack@^2.5.1, "nitropack@npm:nitropack-edge@latest":
     chalk "^5.2.0"
     chokidar "^3.5.3"
     citty "^0.1.1"
-    consola "^3.1.0"
+    consola "^3.2.2"
     cookie-es "^1.0.0"
     defu "^6.1.2"
     destr "^2.0.0"
@@ -5102,7 +5127,7 @@ nitropack@^2.5.1, "nitropack@npm:nitropack-edge@latest":
     fs-extra "^11.1.1"
     globby "^13.2.0"
     gzip-size "^7.0.0"
-    h3 "^1.7.0"
+    h3 "^1.7.1"
     hookable "^5.5.3"
     http-graceful-shutdown "^3.1.13"
     http-proxy "^1.18.1"
@@ -5135,7 +5160,7 @@ nitropack@^2.5.1, "nitropack@npm:nitropack-edge@latest":
     ufo "^1.1.2"
     uncrypto "^0.1.3"
     unenv "^1.5.1"
-    unimport "^3.0.10"
+    unimport "^3.0.11"
     unstorage "^1.7.0"
 
 node-abi@^3.3.0:
@@ -5343,6 +5368,14 @@ nuxi@3.6.1:
   integrity sha512-8kyDHfyiq0oLywon8UlucQWyYj3toE5AU96COjbuQy8ZzyRT6KJlAmMXmFkO/VuIhaMC8qdlcZPYg/NnHTVjaQ==
   optionalDependencies:
     fsevents "~2.3.2"
+
+nuxt-icon@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/nuxt-icon/-/nuxt-icon-0.4.2.tgz#040efe9463b06d0d48d8e84702582758a5e76357"
+  integrity sha512-yFpvDA+FuUz+ixtt1eRzctTfR4sl7egZoXu7LL+CUc42qFlzCMaTZJ9eqFR2FTW8zu9tfLIZ83RJmUa1jNEWgg==
+  dependencies:
+    "@iconify/vue" "^4.1.1"
+    "@nuxt/kit" "^3.6.1"
 
 nuxt@^3.5.3, nuxt@^3.6.1:
   version "3.6.1"
@@ -7190,6 +7223,23 @@ unimport@^3.0.10, unimport@^3.0.8:
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/unimport/-/unimport-3.0.10.tgz#cc58b1a8bc14556cb89c5a3006fe2c6bdd666f6c"
   integrity sha512-rKxlbbjxVQR+6dL7OxJSuVOu96MtTvoRY0VBasGQTgZGTzKPrawZ4zMv7bmhLHRmUqG/CUAJ4uNZlaip+F/6+A==
+  dependencies:
+    "@rollup/pluginutils" "^5.0.2"
+    escape-string-regexp "^5.0.0"
+    fast-glob "^3.2.12"
+    local-pkg "^0.4.3"
+    magic-string "^0.30.0"
+    mlly "^1.4.0"
+    pathe "^1.1.1"
+    pkg-types "^1.0.3"
+    scule "^1.0.0"
+    strip-literal "^1.0.1"
+    unplugin "^1.3.1"
+
+unimport@^3.0.11:
+  version "3.0.11"
+  resolved "https://registry.yarnpkg.com/unimport/-/unimport-3.0.11.tgz#64b0e9dc508e1835737a2e333e75d7123db63120"
+  integrity sha512-UaaLu7TiqiEwjm5a9FGsL8RL87U65wyr1jBeIAAvLChgJZRMTTkknU9bkWjBsVGutXLT2Yq8/dPyWXSC3/ELRg==
   dependencies:
     "@rollup/pluginutils" "^5.0.2"
     escape-string-regexp "^5.0.0"

@@ -4,8 +4,8 @@ export default eventHandler(async () => {
   // Count the total number of collections
   return await useDb()
     .select({
-      collections: sql<number>`count(*)`,
       users: sql<number>`count(distinct(${tables.collections.userId}))`,
+      collections: sql<number>`count(*)`,
     })
     .from(tables.collections)
     .get();

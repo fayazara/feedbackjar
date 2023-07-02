@@ -5,7 +5,7 @@
   />
   <DashboardPageContainer>
     <div
-      class="flex p-4 border rounded-2xl bg-white dark:bg-slate-950 dark:border-slate-800"
+      class="flex p-4 border rounded-2xl bg-white dark:bg-slate-1000 dark:border-slate-900"
     >
       <UAvatar :src="user.avatar_url" :alt="user.name" size="3xl" />
       <div class="ml-6">

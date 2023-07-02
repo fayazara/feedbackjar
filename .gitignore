@@ -25,6 +25,7 @@ logs
 
 nuxt.d.ts
 .history
-db.sqlite
+*.sqlite
 .vercel
 .netlify
+server/db/db.sqlite

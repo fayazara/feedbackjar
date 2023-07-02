@@ -2,7 +2,7 @@
   <div class="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <div class="flex items-center justify-center">
-        <UIcon name="i-heroicons-envelope" class="text-3xl" />
+        <img height="32" width="32" src="/logo.png" alt="EmailJar Logo" />
       </div>
       <h2 class="mt-2 text-center text-2xl font-bold leading-9 tracking-tight">
         Sign in to your account

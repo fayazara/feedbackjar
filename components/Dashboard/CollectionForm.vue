@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="saveCollection">
-    <UCard :ui="{ divide: 'divide-y divide-slate-100 dark:divide-slate-800' }">
+    <UCard :ui="{ divide: 'divide-y divide-slate-100 dark:divide-slate-900' }">
       <template #header>
         <div class="flex items-center text-slate-600 dark:text-slate-300">
           <UIcon name="i-heroicons-document-plus" class="text-xl" />

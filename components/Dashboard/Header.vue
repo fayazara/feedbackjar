@@ -6,11 +6,9 @@
       <h1
         class="text-xl sm:text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white"
       >
-        {{ !loading ? title : "Fetching details" }}
+        {{ title }}
       </h1>
-      <p v-if="subtitle" class="text-sm sm:text-base text-slate-500">
-        {{ subtitle }}
-      </p>
+      <p v-if="subtitle" class="text-sm sm:text-base text-slate-500">{{ subtitle }}</p>
     </div>
     <slot />
   </header>
@@ -25,11 +23,6 @@ const props = defineProps({
     type: String,
     required: false,
     default: "",
-  },
-  loading: {
-    type: Boolean,
-    required: false,
-    default: false,
   },
 });
 </script>

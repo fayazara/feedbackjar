@@ -4,7 +4,7 @@ const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxthq/ui", "@vueuse/nuxt", "@nuxtjs/fontaine"],
+  modules: ["@nuxthq/ui", "@vueuse/nuxt", "@nuxtjs/fontaine", "nuxt-icon"],
   ui: {
     icons: ["heroicons", "mdi"],
   },
