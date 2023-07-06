@@ -8,11 +8,11 @@ export default eventHandler(async (event) => {
   const session = await requireUserSession(event);
 
   const deletedCollection = await useDb()
-    .delete(tables.collections)
+    .delete(tables.projects)
     .where(
       and(
-        eq(tables.collections.id, id),
-        eq(tables.collections.userId, session.user.id)
+        eq(tables.projects.id, id),
+        eq(tables.projects.userId, session.user.id)
       )
     )
     .returning()

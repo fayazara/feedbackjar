@@ -20,7 +20,7 @@
           >
             <div class="relative">
               <table
-                class="min-w-full table-fixed divide-y divide-slate-300 dark:divide-slate-900"
+                class="min-w-full table-fixed divide-y divide-gray-300 dark:divide-gray-900"
               >
                 <thead>
                   <tr>
@@ -67,13 +67,13 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-200 dark:divide-slate-900">
+                <tbody class="divide-y divide-gray-200 dark:divide-gray-900">
                   <tr
                     v-for="email in emailCollection?.emails"
                     :key="email.id"
                     :class="[
                       selectedEmails.includes(email.emailId) &&
-                        'bg-slate-100 dark:bg-black',
+                        'bg-gray-100 dark:bg-black',
                     ]"
                   >
                     <td class="relative px-7 sm:w-12 sm:px-6">
@@ -97,17 +97,17 @@
                       {{ email.emailId }}
                     </td>
                     <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-slate-500"
+                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                     >
                       {{ email.origin }}
                     </td>
                     <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-slate-500"
+                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                     >
                       {{ email.status }}
                     </td>
                     <td
-                      class="whitespace-nowrap px-3 py-4 text-sm text-slate-500"
+                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                     >
                       {{ email.createdAt }}
                     </td>

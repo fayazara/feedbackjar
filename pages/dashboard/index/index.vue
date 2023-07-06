@@ -1,8 +1,5 @@
 <template>
-  <DashboardHeader
-    title="Email Collections"
-    subtitle="Create and manage email collections."
-  >
+  <DashboardHeader title="Projects" subtitle="Create and manage projects.">
     <UButton
       icon="i-heroicons-plus-small-20-solid"
       color="white"
@@ -11,34 +8,9 @@
       @click="isModalOpen = true"
     />
   </DashboardHeader>
-  <DashboardPageContainer>
-    <DashboardCollectionList
-      :collections="collections"
-      @editCollection="editCollection"
-      @deleteCollection="deleteCollection"
-      @duplicateCollection="duplicateCollection"
-    />
-  </DashboardPageContainer>
-  <UModal v-model="isModalOpen">
-    <DashboardCollectionForm
-      :mode="mode"
-      @close="closeModal"
-      :selectedCollection="selectedCollection"
-      @updateCollection="updateCollection"
-    />
-  </UModal>
+  <DashboardPageContainer> sajsfdb </DashboardPageContainer>
 </template>
 
 <script setup>
-const {
-  collections,
-  isModalOpen,
-  selectedCollection,
-  mode,
-  updateCollection,
-  closeModal,
-  editCollection,
-  deleteCollection,
-  duplicateCollection,
-} = useCollection();
+const { data: projects } = useFetch("/api/projects");
 </script>

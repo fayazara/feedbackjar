@@ -2,13 +2,13 @@
   <div class="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <div class="flex items-center justify-center">
-        <img height="32" width="32" src="/logo.png" alt="EmailJar Logo" />
+        <img height="32" width="32" src="/logo.png" alt="Feedbackjar Logo" />
       </div>
       <h2 class="mt-2 text-center text-2xl font-bold leading-9 tracking-tight">
         Sign in to your account
       </h2>
-      <p class="text-center text-slate-500">
-        You need to sign in to your account to continue using Emailjar
+      <p class="text-center text-gray-500">
+        You need to sign in to your account to continue using Feedbackjar
       </p>
     </div>
 

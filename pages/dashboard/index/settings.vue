@@ -5,12 +5,12 @@
   />
   <DashboardPageContainer>
     <div
-      class="flex p-4 border rounded-2xl bg-white dark:bg-slate-1000 dark:border-slate-900"
+      class="flex p-4 border rounded-2xl bg-white dark:bg-gray-950 dark:border-gray-900"
     >
       <UAvatar :src="user.avatar_url" :alt="user.name" size="3xl" />
       <div class="ml-6">
         <p class="text-2xl font-bold">{{ user.name }}</p>
-        <p class="text-slate-500 text-sm">{{ user.bio }}</p>
+        <p class="text-gray-500 text-sm">{{ user.bio }}</p>
         <div class="mt-2 flex items-center space-x-2">
           <UBadge v-if="user.location">
             <UIcon name="i-heroicons-map-pin" class="mr-1" />

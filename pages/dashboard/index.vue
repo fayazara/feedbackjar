@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-slate-100 dark:bg-slate-1000">
+  <div class="min-h-screen bg-gray-100 dark:bg-gray-950">
     <USlideover
       v-model="sidebarOpen"
       side="left"
@@ -19,16 +19,16 @@
     </div>
 
     <div
-      class="sticky top-0 z-40 flex items-center justify-between gap-x-4 bg-white dark:bg-slate-1000 dark:border-b border-slate-900 px-4 py-4 shadow-sm sm:px-6"
+      class="sticky top-0 z-40 flex items-center justify-between gap-x-4 bg-white dark:bg-gray-950 dark:border-b border-gray-900 px-4 py-4 shadow-sm sm:px-6"
     >
       <div class="flex items-center gap-x-3">
         <Logo class="h-8 w-auto" />
-        <p class="font-medium text-lg">Emailjar</p>
+        <p class="font-medium text-lg">Feedbackjar</p>
       </div>
       <div class="flex-grow"></div>
       <UButton
         external
-        to="https://github.com/fayazara/emailjar"
+        to="https://github.com/fayazara/feedbackjar"
         target="_blank"
         color="gray"
         variant="ghost"
@@ -66,7 +66,9 @@ watch(loggedIn, () => {
 });
 
 useHead({
-  title: "EmailJar",
-  meta: [{ name: "description", content: "Save Email Links" }],
+  title: "Feedbackjar",
+  meta: [
+    { name: "description", content: "Collect Feedback and Grow your business" },
+  ],
 });
 </script>
