@@ -1,15 +1,19 @@
 import { eq, sql } from "drizzle-orm";
+import { Project } from "../../types/project";
 
 export default eventHandler(async (event) => {
   const session = await requireUserSession(event);
-  const projects = await useDb()
+  const projects: Project[] = useDb()
     .select({
       id: tables.projects.id,
       name: tables.projects.name,
       status: tables.projects.status,
       description: tables.projects.description,
       createdAt: tables.projects.createdAt,
-      emailsCount: sql`COUNT(${tables.feedbacks.id})`,
+      updatedAt: tables.projects.updatedAt,
+      avatar: tables.projects.avatar,
+      website: tables.projects.website,
+      totalFeedbacks: sql`COUNT(${tables.feedbacks.id})`,
     })
     .from(tables.projects)
     .leftJoin(

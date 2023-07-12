@@ -1,10 +1,10 @@
 import { eq, and } from "drizzle-orm";
-import { useValidatedParams, zh } from "h3-zod";
+import { useValidation } from "../../utils/validate";
 
 export default eventHandler(async (event) => {
-  const { id } = await useValidatedParams(event, {
-    id: zh.intAsString,
-  });
+
+  const validate = useValidation(event);
+  const id = (await validate).id;
   const session = await requireUserSession(event);
 
   const deletedCollection = await useDb()

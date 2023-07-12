@@ -1,28 +1,25 @@
 import { eq, and } from "drizzle-orm";
-import { useValidatedParams, useValidatedBody, z, zh } from "h3-zod";
+import { useValidation } from "../../utils/validate";
+import { Project } from "../../types/project";
 
 export default eventHandler(async (event) => {
-  const { id } = await useValidatedParams(event, {
-    id: zh.intAsString,
-  });
-  const { name } = await useValidatedBody(event, {
-    name: z.string(),
-  });
-  const { description } = await useValidatedBody(event, {
-    description: z.string(),
-  });
-  const { status } = await useValidatedBody(event, {
-    status: z.string(),
-  });
+
+  const validate = useValidation(event)
+  const id = (await validate).id;
+  const name = (await validate).name;
+  const description = (await validate).description;
+  const status = (await validate).status;
+  const website = (await validate).website;
   const session = await requireUserSession(event);
 
-  // List todos for the current user
-  const todo = await useDb()
+  const project: Project = await useDb()
     .update(tables.projects)
     .set({
       name,
       description,
       status,
+      website,
+      updatedAt: new Date(),
     })
     .where(
       and(
@@ -33,5 +30,5 @@ export default eventHandler(async (event) => {
     .returning()
     .get();
 
-  return todo;
+  return project;
 });

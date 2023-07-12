@@ -1,19 +1,17 @@
-import { useValidatedBody, z } from "h3-zod";
+import { useValidation } from "../../utils/validate";
+import { Project } from "../../types/project";
 
 export default eventHandler(async (event) => {
-  const { name } = await useValidatedBody(event, {
-    name: z.string().min(1).max(100),
-  });
-  const { description } = await useValidatedBody(event, {
-    description: z.string().max(300),
-  });
-  const { status } = await useValidatedBody(event, {
-    status: z.string(),
-  });
+  const validate = useValidation(event)
+  const name = (await validate).name;
+  const description = (await validate).description;
+  const status = (await validate).status;
+  const website = (await validate).website;
+  const avatar = (await validate).avatar;
   const session = await requireUserSession(event);
 
-  // list collections for the current user
-  const collection = await useDb()
+  // create project
+  const projects: Project = await useDb()
     .insert(tables.projects)
     .values({
       userId: session.user.id,
@@ -21,9 +19,12 @@ export default eventHandler(async (event) => {
       description,
       status,
       createdAt: new Date(),
+      updatedAt: new Date(),
+      website,
+      avatar
     })
     .returning()
     .get();
 
-  return collection;
+  return projects;
 });
