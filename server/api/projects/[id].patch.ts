@@ -18,7 +18,7 @@ export default eventHandler(async (event) => {
 
   // List todos for the current user
   const todo = await useDb()
-    .update(tables.collections)
+    .update(tables.projects)
     .set({
       name,
       description,
@@ -26,8 +26,8 @@ export default eventHandler(async (event) => {
     })
     .where(
       and(
-        eq(tables.collections.id, id),
-        eq(tables.collections.userId, session.user.id)
+        eq(tables.projects.id, id),
+        eq(tables.projects.userId, session.user.id)
       )
     )
     .returning()

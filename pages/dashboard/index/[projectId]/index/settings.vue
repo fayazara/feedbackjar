@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Project Listing and creating</p>
+    <p>Project Settings page</p>
   </div>
 </template>
 

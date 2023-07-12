@@ -15,12 +15,12 @@
       leave-to-class="transform opacity-0 scale-95"
     >
       <MenuItems
-        class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-slate-100 dark:divide-slate-900 rounded-md bg-white dark:bg-slate-1000 border dark:border-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        class="absolute right-0 z-10 mt-2 origin-top-right divide-y divide-gray-100 dark:divide-gray-900 rounded-md bg-white dark:bg-gray-950 border dark:border-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       >
         <div class="px-4 py-3">
           <p class="text-sm">Signed in as</p>
           <p
-            class="truncate text-sm font-medium text-slate-900 dark:text-slate-500"
+            class="truncate text-sm font-medium text-gray-900 dark:text-gray-500"
           >
             {{ user?.name || user?.email || user?.login || "" }}
           </p>
@@ -36,8 +36,8 @@
               :to="link.url"
               :class="[
                 active
-                  ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100'
-                  : 'text-slate-00 dark:text-slate-300',
+                  ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100'
+                  : 'text-gray-00 dark:text-gray-300',
                 'block px-4 py-2 text-sm',
               ]"
               >{{ link.name }}</NuxtLink
@@ -52,8 +52,8 @@
                 @click="clear"
                 :class="[
                   active
-                    ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100'
-                    : 'text-slate-700 dark:text-slate-300',
+                    ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100'
+                    : 'text-gray-700 dark:text-gray-300',
                   'block w-full px-4 py-2 text-left text-sm',
                 ]"
               >

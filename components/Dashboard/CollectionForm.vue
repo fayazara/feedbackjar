@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="saveCollection">
-    <UCard :ui="{ divide: 'divide-y divide-slate-100 dark:divide-slate-900' }">
+    <UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-900' }">
       <template #header>
-        <div class="flex items-center text-slate-600 dark:text-slate-300">
+        <div class="flex items-center text-gray-600 dark:text-gray-300">
           <UIcon name="i-heroicons-document-plus" class="text-xl" />
           <p class="ml-3 text-sm font-semibold">{{ headerText }}</p>
         </div>
@@ -34,13 +34,14 @@
       </div>
       <template #footer>
         <div class="flex items-center justify-end w-full space-x-2">
-          <UButton type="button" @click="$emit('close')" variant="soft"
+          <UButton type="button" @click="$emit('close')" variant="soft" color="black"
             >Cancel</UButton
           >
           <UButton
             :loading="loading"
             :disabled="isSaveDisabled"
             type="submit"
+            color="black"
             >{{ saveButtonText }}</UButton
           >
         </div>

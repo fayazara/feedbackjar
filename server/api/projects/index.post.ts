@@ -14,7 +14,7 @@ export default eventHandler(async (event) => {
 
   // list collections for the current user
   const collection = await useDb()
-    .insert(tables.collections)
+    .insert(tables.projects)
     .values({
       userId: session.user.id,
       name,

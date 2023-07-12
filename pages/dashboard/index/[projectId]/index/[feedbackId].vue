@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Billing page</p>
+    <p>Feedback details</p>
   </div>
 </template>
 

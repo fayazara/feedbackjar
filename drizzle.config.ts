@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { Config } from "drizzle-kit";
 
-export default {
+export default <Config>{
   out: "./server/db/migrations",
   schema: "./server/db/schema.ts",
   breakpoints: true,
@@ -10,4 +10,4 @@ export default {
     url: process.env.TURSO_DB_URL,
     authToken: process.env.TURSO_DB_TOKEN,
   },
-} satisfies Config;
+};

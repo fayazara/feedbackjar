@@ -1,5 +1,6 @@
 <template>
-  <main class="min-h-screen bg-white dark:bg-slate-1000">
+  <main class="min-h-screen bg-white dark:bg-gray-950">
+    <!-- //  Landing page  -->
     <HomeNavbar :loggedIn="loggedIn" />
     <HomeHero />
   </main>

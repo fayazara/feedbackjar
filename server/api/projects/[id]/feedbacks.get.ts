@@ -7,18 +7,18 @@ export default eventHandler(async (event) => {
   });
   const session = await requireUserSession(event);
 
-  // Retrieve the collection data and emails using a left join
+  // Retrieve the collection data and feedbacks using a left join
   const result = await useDb()
     .select()
-    .from(tables.collections)
+    .from(tables.projects)
     .leftJoin(
-      tables.emails,
-      eq(tables.collections.id, tables.emails.collectionId)
+      tables.feedbacks,
+      eq(tables.projects.id, tables.feedbacks.projectId)
     )
     .where(
       and(
-        eq(tables.collections.id, id),
-        eq(tables.collections.userId, session.user.id)
+        eq(tables.projects.id, id),
+        eq(tables.projects.userId, session.user.id)
       )
     )
     .all();
@@ -31,13 +31,13 @@ export default eventHandler(async (event) => {
     });
   }
 
-  // Extract the collection data and emails from the result
-  const collection = result[0].collections;
-  const emails = result.map((r) => r.emails).filter((e) => e);
+  // Extract the collection data and feedbacks from the result
+  const collection = result[0].projects;
+  const feedbacks = result.map((r) => r.feedbacks).filter((e) => e);
 
-  // Return the collection data and emails
+  // Return the collection data and feedbacks
   return {
     collection,
-    emails,
+    feedbacks,
   };
 });

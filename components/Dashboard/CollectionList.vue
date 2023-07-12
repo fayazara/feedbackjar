@@ -1,8 +1,8 @@
 <template>
   <div
-    class="bg-white dark:bg-slate-1000 px-5 border dark:border-slate-900 rounded-xl"
+    class="bg-white dark:bg-gray-950 px-5 border dark:border-gray-900 rounded-xl"
   >
-    <ul role="list" class="divide-y divide-slate-100 dark:divide-slate-900">
+    <ul role="list" class="divide-y divide-gray-100 dark:divide-gray-900">
       <li
         v-for="collection in collections"
         :key="collection.id"
@@ -19,7 +19,7 @@
               }}
             </UBadge>
           </div>
-          <section class="text-xs leading-5 text-slate-500">
+          <section class="text-xs leading-5 text-gray-500">
             <div class="mt-1 flex items-center gap-x-2">
               <p class="whitespace-nowrap">
                 <time :datetime="formattedDate(collection.createdAt)">{{
