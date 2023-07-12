@@ -50,6 +50,14 @@ export const useValidation = async (event: H3Event) => {
     projectId: z.number(),
   })
 
+  const { limit } = await useValidatedBody(event, {
+    limit: z.number(),
+  })
+
+  const { offset } = await useValidatedBody(event, {
+    offset: z.number(),
+  })
+
   return {
     id,
     name,
@@ -62,6 +70,8 @@ export const useValidation = async (event: H3Event) => {
     userName,
     category,
     origin,
-    projectId
+    projectId,
+    limit,
+    offset
   };
 };

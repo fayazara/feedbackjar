@@ -1,5 +1,6 @@
 import { useValidation } from "../../utils/validate";
 import { Project } from "../../types/project";
+import { insertProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
   const validate = useValidation(event)
@@ -10,21 +11,16 @@ export default eventHandler(async (event) => {
   const avatar = (await validate).avatar;
   const session = await requireUserSession(event);
 
-  // create project
-  const projects: Project = await useDb()
-    .insert(tables.projects)
-    .values({
-      userId: session.user.id,
-      name,
-      description,
-      status,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      website,
-      avatar
-    })
-    .returning()
-    .get();
+  const project: Project = await insertProject({
+    userId: session.user.id,
+    name,
+    description,
+    status,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    website,
+    avatar
+  })
 
-  return projects;
+  return project;
 });

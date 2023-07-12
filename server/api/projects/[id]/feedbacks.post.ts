@@ -1,7 +1,7 @@
+import { insertFeedback } from "../../../db/query/feedback";
 import { Feedback } from "../../../types/project";
 import { useHelper } from "../../../utils/helper";
 import { useValidation } from "../../../utils/validate";
-
 
 export default eventHandler(async (event) => {
   const validate = useValidation(event);
@@ -15,22 +15,18 @@ export default eventHandler(async (event) => {
   const origin = useHelper().getBrowser(event);
   const session = await requireUserSession(event);
 
-  const feedbackInstance: Feedback = await useDb()
-    .insert(tables.feedbacks)
-    .values({
-        feedback,
-        userEmail,
-        userName,
-        category,
-        status,
-        origin,
-        projectId,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        userId: session?.user?.id
-    })
-    .returning()
-    .get();
+  const feedbackInstance: Feedback = await insertFeedback({
+    feedback,
+    userEmail,
+    userName,
+    category,
+    status,
+    origin,
+    projectId,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    userId: session?.user?.id,
+  });
 
   return feedbackInstance;
 });

@@ -1,10 +1,15 @@
 import { eq, sql } from "drizzle-orm";
-import { Project } from "../../types/project";
+import { getProjects } from "../../db/query/project";
+import { useValidation } from "../../utils/validate";
 
 export default eventHandler(async (event) => {
+  const validate = useValidation(event);
+  const limit = (await validate).limit;
+  const offset = (await validate).offset;
+
   const session = await requireUserSession(event);
-  const projects: Project[] = useDb()
-    .select({
+  const projects = await getProjects(
+    {
       id: tables.projects.id,
       name: tables.projects.name,
       status: tables.projects.status,
@@ -14,15 +19,12 @@ export default eventHandler(async (event) => {
       avatar: tables.projects.avatar,
       website: tables.projects.website,
       totalFeedbacks: sql`COUNT(${tables.feedbacks.id})`,
-    })
-    .from(tables.projects)
-    .leftJoin(
-      tables.feedbacks,
-      eq(tables.feedbacks.projectId, tables.projects.id)
-    )
-    .where(eq(tables.projects.userId, session.user.id))
-    .groupBy(tables.projects.id)
-    .all();
+    },
+    eq(tables.projects.userId, session.user.id),
+    tables.projects.name,
+    offset,
+    limit
+  );
 
   return projects;
 });

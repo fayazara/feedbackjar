@@ -1,6 +1,7 @@
 import { eq, and } from "drizzle-orm";
 import { useValidation } from "../../utils/validate";
 import { Project } from "../../types/project";
+import { updateProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
 
@@ -12,23 +13,16 @@ export default eventHandler(async (event) => {
   const website = (await validate).website;
   const session = await requireUserSession(event);
 
-  const project: Project = await useDb()
-    .update(tables.projects)
-    .set({
-      name,
-      description,
-      status,
-      website,
-      updatedAt: new Date(),
-    })
-    .where(
-      and(
-        eq(tables.projects.id, id),
-        eq(tables.projects.userId, session.user.id)
-      )
-    )
-    .returning()
-    .get();
+  const project: Project = await updateProject({
+    name,
+    description,
+    status,
+    website,
+    updatedAt: new Date(),
+  }, and(
+    eq(tables.projects.id, id),
+    eq(tables.projects.userId, session.user.id)
+  ));
 
   return project;
 });

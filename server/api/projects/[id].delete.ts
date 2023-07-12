@@ -1,28 +1,18 @@
 import { eq, and } from "drizzle-orm";
 import { useValidation } from "../../utils/validate";
+import { deleteProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
-
   const validate = useValidation(event);
   const id = (await validate).id;
   const session = await requireUserSession(event);
+  const deletedProject = deleteProject(id, session.user.id);
 
-  const deletedCollection = await useDb()
-    .delete(tables.projects)
-    .where(
-      and(
-        eq(tables.projects.id, id),
-        eq(tables.projects.userId, session.user.id)
-      )
-    )
-    .returning()
-    .get();
-
-  if (!deletedCollection) {
+  if (!deletedProject) {
     throw createError({
       statusCode: 404,
-      message: "Collection not found",
+      message: "Project not found",
     });
   }
-  return deletedCollection;
+  return deletedProject;
 });
