@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { users } from "../schema";
 import { z } from "h3-zod";
-import { GitHubUser } from "@/server/types/github";
+import { GithubUser } from "@/lib/types/github";
 
 export const allUsers = async () => await useDb().select().from(users);
 
@@ -16,7 +16,7 @@ export const getUser = async (githubId: number) => {
   return results[0];
 };
 
-export const insertUser = async (data: GitHubUser) => {
+export const insertUser = async (data: GithubUser) => {
   const {
     id,
     login,
@@ -28,7 +28,7 @@ export const insertUser = async (data: GitHubUser) => {
     blog,
     company,
     location,
-    html_url
+    html_url,
   } = data;
 
   const user = await useDb()

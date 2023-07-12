@@ -1,11 +1,11 @@
 <template>
   <div
-    class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 dark:border-gray-900 bg-white dark:bg-gray-950 px-6"
+    class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 dark:border-gray-900 bg-white dark:bg-gray-950 px-4"
   >
-    <div class="flex h-16 shrink-0 items-center justify-between">
+    <div class="flex h-14 shrink-0 items-center justify-between">
       <div class="flex items-center space-x-2">
-        <Logo class="h-8 w-auto" role="img" />
-        <span class="font-bold text-xl">Feedbackjar</span>
+        <Logo class="h-6 w-auto" role="img" />
+        <span class="font-semibold text-lg">Feedbackjar</span>
       </div>
       <UButton
         v-if="closeButton"
@@ -18,26 +18,28 @@
     </div>
     <nav class="flex flex-1 flex-col">
       <UDropdown
+        v-if="!isAccountRoute"
         :items="projects"
         :popper="{ placement: 'bottom-start' }"
-        class="mb-4"
+        class="mb-4 w-full"
+        :ui="{ width: 'w-[223px]' }"
       >
-        <UButton color="gray" size="lg" class="text-left w-full">
+        <UButton color="gray" size="lg" square class="text-left p-1.5" block>
           <template #leading>
             <UAvatar
               src="https://cdn.dribbble.com/assets/dribbble-ball-192-23ecbdf987832231e87c642bb25de821af1ba6734a626c8c259a20a0ca51a247.png"
-              size="xs"
+              size="2xs"
             />
           </template>
-          <div class="flex-grow">Dribble</div>
+          <div class="flex-grow text-sm">Dribble</div>
           <template #trailing>
-            <UIcon name="i-heroicons-chevron-down-20-solid" />
+            <Icon name="heroicons:chevron-down-solid" />
           </template>
         </UButton>
       </UDropdown>
       <ul role="list" class="flex flex-1 flex-col gap-y-7">
         <li>
-          <ul role="list" class="-mx-2 space-y-1">
+          <ul role="list" class="space-y-1">
             <li v-for="item in navigation" :key="item.name">
               <NuxtLink
                 @click="$emit('close')"
@@ -56,47 +58,47 @@
             </li>
           </ul>
         </li>
-        <li>
+        <li v-if="!isAccountRoute">
           <div class="text-xs font-semibold leading-6 text-gray-400">
             FILTER
           </div>
           <ul role="list" class="-mx-2 mt-2 space-y-1">
-            <li v-for="team in teams" :key="team.name">
-              <a
-                :href="team.href"
-                :class="[
-                  team.current
-                    ? 'bg-gray-50 text-indigo-600'
-                    : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                  'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
-                ]"
+            <li v-for="filter in filters" :key="filter.key">
+              <button
+                @click="selectedFilter = filter.key"
+                class="group flex items-center text-left gap-x-3 rounded-md py-1.5 px-2 text-sm font-semibold text-gray-700 dark:text-gray-400 hover:bg-gray-100 hover:dark:bg-gray-800 w-full"
+                :class="{
+                  'bg-gray-100 dark:bg-gray-800': selectedFilter === filter.key,
+                }"
               >
-                <span
-                  :class="[
-                    team.current
-                      ? 'text-indigo-600 border-indigo-600'
-                      : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600',
-                    'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white',
-                  ]"
-                  >{{ team.initial }}</span
+                <svg
+                  class="h-2 w-2"
+                  :class="filter.fill"
+                  viewBox="0 0 6 6"
+                  aria-hidden="true"
                 >
-                <span class="truncate">{{ team.name }}</span>
-              </a>
+                  <circle cx="3" cy="3" r="3" />
+                </svg>
+                <span class="flex-1">{{ filter.name }}</span>
+                <span v-if="selectedFilter === filter.key" aria-hidden="true">
+                  &rarr;
+                </span>
+              </button>
             </li>
           </ul>
         </li>
-        <li class="-mx-6 mt-auto relative">
+        <li class="-mx-4 mt-auto relative">
           <UDropdown
             :items="userSettings"
             class="w-full"
-            :ui="{ width: 'w-[17rem]' }"
+            :ui="{ width: 'w-[15rem]' }"
             :popper="{ placement: 'bottom-start' }"
           >
             <button
-              class="flex items-center w-full justify-between py-3 text-sm font-semibold leading-6 bg-gray-50 dark:bg-gray-950 dark:border-t border-gray-900 px-6"
+              class="flex items-center w-full justify-between py-2.5 text-sm font-semibold leading-6 bg-gray-50 dark:bg-gray-950 dark:border-t border-gray-900 px-4"
             >
               <div class="flex items-center gap-x-4">
-                <UAvatar :src="user.avatar_url" :alt="user.name" />
+                <UAvatar :src="user.avatarUrl" :alt="user.name" />
                 <span aria-hidden="true">{{ user.name }}</span>
               </div>
               <Icon name="heroicons:ellipsis-vertical" class="h-6 w-6" />
@@ -109,43 +111,91 @@
 </template>
 
 <script setup lang="ts">
-import { GitHubUser } from "server/types/github";
+import { GithubUser } from "@/lib/types/github";
 
 interface Props {
   closeButton: boolean;
-  user: GitHubUser;
+  user: GithubUser;
   clear: () => void;
+  isAccountRoute: boolean;
 }
 const props = defineProps<Props>();
 
-const teams = [
-  { id: 1, name: "All", href: "#", initial: "H", current: false },
-  { id: 2, name: "Issues", href: "#", initial: "T", current: false },
-  { id: 3, name: "Idea", href: "#", initial: "W", current: false },
-  { id: 3, name: "Other", href: "#", initial: "W", current: false },
-  { id: 3, name: "Archived", href: "#", initial: "W", current: false },
-];
+const selectedFilter = ref("all");
 
-const navigation = [
+const navigation = computed(() => {
+  if (props.isAccountRoute) {
+    return accountNavigationLinks;
+  }
+  return projectNavigationLinks;
+});
+
+const projectNavigationLinks = [
   {
     name: "Overview",
-    href: "/dashboard/overview",
+    href: "/overview",
     icon: "heroicons:chart-pie",
   },
   {
-    name: "Tickets",
-    href: "/dashboard/collections",
-    icon: "heroicons:folder",
-  },
-  {
-    name: "Billing",
-    href: "/dashboard/billing",
-    icon: "heroicons:currency-rupee",
+    name: "Feedback",
+    href: "/feedback",
+    icon: "heroicons:archive-box-arrow-down",
   },
   {
     name: "Settings",
-    href: "/dashboard/settings",
+    href: "/project-settings",
     icon: "heroicons:cog-6-tooth",
+  },
+];
+
+const accountNavigationLinks = [
+  {
+    name: "New Project",
+    href: "/new-project",
+    icon: "heroicons:folder",
+  },
+  {
+    name: "Settings",
+    href: "/settings",
+    icon: "heroicons:cog-6-tooth",
+  },
+  {
+    name: "Billing",
+    href: "/feedback",
+    icon: "heroicons:currency-rupee",
+  },
+];
+
+const filters = [
+  { id: 1, name: "All", key: "all", fill: "fill-indigo-500", selected: false },
+  {
+    id: 2,
+    name: "Issues",
+    key: "issues",
+    fill: "fill-rose-500",
+    selected: false,
+  },
+  { id: 3, name: "Ideas", key: "Ideas", fill: "fill-sky-500", selected: false },
+  {
+    id: 3,
+    name: "Other",
+    key: "other",
+    fill: "fill-yellow-500",
+    selected: false,
+  },
+  {
+    id: 3,
+    name: "Closed",
+    key: "closed",
+    fill: "fill-green-500",
+    selected: false,
+  },
+  {
+    id: 3,
+    name: "Archived",
+    key: "archived",
+    fill: "fill-gray-500",
+    selected: false,
   },
 ];
 
@@ -154,6 +204,12 @@ const userSettings = [
     {
       label: "Settings",
       icon: "i-heroicons-cog-6-tooth",
+      to:"/settings"
+    },
+    {
+      label: "Billing & Invoices",
+      icon: "i-heroicons-currency-rupee",
+      to:"/billing"
     },
     {
       label: "Sign out",
@@ -185,23 +241,23 @@ const projects = [
         src: "https://uploads-ssl.webflow.com/634eb51a43522eda9b21e8c3/63c5a7a9ad3731514682c748_android-chrome-512x512.png",
       },
     },
+    {
+      label: "New Project",
+      icon: "i-heroicons-plus-circle",
+    },
   ],
 ];
 </script>
 
 <style scoped>
 .navlink {
-  @apply flex gap-x-3 items-center rounded-md p-2 text-sm leading-6 font-medium text-gray-700 dark:text-gray-400 hover:text-indigo-600 hover:bg-gray-100 hover:dark:bg-gray-800;
+  @apply flex gap-x-3 items-center rounded-md px-2 py-1.5 text-sm leading-6 font-medium text-gray-700 dark:text-gray-400 hover:bg-gray-100 hover:dark:bg-gray-800;
 }
 .navlink.router-link-exact-active {
-  @apply bg-gray-100 dark:bg-gray-900 text-indigo-600 dark:text-indigo-200;
+  @apply bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white;
 }
 
 .navlink-icon {
-  @apply h-5 w-5 shrink-0 text-gray-400 group-hover:text-indigo-600;
-}
-
-.navlink.router-link-exact-active .navlink-icon {
-  @apply text-indigo-600;
+  @apply h-5 w-5 shrink-0;
 }
 </style>

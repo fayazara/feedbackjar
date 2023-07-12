@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "28d2b694-fc7d-483a-9f07-520f204840bd",
+  "id": "8f666810-4cfb-44f9-b164-dfc2e52d87e2",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "feedbacks": {
@@ -194,29 +194,29 @@
           "notNull": false,
           "autoincrement": false
         },
-        "avatar_url": {
-          "name": "avatar_url",
+        "avatarUrl": {
+          "name": "avatarUrl",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "html_url": {
-          "name": "html_url",
+        "githubUrl": {
+          "name": "githubUrl",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "github_username": {
-          "name": "github_username",
+        "githubUsername": {
+          "name": "githubUsername",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "twitter_username": {
-          "name": "twitter_username",
+        "twitterUsername": {
+          "name": "twitterUsername",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
