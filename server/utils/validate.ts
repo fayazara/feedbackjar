@@ -1,77 +1,118 @@
-import { H3Event } from "h3";
-import { useValidatedParams, useValidatedBody, z, zh } from "h3-zod";
+import { useValidatedParams, useValidatedBody, useSafeValidatedQuery, z, zh } from "h3-zod";
 
-export const useValidation = async (event: H3Event) => {
-  const { id } = await useValidatedParams(event, {
-    id: zh.intAsString,
-  });
+export const useValidation = (event: any) => {
+  const getId = async () => {
+    const { id } = await useValidatedParams(event, {
+      id: zh.intAsString,
+    });
+    return id
+  };
 
-  const { name } = await useValidatedBody(event, {
-    name: z.string().min(1).max(100),
-  });
+  const getName = async () => {
+    const { name } = await useValidatedBody(event, {
+      name: z.string().min(1).max(100),
+    });
+    return name
+  };
 
-  const { description } = await useValidatedBody(event, {
-    description: z.string().max(300),
-  });
+  const getDescription = async () => {
+    const { description } = await useValidatedBody(event, {
+      description: z.string().max(300),
+    });
+    return description
+  }
 
-  const { status } = await useValidatedBody(event, {
-    status: z.string(),
-  });
+  const getStatus = async () => {
+    const { status } = await useValidatedBody(event, {
+      status: z.string(),
+    });
+    return status
+  }
 
-  const { website } = await useValidatedBody(event, {
-    website: z.string(),
-  });
+  const getWebsite = async () => {
+    const { website } = await useValidatedBody(event, {
+      website: z.string(),
+    });
+    return website
+  }
 
-  const { avatar } = await useValidatedBody(event, {
-    avatar: z.string(),
-  })
+  const getAvatar = async () => {
+    const { avatar } = await useValidatedBody(event, {
+      avatar: z.string(),
+    });
+    return avatar
+  }
 
-  const { feedback } = await useValidatedBody(event, {
-    feedback: z.string(),
-  })
+  const getFeedback = async () => {
+    const { feedback } = await useValidatedBody(event, {
+      feedback: z.string(),
+    });
+    return feedback
+  }
 
-  const { userEmail } = await useValidatedBody(event, {
-    userEmail: z.string(),
-  })
+  const getUserEmail = async () => {
+    const { userEmail } = await useValidatedBody(event, {
+      userEmail: z.string(),
+    });
+    return userEmail
+  }
 
-  const { userName } = await useValidatedBody(event, {
-    userName: z.string(),
-  })
+  const getUserName = async () => {
+    const { userName } = await useValidatedBody(event, {
+      userName: z.string(),
+    });
+    return userName
+  }
 
-  const { category } = await useValidatedBody(event, {
-    category: z.string(),
-  })
+  const getCategory = async () => {
+    const { category } = await useValidatedBody(event, {
+      category: z.string(),
+    });
+    return category
+  }
 
-  const { origin } = await useValidatedBody(event, {
-    origin: z.string(),
-  })
+  const getOrigin = async () => {
+    const { origin } = await useValidatedBody(event, {
+      origin: z.string(),
+    });
+    return origin
+  }
 
-  const { projectId } = await useValidatedBody(event, {
-    projectId: z.number(),
-  })
+  const getProjectId = async () => {
+    const { projectId } = await useValidatedBody(event, {
+      projectId: z.number(),
+    });
+    return projectId
+  }
 
-  const { limit } = await useValidatedBody(event, {
-    limit: z.number(),
-  })
+  const getLimit = async () => {
+    const { success } = await useSafeValidatedQuery(event, {
+      limit: z.number(),
+    });
+    return success ? event.limit : 10
+  }
 
-  const { offset } = await useValidatedBody(event, {
-    offset: z.number(),
-  })
+  const getOffset = async () => {
+    const { success } = await useSafeValidatedQuery(event, {
+      offset: z.number(),
+    });
+    return success ? event.offset : 1
+  }
 
   return {
-    id,
-    name,
-    description,
-    status,
-    website,
-    avatar,
-    feedback,
-    userEmail,
-    userName,
-    category,
-    origin,
-    projectId,
-    limit,
-    offset
+    getId,
+    getName,
+    getDescription,
+    getStatus,
+    getWebsite,
+    getAvatar,
+    getFeedback,
+    getUserEmail,
+    getUserName,
+    getCategory,
+    getOrigin,
+    getProjectId,
+    getLimit,
+    getOffset
   };
 };

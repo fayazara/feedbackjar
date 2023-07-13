@@ -3,9 +3,10 @@ import { getProjects } from "../../db/query/project";
 import { useValidation } from "../../utils/validate";
 
 export default eventHandler(async (event) => {
-  const validate = useValidation(event);
-  const limit = (await validate).limit;
-  const offset = (await validate).offset;
+  const { getLimit, getOffset } = useValidation(event);
+
+  const limit = await getLimit();
+  const offset = await getOffset();
 
   const session = await requireUserSession(event);
   const projects = await getProjects(

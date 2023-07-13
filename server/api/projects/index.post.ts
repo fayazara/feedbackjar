@@ -3,7 +3,7 @@ import { Project } from "../../types/project";
 import { insertProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
-  const validate = useValidation(event)
+  const validate = await useValidation(event)
   const name = (await validate).name;
   const description = (await validate).description;
   const status = (await validate).status;
