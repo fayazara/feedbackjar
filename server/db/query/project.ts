@@ -67,14 +67,16 @@ export const updateProject = async (
  * @param {number} userId - The ID of the user who owns the project.
  * @return {Promise<void>} - A promise that resolves when the project is deleted.
  */
-export const deleteProject = async (id: number, userId: number): Promise<any> => {
+export const deleteProject = async (
+  id: number,
+  userId: number
+): Promise<any> => {
   try {
-    return await useDb().delete(tables.projects).where(
-        and(
-          eq(tables.projects.id, id),
-          eq(tables.projects.userId, userId)
-        )
-    );
+    return await useDb()
+      .delete(tables.projects)
+      .where(
+        and(eq(tables.projects.id, id), eq(tables.projects.userId, userId))
+      );
   } catch (error) {
     throw new Error("Failed to delete project");
   }

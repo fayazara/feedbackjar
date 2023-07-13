@@ -1,6 +1,7 @@
 import { eq, sql } from "drizzle-orm";
 import { getProjects } from "../../db/query/project";
 import { useValidation } from "../../utils/validate";
+import { allUsers } from "../../db/query/users";
 
 export default eventHandler(async (event) => {
   const { getLimit, getOffset } = useValidation(event);
@@ -8,7 +9,12 @@ export default eventHandler(async (event) => {
   const limit = await getLimit();
   const offset = await getOffset();
 
+  // TEST
   const session = await requireUserSession(event);
+  const userId = session.user.id
+
+  // const userId = 1
+
   const projects = await getProjects(
     {
       id: tables.projects.id,
@@ -21,7 +27,7 @@ export default eventHandler(async (event) => {
       website: tables.projects.website,
       totalFeedbacks: sql`COUNT(${tables.feedbacks.id})`,
     },
-    eq(tables.projects.userId, session.user.id),
+    eq(tables.projects.userId, userId),
     tables.projects.name,
     offset,
     limit

@@ -3,16 +3,22 @@ import { Project } from "../../types/project";
 import { insertProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
-  const validate = await useValidation(event)
-  const name = (await validate).name;
-  const description = (await validate).description;
-  const status = (await validate).status;
-  const website = (await validate).website;
-  const avatar = (await validate).avatar;
-  const session = await requireUserSession(event);
+  const{ getName, getDescription, getStatus, getWebsite, getAvatar } = useValidation(event)
+  const name = await getName()
+  const description = await getDescription()
+  const status = await getStatus()
+  const website = await getWebsite()
+  const avatar = await getAvatar()
 
+
+  const session = await requireUserSession(event);
+  const userId = session.user.id
+
+  // const userId = 1
+
+  console.log(userId, name, description, status, website, avatar)
   const project: Project = await insertProject({
-    userId: session.user.id,
+    userId,
     name,
     description,
     status,

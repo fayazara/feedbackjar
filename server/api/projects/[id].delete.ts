@@ -3,8 +3,8 @@ import { useValidation } from "../../utils/validate";
 import { deleteProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
-  const validate = useValidation(event);
-  const id = (await validate).id;
+  const { getId } = useValidation(event);
+  const id = await getId();
   const session = await requireUserSession(event);
   const deletedProject = deleteProject(id, session.user.id);
 

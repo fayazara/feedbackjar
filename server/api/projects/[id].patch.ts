@@ -5,12 +5,13 @@ import { updateProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
 
-  const validate = useValidation(event)
-  const id = (await validate).id;
-  const name = (await validate).name;
-  const description = (await validate).description;
-  const status = (await validate).status;
-  const website = (await validate).website;
+  const { getId, getName, getDescription, getStatus, getWebsite, getAvatar } = useValidation(event)
+  const id = await getId()
+  const name = await getName()
+  const description = await getDescription()
+  const status = await getStatus()
+  const website = await getWebsite()
+  const avatar = await getAvatar()
   const session = await requireUserSession(event);
 
   const project: Project = await updateProject({
@@ -18,6 +19,7 @@ export default eventHandler(async (event) => {
     description,
     status,
     website,
+    avatar,
     updatedAt: new Date(),
   }, and(
     eq(tables.projects.id, id),

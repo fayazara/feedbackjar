@@ -1,6 +1,7 @@
 import { useValidatedParams, useValidatedBody, useSafeValidatedQuery, z, zh } from "h3-zod";
 
 export const useValidation = (event: any) => {
+
   const getId = async () => {
     const { id } = await useValidatedParams(event, {
       id: zh.intAsString,

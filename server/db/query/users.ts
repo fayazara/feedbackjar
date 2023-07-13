@@ -3,7 +3,7 @@ import { users } from "../schema";
 import { z } from "h3-zod";
 import { GitHubUser } from "@/server/types/github";
 
-export const allUsers = async () => await useDb().select().from(users);
+export const allUsers = async () => await useDb().select().from(users).all();
 
 export const getUser = async (githubId: number) => {
   const id = z.number().parse(githubId);
