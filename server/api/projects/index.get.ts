@@ -1,7 +1,6 @@
 import { eq, sql } from "drizzle-orm";
 import { getProjects } from "../../db/query/project";
 import { useValidation } from "../../utils/validate";
-import { allUsers } from "../../db/query/users";
 
 export default eventHandler(async (event) => {
   const { getLimit, getOffset } = useValidation(event);

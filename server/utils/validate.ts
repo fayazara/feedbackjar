@@ -1,4 +1,4 @@
-import { useValidatedParams, useValidatedBody, useSafeValidatedQuery, z, zh } from "h3-zod";
+import { useValidatedParams, useValidatedBody, useSafeValidatedQuery, z, zh, useSafeValidatedParams, useValidatedQuery } from "h3-zod";
 
 export const useValidation = (event: any) => {
 
@@ -88,16 +88,16 @@ export const useValidation = (event: any) => {
 
   const getLimit = async () => {
     const { success } = await useSafeValidatedQuery(event, {
-      limit: z.number(),
+      limit: zh.intAsString,
     });
     return success ? event.limit : 10
   }
 
   const getOffset = async () => {
-    const { success } = await useSafeValidatedQuery(event, {
-      offset: z.number(),
+    const { offset } = await useValidatedQuery(event, {
+      offset: zh.intAsString,
     });
-    return success ? event.offset : 1
+    return offset
   }
 
   return {
