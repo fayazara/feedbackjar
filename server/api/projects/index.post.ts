@@ -11,10 +11,10 @@ export default eventHandler(async (event) => {
   const avatar = await getAvatar()
 
 
-  const session = await requireUserSession(event);
-  const userId = session.user.id
+  // const session = await requireUserSession(event);
+  // const userId = session.user.id
 
-  // const userId = 1
+  const userId = 1
 
   console.log(userId, name, description, status, website, avatar)
   const project: Project = await insertProject({

@@ -25,7 +25,7 @@ export const projects = sqliteTable("projects", {
     .references(() => users.id),
   name: text("name").notNull(),
   description: text("description"),
-  status: text("status").notNull().default("active"),
+  status: text("status").notNull().default("active"),  // Active and Archived
   avatar: text("avatar"),
   website: text("website"),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),

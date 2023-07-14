@@ -9,10 +9,10 @@ export default eventHandler(async (event) => {
   const offset = await getOffset();
 
   // TEST
-  const session = await requireUserSession(event);
-  const userId = session.user.id
+  // const session = await requireUserSession(event);
+  // const userId = session.user.id
 
-  // const userId = 1
+  const userId = 1
 
   const projects = await getProjects(
     {
@@ -24,7 +24,6 @@ export default eventHandler(async (event) => {
       updatedAt: tables.projects.updatedAt,
       avatar: tables.projects.avatar,
       website: tables.projects.website,
-      totalFeedbacks: sql`COUNT(${tables.feedbacks.id})`,
     },
     eq(tables.projects.userId, userId),
     tables.projects.name,

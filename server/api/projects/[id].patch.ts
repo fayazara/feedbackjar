@@ -12,7 +12,11 @@ export default eventHandler(async (event) => {
   const status = await getStatus()
   const website = await getWebsite()
   const avatar = await getAvatar()
-  const session = await requireUserSession(event);
+
+  // const session = await requireUserSession(event);
+  // const userId = session.user.id
+
+  const userId = 1
 
   const project: Project = await updateProject({
     name,
@@ -23,7 +27,7 @@ export default eventHandler(async (event) => {
     updatedAt: new Date(),
   }, and(
     eq(tables.projects.id, id),
-    eq(tables.projects.userId, session.user.id)
+    eq(tables.projects.userId, userId)
   ));
 
   return project;
