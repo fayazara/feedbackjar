@@ -7,14 +7,14 @@ export interface Config {
 
 export type Code = string;
 
-export interface GitHubUser {
+export interface GithubUser {
   id: number;
   login?: string;
   name?: string;
   email?: string;
-  avatar_url?: string;
-  html_url?: string;
-  twitter_username?: string;
+  avatarUrl?: string;
+  githubUrl?: string;
+  twitterUsername?: string;
   bio?: string;
   blog?: string;
   company?: string;

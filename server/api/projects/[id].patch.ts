@@ -1,6 +1,6 @@
 import { eq, and } from "drizzle-orm";
 import { useValidation } from "../../utils/validate";
-import { Project } from "../../types/project";
+import { Project } from "~/lib/types/project";
 import { updateProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {

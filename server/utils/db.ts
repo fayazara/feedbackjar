@@ -11,7 +11,12 @@ let _db: BetterSQLite3Database | LibSQLDatabase | null = null;
 
 export const useDb = () => {
   if (!_db) {
-    if (process.env.TURSO_DB_URL && process.env.TURSO_DB_TOKEN) {
+    if (process.dev) {
+      // local sqlite in development
+      const { dbDir } = useRuntimeConfig();
+      const sqlite = new Database(join(dbDir, "./db.sqlite"));
+      _db = drizzle(sqlite);
+    } else if (process.env.TURSO_DB_URL && process.env.TURSO_DB_TOKEN) {
       // Turso in production
       _db = drizzleLibSQL(
         createLibSQLClient({
@@ -19,11 +24,6 @@ export const useDb = () => {
           authToken: process.env.TURSO_DB_TOKEN,
         })
       );
-    } else if (process.dev) {
-      // local sqlite in development
-      const { dbDir } = useRuntimeConfig();
-      const sqlite = new Database(join(dbDir, "./db.sqlite"));
-      _db = drizzle(sqlite);
     } else {
       throw new Error("No database configured for production");
     }

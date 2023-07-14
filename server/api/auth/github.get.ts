@@ -1,6 +1,6 @@
 import { insertUser, getUser } from "../../db/query/users";
 import { sendError, createError, sendRedirect } from "h3";
-import { Config, Code, GitHubUser } from "@/server/types/github";
+import { Config, Code, GithubUser } from "@/lib/types/github";
 
 async function fetchAccessToken(config: Config, code: Code) {
   try {
@@ -26,7 +26,7 @@ async function fetchAccessToken(config: Config, code: Code) {
 
 async function fetchGitHubUser(config: Config, accessToken: string) {
   try {
-    const ghUser: GitHubUser = await $fetch("https://api.github.com/user", {
+    const ghUser: GithubUser = await $fetch("https://api.github.com/user", {
       headers: {
         "User-Agent": `Github-OAuth-${config.github.clientId}`,
         Authorization: `token ${accessToken}`,
@@ -40,9 +40,9 @@ async function fetchGitHubUser(config: Config, accessToken: string) {
       login: ghUser.login,
       name: ghUser.name,
       email: ghUser.email,
-      avatar_url: ghUser.avatar_url,
-      html_url: ghUser.html_url,
-      twitter_username: ghUser.twitter_username,
+      avatar_url: ghUser.avatarUrl,
+      html_url: ghUser.githubUrl,
+      twitter_username: ghUser.twitterUsername,
       bio: ghUser.bio,
       blog: ghUser.blog,
       company: ghUser.company,
@@ -82,7 +82,7 @@ export default eventHandler(async (event) => {
       console.log("User inserted", newUser);
     }
     await setUserSession(event, { user });
-    return sendRedirect(event, "/dashboard");
+    return sendRedirect(event, "/asd");
   } catch (error) {
     console.error(error);
     return sendError(
