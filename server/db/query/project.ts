@@ -81,3 +81,20 @@ export const deleteProject = async (
     throw new Error("Failed to delete project");
   }
 };
+
+export const archiveProject = async (
+  data: any,
+  filterBy: any
+): Promise<Project> => {
+  try {
+    const updatedProject = await useDb()
+      .update(tables.projects)
+      .set({status: "archived"})
+      .where(filterBy)
+      .returning()
+      .get();
+    return updatedProject;
+  } catch (error) {
+    throw new Error("Failed to update project");
+  }
+};
