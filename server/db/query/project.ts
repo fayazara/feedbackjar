@@ -82,6 +82,14 @@ export const deleteProject = async (
   }
 };
 
+
+/**
+ * Archives a project.
+ *
+ * @param {any} data - The data to archive.
+ * @param {any} filterBy - The filter to apply when archiving.
+ * @return {Promise<Project>} The updated project after archiving.
+ */
 export const archiveProject = async (
   data: any,
   filterBy: any
@@ -95,6 +103,6 @@ export const archiveProject = async (
       .get();
     return updatedProject;
   } catch (error) {
-    throw new Error("Failed to update project");
+    throw new Error("Failed to archive the project");
   }
 };
