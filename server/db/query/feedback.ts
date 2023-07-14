@@ -1,5 +1,4 @@
-import { eq } from "drizzle-orm";
-import { Feedback } from "../../types/project";
+import { Feedback } from "~/lib/types/project";
 
 /**
  * Insert feedback into the database.

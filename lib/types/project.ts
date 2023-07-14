@@ -23,3 +23,8 @@ export interface Feedback {
   updatedAt: Date;
   origin: string;
 }
+
+export enum Status {
+  active = "active",
+  archived = "archived",
+}

@@ -13,10 +13,10 @@ export default eventHandler(async (event) => {
   const website = await getWebsite()
   const avatar = await getAvatar()
 
-  // const session = await requireUserSession(event);
-  // const userId = session.user.id
+  const session = await requireUserSession(event);
+  const userId = session.user.id
 
-  const userId = 1
+  // const userId = 1
 
   const project: Project = await updateProject({
     name,

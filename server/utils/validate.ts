@@ -1,4 +1,4 @@
-import { useValidatedParams, useValidatedBody, useSafeValidatedQuery, z, zh, useSafeValidatedParams, useValidatedQuery } from "h3-zod";
+import { useValidatedParams, useValidatedBody, useSafeValidatedQuery, z, zh, useValidatedQuery } from "h3-zod";
 
 export const useValidation = (event: any) => {
 
@@ -81,21 +81,29 @@ export const useValidation = (event: any) => {
 
   const getProjectId = async () => {
     const { projectId } = await useValidatedBody(event, {
-      projectId: z.number(),
+      projectId: z.number()
     });
     return projectId
   }
 
+  const getProjectListFilters = async () => {
+    const filters = await useValidatedQuery(event, {
+      status: z.string().optional(),
+      date: z.string().optional()
+    });
+    return filters
+  }
+
   const getLimit = async () => {
     const { success } = await useSafeValidatedQuery(event, {
-      limit: zh.intAsString,
+      limit: zh.intAsString.optional()
     });
     return success ? event.limit : 10
   }
 
   const getOffset = async () => {
     const { offset } = await useValidatedQuery(event, {
-      offset: zh.intAsString,
+      offset: zh.intAsString.optional()
     });
     return offset
   }
@@ -114,6 +122,7 @@ export const useValidation = (event: any) => {
     getOrigin,
     getProjectId,
     getLimit,
-    getOffset
+    getOffset,
+    getProjectListFilters
   };
 };

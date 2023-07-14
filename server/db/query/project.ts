@@ -1,5 +1,5 @@
 import { and, eq } from "drizzle-orm";
-import { Project } from "../../types/project";
+import { Project } from "~/lib/types/project";
 
 /**
  * Inserts a project into the database.

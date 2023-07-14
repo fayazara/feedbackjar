@@ -1,5 +1,5 @@
 import { useValidation } from "../../utils/validate";
-import { Project } from "../../types/project";
+import { Project } from "~/lib/types/project";
 import { insertProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
@@ -11,10 +11,10 @@ export default eventHandler(async (event) => {
   const avatar = await getAvatar()
 
 
-  // const session = await requireUserSession(event);
-  // const userId = session.user.id
+  const session = await requireUserSession(event);
+  const userId = session.user.id
 
-  const userId = 1
+  // const userId = 1
 
   console.log(userId, name, description, status, website, avatar)
   const project: Project = await insertProject({
