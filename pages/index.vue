@@ -57,7 +57,7 @@
             <div
               class="max-w-max mx-auto px-2.5 py-1.5 text-sm bg-gray-50/20 dark:bg-gray-700/20 border border-gray-400 dark:border-gray-500 rounded-full text-gray-700 dark:text-gray-400 font-medium"
             >
-              ★ 19 &middot; Star us on Github
+              ★ 21 &middot; Star us on Github
             </div>
             <h1
               class="text-4xl font-bold tracking-tights sm:text-6xl mt-4 font-display"
@@ -76,7 +76,7 @@
                 href="/api/auth/github"
                 color="white"
                 size="xl"
-                class="bg-gray-900 dark:bg-blue-300/10 text-white rounded-lg border dark:border-white/20  px-5 py-2"
+                class="bg-gray-900 dark:bg-blue-300/10 text-white rounded-lg border dark:border-white/20 px-5 py-2"
               >
                 Get started
               </button>
