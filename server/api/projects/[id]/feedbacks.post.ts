@@ -1,19 +1,23 @@
+import { Feedback } from "../../../../lib/types/project";
 import { insertFeedback } from "../../../db/query/feedback";
-import { Feedback } from "../../../types/project";
 import { useHelper } from "../../../utils/helper";
 import { useValidation } from "../../../utils/validate";
 
-export default eventHandler(async (event) => {
-  const validate = useValidation(event);
-  const feedback = (await validate).feedback;
-  const userEmail = (await validate).userEmail;
-  const userName = (await validate).userName;
-  const category = (await validate).category;
-  const status = (await validate).status;
-  const projectId = (await validate).projectId;
 
+export default eventHandler(async (event) => {
+  const { getUserEmail, getUserName, getCategory, getStatus, getProjectId, getFeedback } = useValidation(event);
+  const feedback = await getFeedback()
+  const userEmail = await getUserEmail()
+  const userName = await getUserName()
+  const category = await getCategory()
+  const status = await getStatus()
+  const projectId = await getProjectId()
   const origin = useHelper().getBrowser(event);
+
   const session = await requireUserSession(event);
+  const userId = session?.user?.id
+
+  // const userId = 1
 
   const feedbackInstance: Feedback = await insertFeedback({
     feedback,
@@ -25,7 +29,7 @@ export default eventHandler(async (event) => {
     projectId,
     createdAt: new Date(),
     updatedAt: new Date(),
-    userId: session?.user?.id,
+    userId
   });
 
   return feedbackInstance;

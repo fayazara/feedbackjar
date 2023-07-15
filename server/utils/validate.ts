@@ -80,10 +80,10 @@ export const useValidation = (event: any) => {
   }
 
   const getProjectId = async () => {
-    const { projectId } = await useValidatedBody(event, {
-      projectId: z.number()
+    const { id } = await useValidatedParams(event, {
+      id: zh.intAsString,
     });
-    return projectId
+    return id
   }
 
   const getProjectListFilters = async () => {
