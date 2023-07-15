@@ -1,13 +1,13 @@
 import { and, eq } from "drizzle-orm";
 import { useValidation } from "../../../utils/validate";
 import { updateFeedback } from "../../../db/query/feedback";
-import { Feedback } from "../../../types/project";
+import { Feedback } from "../../../../lib/types/project";
 
 export default eventHandler(async (event) => {
-  const validate = useValidation(event);
-  const id = (await validate).id;
-  const category = (await validate).category;
-  const status = (await validate).status;
+  const { getId, getCategory, getStatus } = useValidation(event);
+  const id = await getId();
+  const category = await getCategory()
+  const status = await getStatus()
 
   const session = await requireUserSession(event);
 
