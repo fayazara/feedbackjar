@@ -3,10 +3,9 @@ import { getProjects } from "../../db/query/project";
 import { useValidation } from "../../utils/validate";
 
 export default eventHandler(async (event) => {
-  const { getLimit, getOffset, getProjectListFilters } = useValidation(event);
+  const { getProjectListFilters, getPagination } = useValidation(event);
 
-  const limit = await getLimit();
-  const offset = await getOffset();
+  const { limit, offset } = await getPagination()
   const filterParams = await getProjectListFilters();
 
   // TEST
@@ -15,7 +14,7 @@ export default eventHandler(async (event) => {
 
   // const userId = 1
 
-  let filterBy:any = eq(tables.projects.userId, userId)
+  let filterBy: any = eq(tables.projects.userId, userId)
 
   if (filterParams.status) {
     filterBy = and(filterBy, eq(tables.projects.status, filterParams.status))

@@ -108,6 +108,16 @@ export const useValidation = (event: any) => {
     return offset
   }
 
+  const getPagination = async () => {
+    let { offset, limit }: any = await useValidatedQuery(event, {
+      offset: zh.intAsString.optional(),
+      limit: zh.intAsString.optional()
+    });
+    offset = offset || 1
+    limit = limit || 10
+    return { offset, limit }
+  }
+
   return {
     getId,
     getName,
@@ -121,8 +131,7 @@ export const useValidation = (event: any) => {
     getCategory,
     getOrigin,
     getProjectId,
-    getLimit,
-    getOffset,
+    getPagination,
     getProjectListFilters
   };
 };

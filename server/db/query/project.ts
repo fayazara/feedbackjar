@@ -24,8 +24,8 @@ export const getProjects = async (
   columns: any,
   filterBy: any,
   orderBy: any,
-  limit: any,
-  offset: any
+  offset: any,
+  limit: any
 ): Promise<any[]> => // This type needs attention
   await useDb()
     .select(columns)
@@ -82,7 +82,6 @@ export const deleteProject = async (
   }
 };
 
-
 /**
  * Archives a project.
  *
@@ -97,7 +96,7 @@ export const archiveProject = async (
   try {
     const updatedProject = await useDb()
       .update(tables.projects)
-      .set({status: "archived"})
+      .set({ status: "archived" })
       .where(filterBy)
       .returning()
       .get();

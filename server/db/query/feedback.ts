@@ -23,17 +23,20 @@ export const getFeedbacks = async (
   columns: any,
   filterBy: any,
   orderBy: any,
+  offset: any,
   limit: any,
-  offset: any
 ): Promise<any[]> => // This type needs attention
-  await useDb()
+  {
+   const db = await useDb()
     .select(columns)
     .from(tables.feedbacks)
     .where(filterBy)
     .orderBy(orderBy)
     .limit(limit)
     .offset(offset)
-    .all();
+   console.log(db.toSQL())
+   return db.all();
+  }
 
 /**
  * Updates a Feedback based on the provided data and filter criteria.
