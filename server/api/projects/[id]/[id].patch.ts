@@ -10,6 +10,9 @@ export default eventHandler(async (event) => {
   const status = await getStatus()
 
   const session = await requireUserSession(event);
+  const userId = session.user.id;
+
+  // const userId = 1
 
   const feedback: Feedback = await updateFeedback(
     {
@@ -19,7 +22,7 @@ export default eventHandler(async (event) => {
     },
     and(
       eq(tables.feedbacks.id, id),
-      eq(tables.feedbacks.userId, session.user.id)
+      eq(tables.feedbacks.userId, userId)
     )
   );
 

@@ -1,16 +1,45 @@
-import { sql } from "drizzle-orm";
+import { and, sql, eq } from "drizzle-orm";
 
 export default eventHandler(async (event) => {
-  const session = await requireUserSession(event);
+  // const session = await requireUserSession(event);
+  // const userId = session.user.id;
 
-  const result = useDb()
+  const { getProjectId } = useValidation(event);
+  const projectId = await getProjectId();
+
+  const stats = await useDb()
     .select({
-      numberOfFeedbacks: sql<number>`count(*) as count from tables.feedbacks where userId = ${session.user.id}`,
-      countByCategory: sql<number>`count(*) as count from tables.feedbacks where userId = ${session.user.id} group by category`,
-      countByStatus: sql<number>`count(*) as count from tables.feedbacks where userId = ${session.user.id} group by status`
+      total: sql<number>`count(${tables.feedbacks.id})`.mapWith(Number),
+      uniqueUsers: sql<number>`count(distinct(${tables.feedbacks.userId}))`,
     })
-    .from(tables.projects)
+    .from(tables.feedbacks)
+    .where(eq(tables.feedbacks.projectId, projectId))
     .get();
 
-  return result;
+  const countByStatus = await useDb()
+    .select({
+      status: tables.feedbacks.status,
+      count: sql<number>`count(${tables.feedbacks.id})`,
+    }).from(tables.feedbacks)
+    .where(eq(tables.feedbacks.projectId, projectId))
+    .groupBy(tables.feedbacks.status)
+    .all();
+
+  const countByCategory = await useDb()
+    .select({
+      category: tables.feedbacks.category,
+      count: sql<number>`count(${tables.feedbacks.id})`,
+    }).from(tables.feedbacks)
+    .where(eq(tables.feedbacks.projectId, projectId))
+    .groupBy(tables.feedbacks.category)
+    .all();
+
+  const finalStats = {
+    total: stats.total,
+    uniqueUsers: stats.uniqueUsers,
+    countByStatus,
+    countByCategory,
+  }
+
+  return finalStats;
 });
