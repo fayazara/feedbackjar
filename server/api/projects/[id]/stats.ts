@@ -1,11 +1,17 @@
-import { and, sql, eq } from "drizzle-orm";
+import { and, sql, eq, between } from "drizzle-orm";
 
 export default eventHandler(async (event) => {
   // const session = await requireUserSession(event);
   // const userId = session.user.id;
 
-  const { getProjectId } = useValidation(event);
+  const { getProjectId, getDateRangeFilter } = useValidation(event);
   const projectId = await getProjectId();
+  const { start, end } = await getDateRangeFilter();
+
+  let filterBy: any = eq(tables.feedbacks.projectId, projectId);
+  if (start && end) {
+    filterBy = and(filterBy, between(tables.feedbacks.createdAt, start, end));
+  }
 
   const stats = await useDb()
     .select({
@@ -13,7 +19,7 @@ export default eventHandler(async (event) => {
       uniqueUsers: sql<number>`count(distinct(${tables.feedbacks.userId}))`,
     })
     .from(tables.feedbacks)
-    .where(eq(tables.feedbacks.projectId, projectId))
+    .where(filterBy)
     .get();
 
   const countByStatus = await useDb()
@@ -21,7 +27,7 @@ export default eventHandler(async (event) => {
       status: tables.feedbacks.status,
       count: sql<number>`count(${tables.feedbacks.id})`,
     }).from(tables.feedbacks)
-    .where(eq(tables.feedbacks.projectId, projectId))
+    .where(filterBy)
     .groupBy(tables.feedbacks.status)
     .all();
 
@@ -30,7 +36,7 @@ export default eventHandler(async (event) => {
       category: tables.feedbacks.category,
       count: sql<number>`count(${tables.feedbacks.id})`,
     }).from(tables.feedbacks)
-    .where(eq(tables.feedbacks.projectId, projectId))
+    .where(filterBy)
     .groupBy(tables.feedbacks.category)
     .all();
 
