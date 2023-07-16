@@ -1,18 +1,24 @@
 import { useValidation } from "../../../utils/validate";
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, and, between } from "drizzle-orm";
 import { getFeedbacks } from "../../../db/query/feedback";
 import { Feedback } from "../../../../lib/types/project";
 
 
 export default eventHandler(async (event) => {
-  const { getPagination, getId } = useValidation(event);
-  const { limit, offset } = await getPagination()
+  const { getPagination, getDateRangeFilter, getId } = useValidation(event);
   const id = await getId()
+  const { limit, offset } = await getPagination()
+  const { start, end } = await getDateRangeFilter();
 
-  const session = await requireUserSession(event);
-  const userId = session.user.id
+  // const session = await requireUserSession(event);
+  // const userId = session.user.id
 
   // const userId = 1
+
+  const filterBy: any = and(
+    eq(tables.feedbacks.projectId, id),
+    between(tables.feedbacks.createdAt, start, end)
+  )
 
   const feedbacks: Feedback[] =  await getFeedbacks(
     {
@@ -27,7 +33,7 @@ export default eventHandler(async (event) => {
       createdAt: tables.feedbacks.createdAt,
       updatedAt: tables.feedbacks.updatedAt,
     },
-    eq(tables.feedbacks.projectId, id),
+    filterBy,
     desc(tables.feedbacks.updatedAt),
     offset,
     limit

@@ -8,10 +8,10 @@ export default eventHandler(async (event) => {
   const projectId = await getProjectId();
   const { start, end } = await getDateRangeFilter();
 
-  let filterBy: any = eq(tables.feedbacks.projectId, projectId);
-  if (start && end) {
-    filterBy = and(filterBy, between(tables.feedbacks.createdAt, start, end));
-  }
+  let filterBy: any = and(
+    eq(tables.feedbacks.projectId, projectId),
+    between(tables.feedbacks.createdAt, start, end)
+  );
 
   const stats = await useDb()
     .select({
