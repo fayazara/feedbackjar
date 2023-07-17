@@ -140,3 +140,7 @@ Before you deploy the application to production
 
 1. Make sure you have pushed the migration files to your production server, you can do so using `yarn push`, Drizzle ORM will read the config and run the migrations on your production server.
 2. Make sure you have set the environment variables on your production server.
+
+# Repo Activity
+![Alt](https://repobeats.axiom.co/api/embed/f4994a6e53330008c62e5a7e46c94ea99a76948f.svg "Repobeats analytics image")
+
