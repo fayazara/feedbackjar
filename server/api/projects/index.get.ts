@@ -5,8 +5,8 @@ import { useValidation } from "../../utils/validate";
 export default eventHandler(async (event) => {
   const { getProjectListFilters, getDateRangeFilter, getPagination } = useValidation(event);
 
-  const { limit, offset } = await getPagination()
   const filterParams = await getProjectListFilters();
+  const { limit, offset } = await getPagination()
   const { start, end } = await getDateRangeFilter();
 
   // TEST
