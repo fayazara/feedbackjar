@@ -1,43 +1,43 @@
-import { eq, and } from "drizzle-orm";
-import { useValidatedParams, zh } from "h3-zod";
+import { useValidation } from "../../../utils/validate";
+import { desc, eq, and, between } from "drizzle-orm";
+import { getFeedbacks } from "../../../db/query/feedback";
+import { Feedback } from "../../../../lib/types/project";
+
 
 export default eventHandler(async (event) => {
-  const { id } = await useValidatedParams(event, {
-    id: zh.intAsString,
-  });
-  const session = await requireUserSession(event);
+  const { getPagination, getDateRangeFilter, getId } = useValidation(event);
+  const id = await getId()
+  const { limit, offset } = await getPagination()
+  const { start, end } = await getDateRangeFilter();
 
-  // Retrieve the collection data and feedbacks using a left join
-  const result = await useDb()
-    .select()
-    .from(tables.projects)
-    .leftJoin(
-      tables.feedbacks,
-      eq(tables.projects.id, tables.feedbacks.projectId)
-    )
-    .where(
-      and(
-        eq(tables.projects.id, id),
-        eq(tables.projects.userId, session.user.id)
-      )
-    )
-    .all();
+  // const session = await requireUserSession(event);
+  // const userId = session.user.id
 
-  // If the collection is not found, return a 404 error
-  if (result.length === 0) {
-    throw createError({
-      statusCode: 404,
-      message: "Collection not found",
-    });
-  }
+  // const userId = 1
 
-  // Extract the collection data and feedbacks from the result
-  const collection = result[0].projects;
-  const feedbacks = result.map((r) => r.feedbacks).filter((e) => e);
+  const filterBy: any = and(
+    eq(tables.feedbacks.projectId, id),
+    between(tables.feedbacks.createdAt, start, end)
+  )
 
-  // Return the collection data and feedbacks
-  return {
-    collection,
-    feedbacks,
-  };
+  const feedbacks: Feedback[] =  await getFeedbacks(
+    {
+      id: tables.feedbacks.id,
+      userId: tables.feedbacks.userId,
+      userEmail: tables.feedbacks.userEmail,
+      userName: tables.feedbacks.userName,
+      category: tables.feedbacks.category,
+      projectId: tables.feedbacks.projectId,
+      feedback: tables.feedbacks.feedback,
+      status: tables.feedbacks.status,
+      createdAt: tables.feedbacks.createdAt,
+      updatedAt: tables.feedbacks.updatedAt,
+    },
+    filterBy,
+    desc(tables.feedbacks.updatedAt),
+    offset,
+    limit
+  );
+
+  return feedbacks;
 });

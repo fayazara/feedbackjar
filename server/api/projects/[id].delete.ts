@@ -1,28 +1,17 @@
-import { eq, and } from "drizzle-orm";
-import { useValidatedParams, zh } from "h3-zod";
+import { useValidation } from "../../utils/validate";
+import { archiveProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
-  const { id } = await useValidatedParams(event, {
-    id: zh.intAsString,
-  });
+  const { getId } = useValidation(event);
+  const id = await getId();
   const session = await requireUserSession(event);
+  const deletedProject = archiveProject(id, session.user.id);
 
-  const deletedCollection = await useDb()
-    .delete(tables.projects)
-    .where(
-      and(
-        eq(tables.projects.id, id),
-        eq(tables.projects.userId, session.user.id)
-      )
-    )
-    .returning()
-    .get();
-
-  if (!deletedCollection) {
+  if (!deletedProject) {
     throw createError({
       statusCode: 404,
-      message: "Collection not found",
+      message: "Project not found",
     });
   }
-  return deletedCollection;
+  return deletedProject;
 });
