@@ -1,29 +1,32 @@
-import { useValidatedBody, z } from "h3-zod";
+import { useValidation } from "../../utils/validate";
+import { Project } from "~/lib/types/project";
+import { insertProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
-  const { name } = await useValidatedBody(event, {
-    name: z.string().min(1).max(100),
-  });
-  const { description } = await useValidatedBody(event, {
-    description: z.string().max(300),
-  });
-  const { status } = await useValidatedBody(event, {
-    status: z.string(),
-  });
+  const{ getName, getDescription, getStatus, getWebsite, getAvatar } = useValidation(event)
+  const name = await getName()
+  const description = await getDescription()
+  const status = await getStatus()
+  const website = await getWebsite()
+  const avatar = await getAvatar()
+
+
   const session = await requireUserSession(event);
+  const userId = session.user.id
 
-  // list collections for the current user
-  const collection = await useDb()
-    .insert(tables.projects)
-    .values({
-      userId: session.user.id,
-      name,
-      description,
-      status,
-      createdAt: new Date(),
-    })
-    .returning()
-    .get();
+  // const userId = 1
 
-  return collection;
+  console.log(userId, name, description, status, website, avatar)
+  const project: Project = await insertProject({
+    userId,
+    name,
+    description,
+    status,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    website,
+    avatar
+  })
+
+  return project;
 });

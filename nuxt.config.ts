@@ -12,8 +12,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     dbDir: resolve("./server/db"),
     github: {
-      clientId: "",
-      clientSecret: "",
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET
     },
     session: {
       name: "nuxt-session",

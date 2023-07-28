@@ -23,13 +23,12 @@
     "typescript": "5.1.6"
   },
   "dependencies": {
-    "@iconify-json/mdi": "1.1.53",
+    "@iconify-json/mdi": "^1.1.52",
     "@libsql/client": "0.3.0",
     "better-sqlite3": "^8.4.0",
     "bufferutil": "^4.0.7",
-    "cal-sans": "^1.0.1",
     "drizzle-kit": "0.19.5",
-    "drizzle-orm": "0.27.2",
+    "drizzle-orm": "^0.27.0",
     "h3-zod": "^0.5.1",
     "utf-8-validate": "^6.0.3",
     "zod": "^3.21.4"

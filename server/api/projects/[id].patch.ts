@@ -1,37 +1,34 @@
 import { eq, and } from "drizzle-orm";
-import { useValidatedParams, useValidatedBody, z, zh } from "h3-zod";
+import { useValidation } from "../../utils/validate";
+import { Project } from "~/lib/types/project";
+import { updateProject } from "../../db/query/project";
 
 export default eventHandler(async (event) => {
-  const { id } = await useValidatedParams(event, {
-    id: zh.intAsString,
-  });
-  const { name } = await useValidatedBody(event, {
-    name: z.string(),
-  });
-  const { description } = await useValidatedBody(event, {
-    description: z.string(),
-  });
-  const { status } = await useValidatedBody(event, {
-    status: z.string(),
-  });
+
+  const { getId, getName, getDescription, getStatus, getWebsite, getAvatar } = useValidation(event)
+  const id = await getId()
+  const name = await getName()
+  const description = await getDescription()
+  const status = await getStatus()
+  const website = await getWebsite()
+  const avatar = await getAvatar()
+
   const session = await requireUserSession(event);
+  const userId = session.user.id
 
-  // List todos for the current user
-  const todo = await useDb()
-    .update(tables.projects)
-    .set({
-      name,
-      description,
-      status,
-    })
-    .where(
-      and(
-        eq(tables.projects.id, id),
-        eq(tables.projects.userId, session.user.id)
-      )
-    )
-    .returning()
-    .get();
+  // const userId = 1
 
-  return todo;
+  const project: Project = await updateProject({
+    name,
+    description,
+    status,
+    website,
+    avatar,
+    updatedAt: new Date(),
+  }, and(
+    eq(tables.projects.id, id),
+    eq(tables.projects.userId, userId)
+  ));
+
+  return project;
 });

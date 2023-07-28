@@ -39,7 +39,7 @@ export async function requireUserSession(event: H3Event) {
 
 let sessionConfig: any;
 
-function _useSession(event: H3Event) {
+function _useSession(event: any) {
   if (!sessionConfig) {
     // @ts-ignore
     sessionConfig = defu(
