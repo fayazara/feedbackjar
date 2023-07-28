@@ -8,6 +8,13 @@
       "when": 1689318175937,
       "tag": "0000_chunky_viper",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1690555669991,
+      "tag": "0001_common_white_tiger",
+      "breakpoints": true
     }
   ]
 }

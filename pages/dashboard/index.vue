@@ -46,7 +46,8 @@
     </div>
 
     <div class="lg:pl-60">
-      <NuxtPage />
+      <NuxtPage v-if="user.onboarded" />
+      <DashboardOnboard />
     </div>
     <UNotifications />
   </div>
@@ -56,7 +57,7 @@
 const { user, clear, loggedIn } = useUserSession();
 
 definePageMeta({
-  middleware: "auth",
+  middleware: ["auth"],
 });
 
 const sidebarOpen = ref(false);

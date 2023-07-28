@@ -1,11 +1,7 @@
 <template>
-  <!-- <DashboardHeader
-    title="Overview"
-    subtitle="Project insights, feedback list and overview"
-  /> -->
   <main>
     <header>
-      <!-- Secondary navigation -->
+      <!-- Secondary navigation (Overview, all activity, collabs, settings) -->
       <nav class="flex overflow-x-auto border-b border-white/10 py-4">
         <ul
           role="list"
@@ -56,12 +52,8 @@
           v-for="(stat, statIdx) in stats"
           :key="stat.name"
           :class="[
-            statIdx % 2 === 1
-              ? 'sm:border-l'
-              : statIdx === 2
-              ? 'lg:border-l'
-              : '',
-            'border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8',
+            'border-l border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8',
+            statIdx === 0 ? 'border-l-0' : '',
           ]"
         >
           <p class="text-sm font-medium leading-6 text-gray-400">

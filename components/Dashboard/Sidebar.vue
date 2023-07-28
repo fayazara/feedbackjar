@@ -39,20 +39,6 @@
       <ul role="list" class="menu-list">
         <li>
           <ul role="list" class="submenu">
-            <li>
-              <button
-                v-if="isAccountRoute"
-                @click="back()"
-                class="navlink group"
-              >
-                <Icon
-                  name="heroicons:arrow-left"
-                  class="navlink-icon"
-                  aria-hidden="true"
-                />
-                <span>Back</span>
-              </button>
-            </li>
             <li v-for="item in navigation" :key="item.name">
               <NuxtLink
                 @click="$emit('close')"
@@ -131,6 +117,7 @@ const accountRoutes = [
   "/dashboard",
   "/dashboard/settings",
   "/dashboard/billing",
+  "/dashboard/get-started",
 ];
 
 const selectedProject = ref({
@@ -148,7 +135,11 @@ const navigation = computed(() =>
 );
 
 const projectNavigationLinks = [
-  { name: "Overview", href: "/dashboard/overview", icon: "heroicons:chart-pie" },
+  {
+    name: "Overview",
+    href: "/dashboard/overview",
+    icon: "heroicons:chart-pie",
+  },
   {
     name: "Activity",
     href: "/dashboard/feedback",
@@ -169,7 +160,7 @@ const accountNavigationLinks = [
   {
     name: "New Project",
     href: "/dashboard/new-project",
-    icon: "heroicons:folder",
+    icon: "heroicons:folder-plus",
   },
   {
     name: "Settings",
@@ -177,15 +168,26 @@ const accountNavigationLinks = [
     icon: "heroicons:cog-6-tooth",
   },
   {
+    name: "API Keys",
+    href: "/dashboard/settings",
+    icon: "heroicons:lock-closed",
+  },
+  {
+    name: "Webhooks",
+    href: "/dashboard/settings",
+    icon: "heroicons:arrows-up-down",
+  },
+  {
+    name: "Team",
+    href: "/dashboard/settings",
+    icon: "heroicons:user-group",
+  },
+  {
     name: "Billing",
     href: "/dashboard/billing",
     icon: "heroicons:currency-rupee",
   },
 ];
-
-function back() {
-  window.history.back();
-}
 
 const filters = [
   {
@@ -316,7 +318,7 @@ const projects = [
 }
 
 .submenu {
-  @apply space-y-1 mt-4;
+  @apply space-y-1;
 }
 
 .navlink {
