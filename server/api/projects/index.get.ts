@@ -1,29 +1,23 @@
-import { and, between, eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { getProjects } from "../../db/query/project";
 import { useValidation } from "../../utils/validate";
 
 export default eventHandler(async (event) => {
-  const { getProjectListFilters, getDateRangeFilter, getPagination } = useValidation(event);
+  const { getProjectListFilters, getDateRangeFilter, getPagination } =
+    useValidation(event);
 
   const filterParams = await getProjectListFilters();
-  const { limit, offset } = await getPagination()
-  const { start, end } = await getDateRangeFilter();
+  const { limit, offset } = await getPagination();
 
   // TEST
   const session = await requireUserSession(event);
-  const userId = session.user.id
+  const userId = session.user.id;
 
   // const userId = 1
 
-  let filterBy: any = and(
-    eq(tables.projects.userId, userId),
-    between(tables.projects.createdAt, start, end)
-  )
+  let filterBy: any = and(eq(tables.projects.userId, userId));
   if (filterParams.status) {
-    filterBy = and(
-      filterBy,
-      eq(tables.projects.status, filterParams.status),
-    )
+    filterBy = and(filterBy, eq(tables.projects.status, filterParams.status));
   }
 
   const projects = await getProjects(
