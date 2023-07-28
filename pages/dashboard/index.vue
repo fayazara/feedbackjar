@@ -10,23 +10,17 @@
         :closeButton="true"
         :user="user"
         :clear="clear"
-        :isAccountRoute="isAccountRoute"
       />
     </USlideover>
 
     <div
-      class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col"
+      class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col"
     >
-      <DashboardSidebar
-        :user="user"
-        :clear="clear"
-        :closeButton="false"
-        :isAccountRoute="isAccountRoute"
-      />
+      <DashboardSidebar :user="user" :clear="clear" :closeButton="false" />
     </div>
 
     <div
-      class="sticky h-14 top-0 z-40 md:pl-72 flex items-center justify-between gap-x-4 bg-white dark:bg-gray-950 dark:border-b border-gray-900 px-4 py-4 shadow-sm sm:px-6"
+      class="sticky h-14 top-0 z-40 md:pl-60 flex items-center justify-between gap-x-4 bg-white dark:bg-gray-950 dark:border-b border-gray-900 px-4 py-4 shadow-sm sm:px-6"
     >
       <div class="flex items-center gap-x-2 md:hidden">
         <Logo class="h-6 w-auto" />
@@ -51,11 +45,9 @@
       />
     </div>
 
-    <main class="py-10 lg:pl-72">
-      <div class="px-4 sm:px-6 lg:px-8">
-        <NuxtPage />
-      </div>
-    </main>
+    <div class="lg:pl-60">
+      <NuxtPage />
+    </div>
     <UNotifications />
   </div>
 </template>
@@ -65,14 +57,6 @@ const { user, clear, loggedIn } = useUserSession();
 
 definePageMeta({
   middleware: "auth",
-});
-
-const accountRoutes = ["new-project", "settings", "billing"];
-
-const route = useRoute();
-
-const isAccountRoute = computed(() => {
-  return accountRoutes.includes(route.name);
 });
 
 const sidebarOpen = ref(false);
@@ -89,5 +73,3 @@ useHead({
   ],
 });
 </script>
-
-/

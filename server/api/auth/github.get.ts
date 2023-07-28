@@ -1,6 +1,7 @@
 import { insertUser, getUser } from "../../db/query/users";
 import { sendError, createError, sendRedirect } from "h3";
 import { Config, Code, GithubUser } from "@/lib/types/github";
+import { E } from "drizzle-orm/column.d-aa4e525d";
 
 async function fetchAccessToken(config: Config, code: Code) {
   try {
@@ -26,7 +27,7 @@ async function fetchAccessToken(config: Config, code: Code) {
 
 async function fetchGitHubUser(config: Config, accessToken: string) {
   try {
-    const ghUser: GithubUser = await $fetch("https://api.github.com/user", {
+    const ghUser: any = await $fetch("https://api.github.com/user", {
       headers: {
         "User-Agent": `Github-OAuth-${config.github.clientId}`,
         Authorization: `token ${accessToken}`,
@@ -40,9 +41,9 @@ async function fetchGitHubUser(config: Config, accessToken: string) {
       login: ghUser.login,
       name: ghUser.name,
       email: ghUser.email,
-      avatar_url: ghUser.avatarUrl,
-      html_url: ghUser.githubUrl,
-      twitter_username: ghUser.twitterUsername,
+      avatarUrl: ghUser.avatar_url,
+      githubUrl: ghUser.html_url,
+      twitterUsername: ghUser.twitter_username,
       bio: ghUser.bio,
       blog: ghUser.blog,
       company: ghUser.company,
@@ -75,14 +76,15 @@ export default eventHandler(async (event) => {
 
   try {
     const accessToken = await fetchAccessToken(config, code);
-    const ghUser = await fetchGitHubUser(config, accessToken);
+    const ghUser: GithubUser = await fetchGitHubUser(config, accessToken);
     const user = await getUser(ghUser.id);
     if (!user) {
       const newUser = await insertUser(ghUser);
-      console.log("User inserted", newUser);
+      await setUserSession(event, { user: newUser });
+    } else {
+      await setUserSession(event, { user });
     }
-    await setUserSession(event, { user });
-    return sendRedirect(event, "/asd");
+    return sendRedirect(event, "/dashboard");
   } catch (error) {
     console.error(error);
     return sendError(
