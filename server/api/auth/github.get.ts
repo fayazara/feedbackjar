@@ -82,7 +82,7 @@ export default eventHandler(async (event) => {
       console.log("User inserted", newUser);
     }
     await setUserSession(event, { user });
-    return sendRedirect(event, "/asd");
+    return sendRedirect(event, "/dashboard");
   } catch (error) {
     console.error(error);
     return sendError(
