@@ -3,11 +3,12 @@ import { createResolver } from "nuxt/kit";
 const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: ["@nuxthq/ui", "@vueuse/nuxt", "@nuxtjs/fontaine", "nuxt-icon"],
   ui: {
     icons: ["heroicons", "mdi"],
   },
+  css: ["~/assets/css/font.css"],
   runtimeConfig: {
     dbDir: resolve("./server/db"),
     github: {

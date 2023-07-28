@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: "class",
   theme: {
@@ -7,7 +8,38 @@ module.exports = {
         "slate-1000": "#020409",
       },
     },
+    fontFamily: {
+      sans: [
+        "Inter",
+        "Avenir Next",
+        "Roboto",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Ubuntu",
+        '"Helvetica Neue"',
+        "Arial",
+        '"Noto Sans"',
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+      ],
+      mono: [
+        "ui-monospace",
+        "SFMono-Regular",
+        "Menlo",
+        "Monaco",
+        "Consolas",
+        "Liberation Mono",
+        "Courier New",
+        "monospace",
+      ],
+      display: ["Cal Sans", "Inter", "sans-serif"],
+    },
   },
+  plugins: [],
   content: [
     `assets/**/*.css`,
     `components/**/*.{vue,js}`,

@@ -4,7 +4,7 @@
   >
     <div>
       <h1
-        class="text-xl sm:text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white"
+        class="text-xl sm:text-3xl font-bold leading-tight text-gray-900 dark:text-white font-display"
       >
         {{ title }}
       </h1>
