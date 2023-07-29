@@ -113,13 +113,6 @@ interface Props {
 const props = defineProps<Props>();
 const route = useRoute();
 
-const accountRoutes = [
-  "/dashboard",
-  "/dashboard/settings",
-  "/dashboard/billing",
-  "/dashboard/get-started",
-];
-
 const selectedProject = ref({
   label: "Dribbble",
   avatar: {
@@ -127,7 +120,9 @@ const selectedProject = ref({
   },
 });
 
-const isAccountRoute = computed(() => accountRoutes.includes(route.path));
+const isAccountRoute = computed(() =>
+  accountNavigationLinks.map((item) => item.href).includes(route.path)
+);
 const selectedFilter = ref("all");
 
 const navigation = computed(() =>
@@ -169,17 +164,17 @@ const accountNavigationLinks = [
   },
   {
     name: "API Keys",
-    href: "/dashboard/settings",
+    href: "/dashboard/api-keys",
     icon: "heroicons:lock-closed",
   },
   {
     name: "Webhooks",
-    href: "/dashboard/settings",
+    href: "/dashboard/webhooks",
     icon: "heroicons:arrows-up-down",
   },
   {
     name: "Team",
-    href: "/dashboard/settings",
+    href: "/dashboard/team",
     icon: "heroicons:user-group",
   },
   {

@@ -1,4 +1,4 @@
-import { onBoardUser } from "./../../db/query/users";
+import { onBoardUser } from "../../db/query/users";
 import { useValidation } from "../../utils/validate";
 import { Project } from "~/lib/types/project";
 import { insertProject } from "../../db/query/project";

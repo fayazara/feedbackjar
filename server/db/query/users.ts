@@ -53,21 +53,19 @@ export const insertUser = async (data: GithubUser) => {
 };
 
 export const onBoardUser = async (userId: number) => {
-  const user = await updateUser(
-    {
-      onboarduser: true,
-    },
-    userId
-  );
-  return user;
+  const onboardedUser = await useDb()
+    .update(tables.users)
+    .set({ onboarded: true })
+    .where(eq(tables.users.id, userId))
+    .returning()
+    .get();
+  return onboardedUser;
 };
 
 export const updateUser = async (data: any, userId: number) => {
   const updatedUser = await useDb()
     .update(tables.users)
     .set(data)
-    .where(eq(tables.users.id, userId))
-    .returning()
-    .get();
+    .where(eq(tables.users.id, userId));
   return updatedUser;
 };

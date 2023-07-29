@@ -47,7 +47,7 @@
 
     <div class="lg:pl-60">
       <NuxtPage v-if="user.onboarded" />
-      <DashboardOnboard />
+      <DashboardOnboard v-else/>
     </div>
     <UNotifications />
   </div>
