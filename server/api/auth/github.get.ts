@@ -82,7 +82,7 @@ export default eventHandler(async (event) => {
       user = await insertUser(ghUser);
     }
     await setUserSession(event, { user });
-    if (!user.onboarded) redirectTo = "/dashboard/get-started";
+    if (!user.onboarded) redirectTo = "/dashboard";
     return sendRedirect(event, redirectTo);
   } catch (error) {
     console.error(error);

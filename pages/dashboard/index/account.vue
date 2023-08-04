@@ -1,5 +1,5 @@
 <template>
-  <div>Settings page</div>
+  <div>Account page</div>
 </template>
 
 <script setup>

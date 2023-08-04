@@ -15,6 +15,10 @@ export default eventHandler(async (event) => {
   const session = await requireUserSession(event);
   const userId = session.user.id;
 
+  if (session.user.onboarded) {
+    throw new Error("User is already onboarded");
+  }
+
   const project: Project = await insertProject({
     userId,
     name,
@@ -26,7 +30,8 @@ export default eventHandler(async (event) => {
     avatar,
   });
 
-  await onBoardUser(userId);
-
+  const user = await onBoardUser(userId);
+  await setUserSession(event, { user });
+  
   return project;
 });

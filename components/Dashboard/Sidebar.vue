@@ -112,7 +112,7 @@ interface Props {
 
 const props = defineProps<Props>();
 const route = useRoute();
-
+const selectedFilter = ref("all");
 const selectedProject = ref({
   label: "Dribbble",
   avatar: {
@@ -120,10 +120,15 @@ const selectedProject = ref({
   },
 });
 
-const isAccountRoute = computed(() =>
-  accountNavigationLinks.map((item) => item.href).includes(route.path)
+const isAccountRoute = computed(
+  () =>
+    route.path === "/dashboard" ||
+    route.path === "/dashboard/" ||
+    route.path === "/dashboard/get-started" ||
+    route.path === "/dashboard/get-started/" ||
+    accountNavigationLinks.map((item) => item.href).includes(route.path)
 );
-const selectedFilter = ref("all");
+
 
 const navigation = computed(() =>
   isAccountRoute.value ? accountNavigationLinks : projectNavigationLinks
@@ -158,8 +163,8 @@ const accountNavigationLinks = [
     icon: "heroicons:folder-plus",
   },
   {
-    name: "Settings",
-    href: "/dashboard/settings",
+    name: "Account",
+    href: "/dashboard/account",
     icon: "heroicons:cog-6-tooth",
   },
   {
@@ -234,7 +239,7 @@ const userSettings = [
     {
       label: "Settings",
       icon: "i-heroicons-cog-6-tooth",
-      to: "/dashboard/settings",
+      to: "/dashboard/account",
     },
     {
       label: "Billing & Invoices",
