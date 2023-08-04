@@ -7,7 +7,7 @@
       <div class="w-px bg-gray-200 dark:bg-gray-800" />
     </div>
     <div
-      class="relative flex h-6 w-6 flex-none items-center justify-center bg-gray-100 dark:bg-gray-950"
+      class="relative flex h-6 w-6 flex-none items-center justify-center bg-gray-50 dark:bg-gray-950"
     >
       <Icon
         :name="

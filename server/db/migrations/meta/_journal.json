@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1689318175937,
-      "tag": "0000_chunky_viper",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1690555669991,
-      "tag": "0001_common_white_tiger",
+      "when": 1691155318204,
+      "tag": "0000_neat_doctor_doom",
       "breakpoints": true
     }
   ]

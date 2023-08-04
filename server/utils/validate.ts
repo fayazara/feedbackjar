@@ -58,14 +58,14 @@ export const useValidation = (event: any) => {
 
   const getUserEmail = async () => {
     const { userEmail } = await useValidatedBody(event, {
-      userEmail: z.string(),
+      userEmail: z.string().optional(),
     });
     return userEmail;
   };
 
   const getUserName = async () => {
     const { userName } = await useValidatedBody(event, {
-      userName: z.string(),
+      userName: z.string().optional(),
     });
     return userName;
   };
@@ -79,7 +79,7 @@ export const useValidation = (event: any) => {
 
   const getOrigin = async () => {
     const { origin } = await useValidatedBody(event, {
-      origin: z.string(),
+      origin: z.string().optional(),
     });
     return origin;
   };

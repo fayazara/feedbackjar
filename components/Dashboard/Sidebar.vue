@@ -129,7 +129,6 @@ const isAccountRoute = computed(
     accountNavigationLinks.map((item) => item.href).includes(route.path)
 );
 
-
 const navigation = computed(() =>
   isAccountRoute.value ? accountNavigationLinks : projectNavigationLinks
 );

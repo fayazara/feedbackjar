@@ -1,1 +1,0 @@
-ALTER TABLE users ADD `onboarded` integer DEFAULT false NOT NULL;

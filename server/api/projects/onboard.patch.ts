@@ -29,9 +29,8 @@ export default eventHandler(async (event) => {
     website,
     avatar,
   });
-
   const user = await onBoardUser(userId);
-  await setUserSession(event, { user });
   
+  await setUserSession(event, { user });
   return project;
 });
