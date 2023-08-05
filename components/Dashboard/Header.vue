@@ -8,7 +8,9 @@
       >
         {{ title }}
       </h1>
-      <p v-if="subtitle" class="text-sm sm:text-base text-gray-500">{{ subtitle }}</p>
+      <p v-if="subtitle" class="text-sm sm:text-base text-gray-500">
+        {{ subtitle }}
+      </p>
     </div>
     <slot />
   </header>
