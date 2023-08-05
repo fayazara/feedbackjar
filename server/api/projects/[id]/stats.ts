@@ -53,7 +53,6 @@ export default eventHandler(async (event) => {
   const feedbackCount = await getFeedbackCountOfProject(selectColumns, filterBy, groupBy);
   const countByStatus = await feedbackCountByStatus(filterBy);
   const countByCategory = await feedbackCountByCategory(filterBy);
-  console.log(feedbackCount)
 
   const finalStats = {
     feedbackCount,

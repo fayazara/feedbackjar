@@ -37,7 +37,7 @@ export const useValidation = (event: any) => {
 
   const getWebsite = async () => {
     const { website } = await useValidatedBody(event, {
-      website: z.string(),
+      website: z.string().optional(),
     });
     return website;
   };
@@ -115,8 +115,8 @@ export const useValidation = (event: any) => {
       end: z.string().optional().default(new Date().toISOString()),
     });
 
-    start = start.replace(/T.+/, 'T00:00:00.000Z');
-    end = end.replace(/T.+/, 'T23:59:59.999Z');
+    start = start.replace(/T.+/, "T00:00:00.000Z");
+    end = end.replace(/T.+/, "T23:59:59.999Z");
 
     return { start: new Date(start), end: new Date(end) };
   };

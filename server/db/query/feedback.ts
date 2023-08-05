@@ -34,7 +34,6 @@ export const getFeedbacks = async (
     .orderBy(orderBy)
     .limit(limit)
     .offset(offset)
-   console.log(db.toSQL())
    return db.all();
   }
 

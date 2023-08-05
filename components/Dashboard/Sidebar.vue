@@ -157,9 +157,9 @@ const projectNavigationLinks = [
 ];
 const accountNavigationLinks = [
   {
-    name: "New Project",
-    href: "/dashboard/new-project",
-    icon: "heroicons:folder-plus",
+    name: "Projects",
+    href: "/dashboard",
+    icon: "heroicons:folder",
   },
   {
     name: "Account",
