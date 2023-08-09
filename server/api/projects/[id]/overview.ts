@@ -24,11 +24,7 @@ export default eventHandler(async (event) => {
     eq(tables.feedbacks.projectId, projectId)
   );
 
-  const feedbackCount = await getFeedbackCountOfProject(
-    selectColumns,
-    filterBy
-  );
-  
+  const feedbackCount = await getFeedbackCountOfProject(filterBy);
   const countByStatusQs = await feedbackCountByStatus(filterBy);
   const countByCategoryQs = await feedbackCountByCategory(filterBy);
 

@@ -1,16 +1,13 @@
 import { sql, eq, and } from "drizzle-orm";
 
-export const getFeedbackCountOfProject = async (
-  selectColumns: any,
-  filterBy: any
-): Promise<any> => {
-  const db = await useDb()
-    .select(selectColumns)
+export const getFeedbackCountOfProject = async (filterBy: any) =>
+  await useDb()
+    .select({
+      id: tables.feedbacks.id,
+    })
     .from(tables.feedbacks)
-    .where(filterBy);
-
-  return db.all();
-};
+    .where(filterBy)
+    .all();
 
 export const feedbackCountByStatus = async (filterBy: any) =>
   await useDb()
