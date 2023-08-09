@@ -70,7 +70,11 @@
 <script setup>
 const route = useRoute();
 const { projectId } = route.params;
-const { data: project } = useFetch(`/api/projects/${projectId}`);
+const today = new Date();
+const start = new Date(today.getFullYear(), today.getMonth(), 1);
+const { data: projects } = useFetch(
+  `/api/projects/${projectId}/overview?start=${start.toISOString()}&end=${today.toISOString()}`
+);
 const stats = [
   { name: "Total feedbacks", value: "405" },
   { name: "Issues", value: "134" },
