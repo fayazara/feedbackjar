@@ -67,7 +67,7 @@ export default eventHandler(async (event) => {
 
   const result = {
     stats: {
-      feedbackCount,
+      feedbackCount: feedbackCount.length,
       ...countByStatus,
       ...countByCategory,
       open: open.length,
