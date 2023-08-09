@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-100 dark:bg-gray-950">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-950">
     <USlideover
       v-model="sidebarOpen"
       side="left"
@@ -10,13 +10,19 @@
         :closeButton="true"
         :user="user"
         :clear="clear"
+        :projects="projectsDropdown"
       />
     </USlideover>
 
     <div
       class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col"
     >
-      <DashboardSidebar :user="user" :clear="clear" :closeButton="false" />
+      <DashboardSidebar
+        :user="user"
+        :clear="clear"
+        :closeButton="false"
+        :projects="projectsDropdown"
+      />
     </div>
 
     <div
@@ -56,9 +62,22 @@
 
 <script setup>
 const { user, clear, loggedIn } = useUserSession();
-
+const { data: projects = [] } = await useFetch(`/api/projects`);
 definePageMeta({
   middleware: ["auth"],
+});
+
+const projectsDropdown = computed(() => {
+  return projects.value.map((project) => {
+    return {
+      label: project.name,
+      avatar: {
+        src: project.avatar,
+      },
+      to: `/dashboard/projects/${project.id}`,
+      id: project.id,
+    };
+  });
 });
 
 const sidebarOpen = ref(false);

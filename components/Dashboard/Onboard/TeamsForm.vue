@@ -9,7 +9,7 @@
       </p>
     </div>
     <div
-      class="p-4 border dark:border-gray-800 border-dashed bg-gray-50 dark:bg-gray-900 rounded-xl flex flex-col items-center justify-center"
+      class="p-4 border dark:border-white/10 border-dashed bg-gray-50 dark:bg-gray-900 rounded-xl flex flex-col items-center justify-center"
     >
       <img src="writing-code.png" alt="Work in progress" class="mx-auto" />
       <p class="mt-5 text-gray-700 dark:text-gray-400">

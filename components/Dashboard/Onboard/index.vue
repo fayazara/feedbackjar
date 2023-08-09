@@ -1,7 +1,7 @@
 <template>
   <main class="grid grid-cols-3">
     <div
-      class="h-[calc(100vh-3.5rem)] sticky top-0 border-r bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-900"
+      class="h-[calc(100vh-3.5rem)] sticky top-0 border-r bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-white/10"
     >
       <div class="py-12 px-6">
         <DashboardHeader title="Get Started" subtitle="Let's get you setup." />

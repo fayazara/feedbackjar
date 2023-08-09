@@ -32,7 +32,7 @@
         </p>
         <div class="flex items-center space-x-3 mt-3">
           <div
-            class="rounded-lg h-16 w-16 flex border dark:border-gray-800 items-center justify-center"
+            class="rounded-lg h-16 w-16 flex border dark:border-white/10 items-center justify-center"
           >
             <UAvatar
               :src="avatar"
