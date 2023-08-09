@@ -39,12 +39,14 @@
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
           <UButton
-            to="/"
+            :to="loggedIn ? '/dashboard' : '/api/auth/github'"
             class="font-semibold leading-6"
             variant="ghost"
             color="gray"
+            external
           >
-            Log in <span aria-hidden="true">&rarr;</span>
+            {{ loggedIn ? "Dashboard" : "Login" }}
+            <span aria-hidden="true">&rarr;</span>
           </UButton>
         </div>
       </nav>
@@ -72,14 +74,15 @@
               Capture, analyse and close user feedback from one place.
             </p>
             <div class="mt-10 flex items-center justify-center gap-x-6">
-              <button
-                href="/api/auth/github"
-                color="white"
+              <UButton
+                :to="loggedIn ? '/dashboard' : '/api/auth/github'"
                 size="xl"
-                class="bg-gray-900 dark:bg-blue-300/10 text-white rounded-lg border dark:border-white/20 px-5 py-2"
+                color="white"
+                variant="solid"
+                external
               >
-                Get started
-              </button>
+                {{ loggedIn ? "Go to dashboard" : "Sign up with Github" }}
+              </UButton>
             </div>
           </div>
           <div class="mt-12 flow-root sm:mt-16">
@@ -102,12 +105,12 @@
 </template>
 
 <script setup>
-const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Integrations", href: "#" },
-  { name: "Company", href: "#" },
-];
+// const navigation = [
+//   { name: "Product", href: "#" },
+//   { name: "Features", href: "#" },
+//   { name: "Integrations", href: "#" },
+//   { name: "Company", href: "#" },
+// ];
 
 const { loggedIn } = useUserSession();
 </script>

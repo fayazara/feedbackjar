@@ -74,17 +74,16 @@ export default eventHandler(async (event) => {
   }
 
   try {
+    let redirectTo = "/dashboard";
     const accessToken = await fetchAccessToken(config, code);
     const ghUser: GithubUser = await fetchGitHubUser(config, accessToken);
-    const user = await getUser(ghUser.id);
+    let user = await getUser(ghUser.id);
     if (!user) {
-      const newUser = await insertUser(ghUser);
-      await setUserSession(event, { user: newUser });
-    } else {
-      await setUserSession(event, { user });
+      user = await insertUser(ghUser);
     }
     await setUserSession(event, { user });
-    return sendRedirect(event, "/dashboard");
+    if (!user.onboarded) redirectTo = "/dashboard";
+    return sendRedirect(event, redirectTo);
   } catch (error) {
     console.error(error);
     return sendError(

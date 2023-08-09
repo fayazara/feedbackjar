@@ -37,7 +37,7 @@ export const useValidation = (event: any) => {
 
   const getWebsite = async () => {
     const { website } = await useValidatedBody(event, {
-      website: z.string(),
+      website: z.string().optional(),
     });
     return website;
   };
@@ -58,14 +58,14 @@ export const useValidation = (event: any) => {
 
   const getUserEmail = async () => {
     const { userEmail } = await useValidatedBody(event, {
-      userEmail: z.string(),
+      userEmail: z.string().optional(),
     });
     return userEmail;
   };
 
   const getUserName = async () => {
     const { userName } = await useValidatedBody(event, {
-      userName: z.string(),
+      userName: z.string().optional(),
     });
     return userName;
   };
@@ -79,7 +79,7 @@ export const useValidation = (event: any) => {
 
   const getOrigin = async () => {
     const { origin } = await useValidatedBody(event, {
-      origin: z.string(),
+      origin: z.string().optional(),
     });
     return origin;
   };
@@ -115,8 +115,8 @@ export const useValidation = (event: any) => {
       end: z.string().optional().default(new Date().toISOString()),
     });
 
-    start = start.replace(/T.+/, 'T00:00:00.000Z');
-    end = end.replace(/T.+/, 'T23:59:59.999Z');
+    start = start.replace(/T.+/, "T00:00:00.000Z");
+    end = end.replace(/T.+/, "T23:59:59.999Z");
 
     return { start: new Date(start), end: new Date(end) };
   };

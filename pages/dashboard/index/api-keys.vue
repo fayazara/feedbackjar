@@ -1,5 +1,5 @@
 <template>
-  <div>Settings page</div>
+  <div>API Keys</div>
 </template>
 
 <script setup>

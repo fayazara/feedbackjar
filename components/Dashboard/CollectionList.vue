@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white dark:bg-gray-950 px-5 border dark:border-gray-900 rounded-xl"
+    class="bg-white dark:bg-gray-950 px-5 border dark:border-white/10 rounded-xl"
   >
     <ul role="list" class="divide-y divide-gray-100 dark:divide-gray-900">
       <li

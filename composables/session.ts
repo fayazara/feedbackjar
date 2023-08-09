@@ -7,6 +7,7 @@ export const useUserSession = () => {
   return {
     loggedIn: computed(() => Boolean(sessionState.value.user)),
     user: computed(() => sessionState.value.user || null),
+    onBoarded: computed(() => sessionState.value.user.onboarded),
     data: sessionState,
     fetch,
     clear,

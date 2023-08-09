@@ -15,44 +15,9 @@
       />
     </div>
     <nav class="menu">
-      <USelectMenu
-        v-if="!isAccountRoute"
-        v-model="selectedProject"
-        :options="projects"
-        :popper="{ placement: 'bottom-start' }"
-      >
-        <template #label>
-          <UIcon
-            v-if="selectedProject.icon"
-            :name="selectedProject.icon"
-            class="w-4 h-4"
-          />
-          <UAvatar
-            v-else-if="selectedProject.avatar"
-            v-bind="selectedProject.avatar"
-            size="3xs"
-          />
-
-          {{ selectedProject.label }}
-        </template>
-      </USelectMenu>
       <ul role="list" class="menu-list">
         <li>
           <ul role="list" class="submenu">
-            <li>
-              <button
-                v-if="isAccountRoute"
-                @click="back()"
-                class="navlink group"
-              >
-                <Icon
-                  name="heroicons:arrow-left"
-                  class="navlink-icon"
-                  aria-hidden="true"
-                />
-                <span>Back</span>
-              </button>
-            </li>
             <li v-for="item in navigation" :key="item.name">
               <NuxtLink
                 @click="$emit('close')"
@@ -117,64 +82,75 @@
 
 <script setup lang="ts">
 import { GithubUser } from "@/lib/types/github";
-
 interface Props {
   closeButton: boolean;
   user: GithubUser;
   clear: () => void;
 }
-
 const props = defineProps<Props>();
 const route = useRoute();
-
-const accountRoutes = [
-  "/dashboard",
-  "/dashboard/settings",
-  "/dashboard/billing",
-];
-
-const selectedProject = ref({
-  label: "Dribbble",
-  avatar: {
-    src: "https://cdn.dribbble.com/assets/dribbble-ball-192-23ecbdf987832231e87c642bb25de821af1ba6734a626c8c259a20a0ca51a247.png",
-  },
-});
-
-const isAccountRoute = computed(() => accountRoutes.includes(route.path));
 const selectedFilter = ref("all");
+
+const isAccountRoute = computed(
+  () =>
+    route.path === "/dashboard" ||
+    route.path === "/dashboard/" ||
+    route.path === "/dashboard/get-started" ||
+    route.path === "/dashboard/get-started/" ||
+    accountNavigationLinks.map((item) => item.href).includes(route.path)
+);
 
 const navigation = computed(() =>
   isAccountRoute.value ? accountNavigationLinks : projectNavigationLinks
 );
 
 const projectNavigationLinks = [
-  { name: "Overview", href: "/dashboard/overview", icon: "heroicons:chart-pie" },
   {
-    name: "Activity",
-    href: "/dashboard/feedback",
+    name: "Overview",
+    href: `/dashboard/${route.params.projectId}`,
+    icon: "heroicons:chart-pie",
+  },
+  {
+    name: "All Feedback",
+    href: `/dashboard/${route.params.projectId}/activity`,
     icon: "heroicons:archive-box-arrow-down",
   },
   {
     name: "Collaborators",
-    href: "/dashboard/feedback",
+    href: `/dashboard/${route.params.projectId}/collaborators`,
     icon: "heroicons:users",
   },
   {
     name: "Settings",
-    href: "/dashboard/feedback",
+    href: `/dashboard/${route.params.projectId}/settings`,
     icon: "heroicons:cog-6-tooth",
   },
 ];
 const accountNavigationLinks = [
   {
-    name: "New Project",
-    href: "/dashboard/new-project",
+    name: "Projects",
+    href: "/dashboard",
     icon: "heroicons:folder",
   },
   {
-    name: "Settings",
-    href: "/dashboard/settings",
+    name: "Account",
+    href: "/dashboard/account",
     icon: "heroicons:cog-6-tooth",
+  },
+  {
+    name: "API Keys",
+    href: "/dashboard/api-keys",
+    icon: "heroicons:lock-closed",
+  },
+  {
+    name: "Webhooks",
+    href: "/dashboard/webhooks",
+    icon: "heroicons:arrows-up-down",
+  },
+  {
+    name: "Team",
+    href: "/dashboard/team",
+    icon: "heroicons:user-group",
   },
   {
     name: "Billing",
@@ -182,10 +158,6 @@ const accountNavigationLinks = [
     icon: "heroicons:currency-rupee",
   },
 ];
-
-function back() {
-  window.history.back();
-}
 
 const filters = [
   {
@@ -235,9 +207,9 @@ const filters = [
 const userSettings = [
   [
     {
-      label: "Settings",
+      label: "All Projects",
       icon: "i-heroicons-cog-6-tooth",
-      to: "/dashboard/settings",
+      to: "/dashboard/",
     },
     {
       label: "Billing & Invoices",
@@ -251,32 +223,11 @@ const userSettings = [
     },
   ],
 ];
-
-// mock projects list
-const projects = [
-  {
-    label: "Dribbble",
-    avatar: {
-      src: "https://cdn.dribbble.com/assets/dribbble-ball-192-23ecbdf987832231e87c642bb25de821af1ba6734a626c8c259a20a0ca51a247.png",
-    },
-  },
-  {
-    label: "Figma",
-    avatar: { src: "https://static.figma.com/app/icon/1/icon-128.png" },
-  },
-  {
-    label: "Gleap",
-    avatar: {
-      src: "https://uploads-ssl.webflow.com/634eb51a43522eda9b21e8c3/63c5a7a9ad3731514682c748_android-chrome-512x512.png",
-    },
-  },
-  { label: "New Project", icon: "i-heroicons-plus-circle" },
-];
 </script>
 
 <style scoped>
 .sidebar {
-  @apply flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 dark:border-gray-900 bg-white dark:bg-gray-950 px-4;
+  @apply flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 dark:border-white/10 bg-white dark:bg-gray-950 px-4;
 }
 
 .header {
@@ -316,7 +267,7 @@ const projects = [
 }
 
 .submenu {
-  @apply space-y-1 mt-4;
+  @apply space-y-1;
 }
 
 .navlink {
@@ -336,7 +287,7 @@ const projects = [
 }
 
 .filter-list {
-  @apply -mx-2 mt-2 space-y-1;
+  @apply mt-2 space-y-1;
 }
 
 .filter-button {

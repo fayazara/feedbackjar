@@ -1,10 +1,10 @@
-CREATE TABLE IF NOT EXISTS `feedbacks` (
+CREATE TABLE `feedbacks` (
 	`id` integer PRIMARY KEY NOT NULL,
 	`project_id` integer NOT NULL,
 	`feedback` text NOT NULL,
 	`user_id` integer,
-	`user_email` text NOT NULL,
-	`user_name` text NOT NULL,
+	`user_email` text,
+	`user_name` text,
 	`category` text DEFAULT 'issue' NOT NULL,
 	`status` text DEFAULT 'active' NOT NULL,
 	`created_at` integer NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
 	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS `projects` (
+CREATE TABLE `projects` (
 	`id` integer PRIMARY KEY NOT NULL,
 	`user_id` integer NOT NULL,
 	`name` text NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
 	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
 	`id` integer PRIMARY KEY NOT NULL,
 	`github_id` integer NOT NULL,
 	`login` text,
@@ -42,5 +42,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 	`company` text,
 	`location` text,
 	`created_at` integer NOT NULL,
-	`status` text DEFAULT 'active' NOT NULL
+	`status` text DEFAULT 'active' NOT NULL,
+	`onboarded` integer DEFAULT false NOT NULL
 );

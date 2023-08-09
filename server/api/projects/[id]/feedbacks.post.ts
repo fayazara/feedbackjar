@@ -17,8 +17,6 @@ export default eventHandler(async (event) => {
   const session = await requireUserSession(event);
   const userId = session?.user?.id
 
-  // const userId = 1
-
   const feedbackInstance: Feedback = await insertFeedback({
     feedback,
     userEmail,

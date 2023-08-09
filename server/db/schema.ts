@@ -16,6 +16,7 @@ export const users = sqliteTable("users", {
   location: text("location"),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   status: text("status").notNull().default("active"),
+  onboarded: integer("onboarded", { mode: "boolean" }).notNull().default(false),
 });
 
 export const projects = sqliteTable("projects", {
@@ -25,7 +26,7 @@ export const projects = sqliteTable("projects", {
     .references(() => users.id),
   name: text("name").notNull(),
   description: text("description"),
-  status: text("status").notNull().default("active"),  // Active and Archived
+  status: text("status").notNull().default("active"), // Active and Archived
   avatar: text("avatar"),
   website: text("website"),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
@@ -39,8 +40,8 @@ export const feedbacks = sqliteTable("feedbacks", {
     .notNull(),
   feedback: text("feedback").notNull(),
   userId: integer("user_id").references(() => users.id),
-  userEmail: text("user_email").notNull(),
-  userName: text("user_name").notNull(),
+  userEmail: text("user_email"),
+  userName: text("user_name"),
   category: text("category").notNull().default("issue"),
   status: text("status").notNull().default("active"),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
