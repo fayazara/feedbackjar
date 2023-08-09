@@ -1,4 +1,4 @@
-import { and, eq, between, sql, desc } from "drizzle-orm";
+import { and, eq, sql, desc } from "drizzle-orm";
 import {
   getFeedbackCountOfProject,
   feedbackCountByStatus,
@@ -8,85 +8,43 @@ import {
 import { getFeedbacks } from "../../../db/query/feedback";
 import { Feedback } from "../../../../lib/types/project";
 
-// /api/projects/1/overview
-
-// {
-//   stats: {
-//     total,
-//     bug,
-//     idea,
-//     open,
-//     closed,
-//   },
-//   feedbacks: []
-// }
-
 export default eventHandler(async (event) => {
   const session = await requireUserSession(event);
   const userId = session.user.id;
 
-  /*
-    Daily -> Hourly stats
-    Weekly -> Daywise stats
-    Monthly -> Weekly stats
-    Yearly -> Monthly stats
-  */
-
-  const { getProjectId, getDateRangeFilter } = useValidation(event);
+  const { getProjectId } = useValidation(event);
   const projectId = await getProjectId();
-  const { start, end } = await getDateRangeFilter();
-
-  const { dateDiffInDays } = useHelper();
-  const days = dateDiffInDays(start, end);
 
   let selectColumns: any = {
     count: sql<number>`count(1)`,
   };
-  let dateFormatter = null;
-  let groupBy = null;
-
-  if (days <= 1) {
-    // calculate hourly in sql
-    dateFormatter = "%H";
-    selectColumns[
-      "hour"
-    ] = sql<number>`strftime(${dateFormatter}, datetime(${tables.feedbacks.createdAt},'unixepoch'))`;
-  } else if (days <= 7) {
-    // calculate daily
-    dateFormatter = "%Y-%m-%d";
-    selectColumns[
-      "day"
-    ] = sql<number>`strftime(${dateFormatter}, datetime(${tables.feedbacks.createdAt},'unixepoch'))`;
-  } else if (days <= 30) {
-    // calculate weekly
-    dateFormatter = "%Y-%m-%d";
-    selectColumns[
-      "day"
-    ] = sql<number>`strftime(${dateFormatter}, datetime(${tables.feedbacks.createdAt},'unixepoch'))`;
-  } else {
-    // calculate monthly
-    dateFormatter = "%Y-%m";
-    selectColumns[
-      "month"
-    ] = sql<number>`strftime(${dateFormatter}, datetime(${tables.feedbacks.createdAt},'unixepoch'))`;
-  }
 
   let filterBy: any = and(
     eq(tables.feedbacks.userId, userId),
-    eq(tables.feedbacks.projectId, projectId),
-    between(tables.feedbacks.createdAt, start, end)
+    eq(tables.feedbacks.projectId, projectId)
   );
-  groupBy = sql<number>`strftime(${dateFormatter}, datetime(${tables.feedbacks.createdAt},'unixepoch'))`;
 
   const feedbackCount = await getFeedbackCountOfProject(
     selectColumns,
-    filterBy,
-    groupBy
+    filterBy
   );
-  const countByStatus = await feedbackCountByStatus(filterBy);
-  const countByCategory = await feedbackCountByCategory(filterBy);
+  
+  const countByStatusQs = await feedbackCountByStatus(filterBy);
+  const countByCategoryQs = await feedbackCountByCategory(filterBy);
   const open = await countForStatus(userId, "active");
   const closed = await countForStatus(userId, "closed");
+
+  let countByStatus: any = {};
+  for (const entry of countByStatusQs) {
+    const { status, count } = entry;
+    countByStatus[status] = count;
+  }
+
+  let countByCategory: any = {};
+  for (const entry of countByCategoryQs) {
+    const { category, count } = entry;
+    countByCategory[category] = count;
+  }
 
   const feedbacks: Feedback[] = await getFeedbacks(
     {
@@ -110,12 +68,12 @@ export default eventHandler(async (event) => {
   const result = {
     stats: {
       feedbackCount,
-      countByStatus,
-      countByCategory,
+      ...countByStatus,
+      ...countByCategory,
       open: open.length,
       closed: closed.length,
     },
-    feedbacks
+    feedbacks,
   };
 
   return result;
