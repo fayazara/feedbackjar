@@ -13,8 +13,8 @@ import { Feedback } from "../../../../lib/types/project";
 // {
 //   stats: {
 //     total,
-//     countByStatus,
-//     countByCategory,
+//     bug,
+//     idea,
 //     open,
 //     closed,
 //   },
