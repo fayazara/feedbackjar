@@ -112,8 +112,8 @@ export default eventHandler(async (event) => {
       feedbackCount,
       countByStatus,
       countByCategory,
-      open,
-      closed,
+      open: open.length,
+      closed: closed.length,
     },
     feedbacks
   };
