@@ -15,10 +15,6 @@ export default eventHandler(async (event) => {
   const { getProjectId } = useValidation(event);
   const projectId = await getProjectId();
 
-  let selectColumns: any = {
-    count: sql<number>`count(1)`,
-  };
-
   let filterBy: any = and(
     eq(tables.feedbacks.userId, userId),
     eq(tables.feedbacks.projectId, projectId)
@@ -55,7 +51,7 @@ export default eventHandler(async (event) => {
     },
     filterBy,
     desc(tables.feedbacks.updatedAt),
-    1,
+    0,
     20
   );
 
