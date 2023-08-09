@@ -4,9 +4,11 @@ import {
   feedbackCountByStatus,
   feedbackCountByCategory,
   countForStatus,
-} from "../../../db/query/analytics";
-import { getFeedbacks } from "../../../db/query/feedback";
-import { Feedback } from "../../../../lib/types/project";
+} from "@/server/db/query/analytics";
+
+import { getFeedbacks } from "@/server/db/query/feedback";
+import { getProject } from "@/server/db/query/project";
+import { Feedback, Project } from "@/lib/types/project";
 
 export default eventHandler(async (event) => {
   const session = await requireUserSession(event);
@@ -55,13 +57,16 @@ export default eventHandler(async (event) => {
     20
   );
 
+  const project: Project = await getProject(projectId);
+
   const result = {
     stats: {
       feedbackCount: feedbackCount.length,
       ...countByStatus,
-      ...countByCategory
+      ...countByCategory,
     },
     feedbacks,
+    project
   };
 
   return result;

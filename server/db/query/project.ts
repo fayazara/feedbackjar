@@ -105,3 +105,25 @@ export const archiveProject = async (
     throw new Error("Failed to archive the project");
   }
 };
+
+/**
+ * Retrieves a project from the database.
+ * @param {any} filterBy - The filter to apply when retrieving the project.
+ * @return {Promise<Project>} The retrieved project.
+ * @throws {Error} Throws an error if the project is not found.
+ */
+export const getProject = async (id: number): Promise<Project> => {
+  try {
+    const project = await useDb()
+      .select()
+      .from(tables.projects)
+      .where(eq(tables.projects.id, id))
+      .get();
+    if (!project) {
+      throw new Error("Project not found");
+    }
+    return project;
+  } catch (error) {
+    throw new Error("Failed to retrieve project");
+  }
+};
