@@ -31,8 +31,6 @@ export default eventHandler(async (event) => {
   
   const countByStatusQs = await feedbackCountByStatus(filterBy);
   const countByCategoryQs = await feedbackCountByCategory(filterBy);
-  const open = await countForStatus(userId, "active");
-  const closed = await countForStatus(userId, "closed");
 
   let countByStatus: any = {};
   for (const entry of countByStatusQs) {
@@ -69,9 +67,7 @@ export default eventHandler(async (event) => {
     stats: {
       feedbackCount: feedbackCount.length,
       ...countByStatus,
-      ...countByCategory,
-      open: open.length,
-      closed: closed.length,
+      ...countByCategory
     },
     feedbacks,
   };
