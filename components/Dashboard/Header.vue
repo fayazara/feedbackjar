@@ -1,7 +1,5 @@
 <template>
-  <header
-    class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 flex items-center justify-between"
-  >
+  <header class="mx-auto max-w-4xl flex items-center justify-between">
     <div>
       <h1
         class="text-xl sm:text-4xl font-bold leading-tight text-gray-900 dark:text-white font-display"

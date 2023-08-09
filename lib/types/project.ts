@@ -1,12 +1,12 @@
 export interface Project {
-  id: number;
+  id?: number;
   name: string;
   status: string;
-  description: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-  avatar: string | null;
-  website: string | null;
+  description?: string | null;
+  createdAt?: Date;
+  updatedAt?: Date;
+  avatar?: string | null;
+  website?: string | null;
   totalFeedbacks?: number | unknown;
 }
 

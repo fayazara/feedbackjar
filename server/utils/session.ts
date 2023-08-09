@@ -53,7 +53,6 @@ function _useSession(event: any) {
       "No session password set, using a random password, please set NUXT_SESSION_PASSWORD in your .env file with at least 32 chars"
     );
     const randomPassword = sha256(`${Date.now()}${Math.random()}`).slice(0, 32);
-    console.log(`NUXT_SESSION_PASSWORD=${randomPassword}`);
     sessionConfig.password = randomPassword;
   }
 
