@@ -1,66 +1,49 @@
 <template>
   <main>
-    <header>
-      <div
-        class="col-span-full border-b dark:border-white/10 flex flex-col items-start justify-between gap-x-8 gap-y-4 bg-gray-100 dark:bg-gray-700/10 px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8"
-      >
-        <div>
-          <div class="flex items-center gap-x-3">
-            <UAvatar
-              src="https://cdn.dribbble.com/assets/dribbble-ball-192-23ecbdf987832231e87c642bb25de821af1ba6734a626c8c259a20a0ca51a247.png"
-              size="2xs"
-            />
-            <h1 class="flex gap-x-3 text-base leading-7">
-              <span class="font-semibold">Dribbble</span>
-            </h1>
-          </div>
-          <p class="mt-1 text-xs leading-6 text-gray-500">
-            Feedback collected from the Dribble website
-          </p>
-        </div>
-        <UButton
-          label="Add"
-          icon="i-heroicons-plus-circle"
-          color="white"
-        ></UButton>
-      </div>
-      <div
-        class="grid grid-cols-2 lg:grid-cols-6 gap-px bg-gray-200 dark:bg-white/10"
-      >
-        <div
-          v-for="stat in stats"
-          :key="stat.name"
-          class="py-4 sm:py-6 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-950"
-        >
-          <p
-            class="text-sm font-medium leading-6 text-gray-600 dark:text-gray-400"
-          >
-            {{ stat.name }}
-          </p>
-          <p class="mt-1 sm:mt-2 flex items-baseline gap-x-2">
-            <span
-              class="text-2xl lg:text-4xl font-semibold tracking-tight text-gray-700 dark:text-white/70"
-              >{{ stat.value }}</span
-            >
-            <span
-              v-if="stat.unit"
-              class="text-sm text-gray-600 dark:text-gray-400"
-              >{{ stat.unit }}</span
-            >
-          </p>
-        </div>
-      </div>
-    </header>
+    <DashboardProjectsHeader
+      :project="project.project"
+      :stats="project.stats"
+    />
 
-    <!-- Activity list -->
     <div class="border-t dark:border-white/10 pt-11">
       <h2 class="px-4 text-base font-semibold leading-7 sm:px-6 lg:px-8">
         Latest activity
       </h2>
-      <div>
-        <UButton @click="isOpen = true">Open</UButton>
+      <div class="pt-4">
+        <ul role="list" class="divide-y divide-gray-200 dark:divide-white/10">
+          <li
+            v-for="feedback in project.feedbacks"
+            :key="feedback.id"
+            class="relative grid grid-cols-8 gap-x-6 px-4 py-5 hover:bg-gray-100 dark:hover:bg-gray-900 sm:px-6 lg:px-8"
+          >
+            <div class="min-w-0 flex-grow col-span-6">
+              <p class="truncate font-mono text-sm leading-6">
+                {{ feedback.feedback }}
+              </p>
+            </div>
+            <div class="flex items-center gap-x-2 col-span-4 sm:col-span-1">
+              <div
+                :class="[
+                  statuses[feedback.category].class,
+                  'flex-none rounded-full p-1',
+                ]"
+              >
+                <div class="h-1.5 w-1.5 rounded-full bg-current" />
+              </div>
+              <div class="text-sm sm:block">
+                {{ statuses[feedback.category].label }}
+              </div>
+            </div>
+            <div class="text-sm sm:block col-span-4 sm:col-span-1">
+              {{ timeAgo(feedback.createdAt) }}
+            </div>
+          </li>
+        </ul>
+        <!-- <UButton @click="isOpen = true">Open</UButton> -->
         <USlideover v-model="isOpen" :ui="feedbackStylesBase">
-          <DashboardFeedbackDetails />
+          <DashboardFeedbackDetails
+            @toggleFeedbackDetails="toggleFeedbackDetails"
+          />
         </USlideover>
       </div>
     </div>
@@ -68,19 +51,30 @@
 </template>
 
 <script setup>
+import { formatTimeAgo } from "@vueuse/core";
 const route = useRoute();
 const { projectId } = route.params;
-const { data: project } = useFetch(`/api/projects/${projectId}`);
-const stats = [
-  { name: "Total feedbacks", value: "405" },
-  { name: "Issues", value: "134" },
-  { name: "Ideas", value: "233" },
-  { name: "Other", value: "90" },
-  { name: "Open", value: "112" },
-  { name: "Closed", value: "335" },
-];
+const { data: project } = useFetch(`/api/projects/${projectId}/overview`);
+
 const feedbackStylesBase = {
   base: "relative flex-1 flex flex-col w-full focus:outline-none m-2 rounded-xl",
 };
 const isOpen = ref(false);
+const toggleFeedbackDetails = () => (isOpen.value = !isOpen.value);
+const timeAgo = (date) => formatTimeAgo(new Date(date));
+
+const statuses = {
+  idea: {
+    class: "text-sky-400 bg-sky-400/10",
+    label: "Idea",
+  },
+  issue: {
+    class: "text-rose-400 bg-rose-400/10",
+    label: "Issue",
+  },
+  other: {
+    class: "text-yellow-400 bg-yellow-400/10",
+    label: "Other",
+  },
+};
 </script>

@@ -1,15 +1,13 @@
-import { and, sql, eq, between } from "drizzle-orm";
+import { sql, eq, and } from "drizzle-orm";
 
-export const getFeedbackCountOfProject = async (selectColumns: any, filterBy: any, groupBy: any) =>
-  {
-    const db = await useDb()
-    .select(selectColumns)
+export const getFeedbackCountOfProject = async (filterBy: any) =>
+  await useDb()
+    .select({
+      id: tables.feedbacks.id,
+    })
     .from(tables.feedbacks)
     .where(filterBy)
-    .groupBy(groupBy)
-
-    return db.all()
-  }
+    .all();
 
 export const feedbackCountByStatus = async (filterBy: any) =>
   await useDb()
@@ -31,4 +29,18 @@ export const feedbackCountByCategory = async (filterBy: any) =>
     .from(tables.feedbacks)
     .where(filterBy)
     .groupBy(tables.feedbacks.category)
+    .all();
+
+export const countForStatus = async (userId: number, status: string) =>
+  await useDb()
+    .select({
+      id: tables.feedbacks.id,
+    })
+    .from(tables.feedbacks)
+    .where(
+      and(
+        eq(tables.feedbacks.userId, userId),
+        eq(tables.feedbacks.status, status)
+      )
+    )
     .all();

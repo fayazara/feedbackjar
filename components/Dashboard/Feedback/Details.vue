@@ -23,7 +23,6 @@
           icon="i-heroicons-ellipsis-vertical"
           class="-my-1"
           size="xs"
-          @click="isOpen = false"
         />
         <UButton
           color="gray"
@@ -31,13 +30,15 @@
           icon="i-heroicons-x-mark-20-solid"
           class="-my-1"
           size="xs"
-          @click="isOpen = false"
+          @click="$emit('toggleFeedbackDetails')"
         />
       </div>
     </template>
 
-    <Placeholder class="h-full" />
+    <!-- <Placeholder class="h-full" /> -->
   </UCard>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+defineEmits(["toggleFeedbackDetails"]);
+</script>
