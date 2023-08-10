@@ -56,7 +56,7 @@ const props = defineProps({
     required: true,
   },
   stats: {
-    type: Array,
+    type: Object,
     required: true,
   },
 });
