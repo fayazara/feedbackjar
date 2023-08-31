@@ -5,7 +5,11 @@
     >
       <div>
         <div class="flex items-center gap-x-3">
-          <UAvatar :src="project.avatar" size="sm" class="ring-white/10 ring-2"/>
+          <UAvatar
+            :src="project.avatar"
+            size="sm"
+            class="ring-white/10 ring-2"
+          />
           <h1 class="flex gap-x-3 text-base leading-7">
             <span class="font-semibold">{{ project.name }}</span>
           </h1>
@@ -63,10 +67,10 @@ const props = defineProps({
 const stats = computed(() => {
   return [
     { name: "Total feedbacks", value: props.stats?.feedbackCount },
-    { name: "Ideas", value: props.stats?.idea || 0 },
-    { name: "Issues", value: props.stats?.issue || 0 },
-    { name: "Other", value: props.stats?.other || 0 },
-    { name: "Open", value: props.stats?.open || 0 },
+    { name: "Ideas", value: props.stats?.Idea || 0 },
+    { name: "Issues", value: props.stats?.Issue || 0 },
+    { name: "Other", value: props.stats?.Other || 0 },
+    { name: "Open", value: props.stats?.Active || 0 },
     { name: "Closed", value: props.stats?.closed || 0 },
   ];
 });
