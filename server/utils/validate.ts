@@ -56,7 +56,6 @@ export const useValidation = (event: any) => {
     return feedback;
   };
 
-
   const getCategory = async () => {
     const { category } = await useValidatedBody(event, {
       category: z.string(),

@@ -6,8 +6,7 @@ import { useValidation } from "../../../utils/validate";
 export default eventHandler(async (event) => {
   const session = await requireUserSession(event);
 
-  const body = await readBody(event);
-  const { getMessage, getCategory, getStatus, getProjectId } = useValidation(body);
+  const { getMessage, getCategory, getStatus, getProjectId } = useValidation(event);
   const message = await getMessage();
   const category = await getCategory();
   const status = await getStatus();
