@@ -50,10 +50,10 @@ export const useValidation = (event: any) => {
   };
 
   const getMessage = async () => {
-    const { feedback } = await useValidatedBody(event, {
-      feedback: z.string(),
+    const { message } = await useValidatedBody(event, {
+      message: z.string(),
     });
-    return feedback;
+    return message;
   };
 
   const getCategory = async () => {
