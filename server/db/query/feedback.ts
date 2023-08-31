@@ -47,5 +47,5 @@ export const getFeedbacks = async (
 export const updateFeedback = async (
   data: any,
   filterBy: any
-): Promise<Feedback> =>
+): Promise<any> =>
   useDb().update(tables.feedbacks).set(data).where(filterBy).returning().get();
