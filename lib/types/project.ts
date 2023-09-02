@@ -33,11 +33,11 @@ export interface Feedback {
   id?: number;
   projectId: number;
   message: string;
-  origin?: string;
-  user?: FeedbackUser;
-  country_name?: string;
-  device_details?: FeedbackDeviceDetails;
-  custom_attributes?: Object;
+  origin?: string | null;
+  user?: FeedbackUser | string | null;
+  country_name?: string | null;
+  device_details?: FeedbackDeviceDetails | string | null;
+  custom_attributes?: Object | string | null;
   createdAt: Date;
   internal_notes?: string;
   updatedAt: Date;
