@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, blob } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
   id: integer("id").primaryKey(),
@@ -40,10 +40,11 @@ export const feedbacks = sqliteTable("feedbacks", {
     .notNull(),
   message: text("message").notNull(),
   origin: text("origin"),
-  user: text("user"),
+  user: blob("user", { mode: "json" }),
   country_name: text("country_name"),
-  device_details: text("device_details"),
-  custom_attributes: text("custom_attributes"),
+  device_details: blob("device_details", { mode: "json" }),
+  custom_attributes: blob("custom_attributes  ", { mode: "json" }),
+  internal_notes: text("internal_notes"),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
   category: text("category").notNull().default("issue"),
