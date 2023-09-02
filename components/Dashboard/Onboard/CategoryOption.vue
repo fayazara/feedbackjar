@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps<{
+defineProps<{
   description: string;
   title: string;
   checked: boolean;

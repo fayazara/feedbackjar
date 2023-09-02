@@ -38,13 +38,14 @@ export const feedbacks = sqliteTable("feedbacks", {
   projectId: integer("project_id")
     .references(() => projects.id)
     .notNull(),
-  feedback: text("feedback").notNull(),
-  userId: integer("user_id").references(() => users.id),
-  userEmail: text("user_email"),
-  userName: text("user_name"),
-  category: text("category").notNull().default("issue"),
-  status: text("status").notNull().default("active"),
+  message: text("message").notNull(),
+  origin: text("origin"),
+  user: text("user"),
+  country_name: text("country_name"),
+  device_details: text("device_details"),
+  custom_attributes: text("custom_attributes"),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
-  origin: text("origin").notNull(),
+  category: text("category").notNull().default("issue"),
+  status: text("status").notNull().default("active"),
 });

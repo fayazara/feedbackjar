@@ -49,25 +49,11 @@ export const useValidation = (event: any) => {
     return avatar;
   };
 
-  const getFeedback = async () => {
-    const { feedback } = await useValidatedBody(event, {
-      feedback: z.string(),
+  const getMessage = async () => {
+    const { message } = await useValidatedBody(event, {
+      message: z.string(),
     });
-    return feedback;
-  };
-
-  const getUserEmail = async () => {
-    const { userEmail } = await useValidatedBody(event, {
-      userEmail: z.string().optional(),
-    });
-    return userEmail;
-  };
-
-  const getUserName = async () => {
-    const { userName } = await useValidatedBody(event, {
-      userName: z.string().optional(),
-    });
-    return userName;
+    return message;
   };
 
   const getCategory = async () => {
@@ -128,9 +114,7 @@ export const useValidation = (event: any) => {
     getStatus,
     getWebsite,
     getAvatar,
-    getFeedback,
-    getUserEmail,
-    getUserName,
+    getMessage,
     getCategory,
     getOrigin,
     getProjectId,

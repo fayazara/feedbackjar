@@ -13,7 +13,6 @@ export default eventHandler(async (event) => {
   // const session = await requireUserSession(event);
   // const userId = session.user.id
 
-  // const userId = 1
 
   const filterBy: any = and(
     eq(tables.feedbacks.projectId, id),
@@ -23,12 +22,10 @@ export default eventHandler(async (event) => {
   const feedbacks: Feedback[] =  await getFeedbacks(
     {
       id: tables.feedbacks.id,
-      userId: tables.feedbacks.userId,
-      userEmail: tables.feedbacks.userEmail,
-      userName: tables.feedbacks.userName,
+      userData: tables.feedbacks.user,
       category: tables.feedbacks.category,
       projectId: tables.feedbacks.projectId,
-      feedback: tables.feedbacks.feedback,
+      message: tables.feedbacks.message,
       status: tables.feedbacks.status,
       createdAt: tables.feedbacks.createdAt,
       updatedAt: tables.feedbacks.updatedAt,

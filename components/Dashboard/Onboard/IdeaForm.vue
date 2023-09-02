@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-lg w-full">
     <div class="mb-12">
-      <h2 class="text-2xl font-bold tracking-tight">Add an idea {{projectId}}</h2>
+      <h2 class="text-2xl font-bold tracking-tight">Add your first idea</h2>
       <p class="text-sm">
         An idea, bug or suggestion. This is optional, you can always add it
         later.
@@ -15,11 +15,16 @@
       class="space-y-6"
     >
       <UFormGroup name="name" label="What's is this?">
-        <UTextarea v-model="formData.feedback" size="lg" />
+        <UTextarea v-model="formData.message" size="lg" />
       </UFormGroup>
 
       <UFormGroup name="status" label="Status">
-        <USelectMenu size="lg" v-model="formData.status" :options="status" />
+        <USelectMenu
+          size="lg"
+          v-model="formData.status"
+          :options="status"
+          value-attribute="value"
+        />
       </UFormGroup>
 
       <UFormGroup name="category" label="Category">
@@ -57,7 +62,7 @@ const form = ref();
 const emit = defineEmits(["nextab"]);
 
 const schema = z.object({
-  feedback: z.string().min(8, "Must be at least 8 characters"),
+  message: z.string().min(8, "Must be at least 8 characters"),
   category: z.string(),
   status: z.string(),
 });
@@ -92,7 +97,7 @@ const categories = [
 ];
 
 const formData = ref({
-  feedback: undefined,
+  message: undefined,
   category: "Bug",
   status: "Active",
 });

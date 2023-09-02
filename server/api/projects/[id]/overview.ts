@@ -12,20 +12,15 @@ import { Feedback, Project } from "@/lib/types/project";
 
 export default eventHandler(async (event) => {
   const session = await requireUserSession(event);
-  const userId = session.user.id;
 
   const { getProjectId } = useValidation(event);
   const projectId = await getProjectId();
 
-  let filterBy: any = and(
-    eq(tables.feedbacks.userId, userId),
-    eq(tables.feedbacks.projectId, projectId)
-  );
+  let filterBy: any = and(eq(tables.feedbacks.projectId, projectId));
 
   const feedbackCount = await getFeedbackCountOfProject(filterBy);
   const countByStatusQs = await feedbackCountByStatus(filterBy);
   const countByCategoryQs = await feedbackCountByCategory(filterBy);
-
   let countByStatus: any = {};
   for (const entry of countByStatusQs) {
     const { status, count } = entry;
@@ -41,18 +36,16 @@ export default eventHandler(async (event) => {
   const feedbacks: Feedback[] = await getFeedbacks(
     {
       id: tables.feedbacks.id,
-      userId: tables.feedbacks.userId,
-      userEmail: tables.feedbacks.userEmail,
-      userName: tables.feedbacks.userName,
+      userData: tables.feedbacks.user,
       category: tables.feedbacks.category,
       projectId: tables.feedbacks.projectId,
-      feedback: tables.feedbacks.feedback,
+      message: tables.feedbacks.message,
       status: tables.feedbacks.status,
       createdAt: tables.feedbacks.createdAt,
       updatedAt: tables.feedbacks.updatedAt,
     },
     filterBy,
-    desc(tables.feedbacks.updatedAt),
+    desc(tables.feedbacks.createdAt),
     0,
     20
   );
@@ -66,7 +59,7 @@ export default eventHandler(async (event) => {
       ...countByCategory,
     },
     feedbacks,
-    project
+    project,
   };
 
   return result;
