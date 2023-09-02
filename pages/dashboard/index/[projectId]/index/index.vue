@@ -56,7 +56,6 @@ import { formatTimeAgo } from "@vueuse/core";
 const route = useRoute();
 const { projectId } = route.params;
 const { data: project } = await useFetch(`/api/projects/${projectId}/overview`);
-console.log(project.value);
 const feedbackStylesBase = {
   base: "relative flex-1 flex flex-col w-full focus:outline-none m-2 rounded-xl",
 };

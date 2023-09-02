@@ -21,7 +21,6 @@ export default eventHandler(async (event) => {
   const feedbackCount = await getFeedbackCountOfProject(filterBy);
   const countByStatusQs = await feedbackCountByStatus(filterBy);
   const countByCategoryQs = await feedbackCountByCategory(filterBy);
-  console.log(countByStatusQs);
   let countByStatus: any = {};
   for (const entry of countByStatusQs) {
     const { status, count } = entry;

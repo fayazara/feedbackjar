@@ -70,7 +70,7 @@
           class="bg-gray-50 dark:bg-gray-900 rounded-lg p-2.5 flex items-center gap-x-3"
         >
           <div
-            class="h-10 w-10 rounded-full flex items-center justify-center bg-gray-950"
+            class="h-10 w-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-950"
           >
             <UIcon
               name="i-heroicons-arrow-down-on-square-20-solid"
@@ -90,7 +90,7 @@
           class="bg-gray-50 dark:bg-gray-900 rounded-lg p-2.5 flex items-center gap-x-3"
         >
           <div
-            class="h-10 w-10 rounded-full flex items-center justify-center bg-gray-950"
+            class="h-10 w-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-950"
           >
             <!-- <UIcon name="i-heroicons-globe-alt"  class="h-6 w-6"/> -->
             <span class="text-2xl">🇮🇳</span>
@@ -108,7 +108,7 @@
           class="bg-gray-50 dark:bg-gray-900 rounded-lg p-2.5 flex items-center gap-x-3"
         >
           <div
-            class="h-10 w-10 rounded-full flex items-center justify-center bg-gray-950"
+            class="h-10 w-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-950"
           >
             <Icon name="logos:chrome" class="h-6 w-6" />
           </div>
@@ -125,7 +125,7 @@
           class="bg-gray-50 dark:bg-gray-900 rounded-lg p-2.5 flex items-center gap-x-3"
         >
           <div
-            class="h-10 w-10 rounded-full flex items-center justify-center bg-gray-950"
+            class="h-10 w-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-950"
           >
             <Icon
               name="heroicons:device-phone-mobile-20-solid"
@@ -145,7 +145,7 @@
           class="bg-gray-50 dark:bg-gray-900 rounded-lg p-2.5 flex items-center gap-x-3"
         >
           <div
-            class="h-10 w-10 rounded-full flex items-center justify-center bg-gray-950"
+            class="h-10 w-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-950"
           >
             <Icon name="heroicons:arrows-pointing-out" class="h-6 w-6" />
           </div>

@@ -1,9 +1,7 @@
 <template>
   <div class="max-w-lg w-full">
     <div class="mb-12">
-      <h2 class="text-2xl font-bold tracking-tight">
-        Add an idea {{ projectId }}
-      </h2>
+      <h2 class="text-2xl font-bold tracking-tight">Add your first idea</h2>
       <p class="text-sm">
         An idea, bug or suggestion. This is optional, you can always add it
         later.

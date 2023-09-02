@@ -1,4 +1,4 @@
-CREATE TABLE `feedbacks` (
+CREATE TABLE IF NOT EXISTS `feedbacks` (
 	`id` integer PRIMARY KEY NOT NULL,
 	`project_id` integer NOT NULL,
 	`message` text NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE `feedbacks` (
 	FOREIGN KEY (`project_id`) REFERENCES `projects`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE TABLE `projects` (
+CREATE TABLE IF NOT EXISTS `projects` (
 	`id` integer PRIMARY KEY NOT NULL,
 	`user_id` integer NOT NULL,
 	`name` text NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE `projects` (
 	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
 	`id` integer PRIMARY KEY NOT NULL,
 	`github_id` integer NOT NULL,
 	`login` text,
