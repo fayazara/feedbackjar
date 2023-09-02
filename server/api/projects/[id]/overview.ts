@@ -34,16 +34,7 @@ export default eventHandler(async (event) => {
   }
 
   const feedbacks: Feedback[] = await getFeedbacks(
-    {
-      id: tables.feedbacks.id,
-      userData: tables.feedbacks.user,
-      category: tables.feedbacks.category,
-      projectId: tables.feedbacks.projectId,
-      message: tables.feedbacks.message,
-      status: tables.feedbacks.status,
-      createdAt: tables.feedbacks.createdAt,
-      updatedAt: tables.feedbacks.updatedAt,
-    },
+    "",
     filterBy,
     desc(tables.feedbacks.createdAt),
     0,

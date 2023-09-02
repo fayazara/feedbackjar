@@ -8,6 +8,20 @@
       "when": 1693481922771,
       "tag": "0000_marvelous_madrox",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1693680692822,
+      "tag": "0001_rare_black_knight",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1693681533430,
+      "tag": "0002_clumsy_strong_guy",
+      "breakpoints": true
     }
   ]
 }
