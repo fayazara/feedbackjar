@@ -7,6 +7,9 @@ module.exports = {
       colors: {
         "slate-1000": "#020409",
       },
+      ringWidth: {
+        '10': '10px',
+      }
     },
     fontFamily: {
       sans: [
