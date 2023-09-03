@@ -14,6 +14,7 @@ export default eventHandler(async (event) => {
   const projectId = await getProjectId();
   const body = await readBody(event);
   const {
+    origin,
     user,
     country_name,
     device_details,
@@ -22,6 +23,7 @@ export default eventHandler(async (event) => {
   } = body;
 
   const feedbackInstance: any = await insertFeedback({
+    origin,
     user,
     country_name,
     device_details,
