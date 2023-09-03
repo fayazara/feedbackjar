@@ -96,7 +96,7 @@
             <p class="text-sm font-semibold text-gray-900 dark:text-white">
               Country
             </p>
-            <p class="text-xs">Netherlands</p>
+            <p class="text-xs">{{ feedback.country_name }}</p>
           </div>
         </div>
       </li>

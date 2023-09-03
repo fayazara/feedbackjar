@@ -1,55 +1,90 @@
 # Feedbackjar
 
-An open-source application built with Nuxt 3, Turso, Tailwindcss, Nuxt UI components, Stripe for collecting user feedback on websites and apps.
+An open source feedback management, public roadmap, and changelog platform. The goal of feedbackjar is to empower product teams to effortlessly gather feedback, track issues, and seamlessly manage them with public roadmaps and provide updates via changelogs.
+
+Unlike Open source projects, Github acts as a de facto feedback management platform, most businesses, apps and platforms are not open source, they miss out on the same experience that open source projects enjoy. Feedbackjar aims to solve this problem by providing a platform to do the same
+
+![Feedbackjar preview](https://feedbackjar.app/feedbackjar-dashboard.png)
 
 > **NOTE**
-> Project Pivot
-> This project was initially named Emailjar and was intended to be a simple CRUD app for collecting email addresses. However, after receiving feedback from users and considering the lack of real-world use cases for Emailjar, I have decided to pivot the project to a new direction. The new project, Feedbackjar, aims to provide a platform for gathering valuable feedback from users on websites and apps. I believe this pivot will make the project more relevant and useful to the open-source community.
+> This project was initially named Emailjar and was intended to be an imaniary app for collecting email addresses, a simple CRUD app. It was inspired by [@shadcn's](https://twitter.com/shadcn) Taxonomy [Project](https://tx.shadcn.com/), see this [tweet](https://twitter.com/fayazara/status/1673915381499727872). I wanted to build something similar with Nuxt 3, Turso, and Vue. However, after receiving feedback from some people and considering the lack of real-world use cases for Emailjar, I have decided to pivot the project to a actual platform that solves something. The new project, Feedbackjar, will be an alternative to Canny.io, Beamer, Frill etc.
 
-## About this project
+## What does this platform actually do?
 
-This project is inspired by [@shadcn's](https://twitter.com/shadcn) Taxonomy [Project](https://tx.shadcn.com/). I wanted to build something similar with Nuxt 3, Turso, and Vue.
+Most applications need a way to collect feedback, report bugs, and track issues. We will provide you tools to do so and manage them in an efficient way.
 
-## What does this app do btw?
+- Collect feedback from your users, using our widgets for React, Vue, HTML projects, apis for mobile apps etc. You will also get public pages for collecting feedback.
+- Manage feedback and issues, close, mark them as resolved etc or move them to the public board where others can vote them up or down.
+- Move issues to the public roadmap, where your users can see what is being worked on and what is coming next.
+- Publish changelogs and updates to your users, feedbackjar will also provide you widgets/apis for embedding the changelogs on your website or app and it will even provide you standalone pages for your changelogs.
 
-Feedbackjar is a platform that allows website and app owners to collect feedback from their users. It provides a simple and user-friendly interface for users to submit their feedback, helping businesses improve their products and services. The feedback can include suggestions, bug reports, feature requests, and more.
+## Features
 
-## Features (WIP)
+- Collect Feedback
+- Manage Feedback
+- Public Roadmap
+- Changelogs
+- Embeddable Widgets
+- APIs
+- Public Pages
+- Authentication via Github, Google, Email password
+- Self hostable
+- Open source
+- Webhooks
+- Integrations with Slack, Discord, Telegram, etc.
 
-- Routing, Layouts, Nested Layouts and Layout Groups
-- Data Fetching, Caching and Mutation
-- Authentication via Github (More coming soon)
-- Loading UI
-- Metadata files
-- Server and Client Components
-- API Routes and Middlewares
-- ORM using **Drizzle ORM**
-- Database on **Turso**
-- UI Components built using **Nuxt UI**
-- Subscriptions using **Stripe**
-- Styled using **Tailwind CSS**
-- Validations using **Zod**
-- Written in **TypeScript** (WIP)
+## v0.1 Public release roadmap
 
-## Roadmap
+We plan to get the feedback collection and management features out as soon as possible, we wui
 
 - [x] Kickstart the project
-- [ ] Add a landing page
-- [ ] Project layout, routing, and navigation
-- [ ] Authentication via Github
-- [ ] Add Websites
-- [ ] Collect Feedback
-- [ ] Feedback Dashboard
-- [ ] Feedback Management - Reply to feedback, mark as resolved, etc.
+- [x] Add a landing page
+- [x] Project layout, routing, and navigation
+- [x] Authentication via Github
+- [ ] Projects CRUD
+  - [x] Create projects
+  - [x] List projects
+  - [x] View project
+  - [ ] Update project
+  - [ ] Delete project
+- [ ] Feedback CRUD
+  - [x] Create feedback
+  - [x] List feedback
+  - [x] View feedback
+  - [ ] Update feedback
+  - [ ] Delete feedback
+- [] Feedback Dashboard
+  - [x] Feedback Details - View
+  - [ ] Feedback Details - Edit
+- [ ] Feedback Management -
+  - [ ] Update status
+  - [ ] Update priority
 - [ ] Feedback Widget - Embeddable widget for collecting feedback
 - [ ] Feedback Analytics
+  - [x] Stats queried by project
 - [ ] Feedback Widget Documentation
 - [ ] Feedback API and API key management.
-- [ ] Subscriptions using Stripe - Free and Paid plans
-- [ ] Add a billing page.
-- [ ] Add a settings page.
 
-## Local Setup
+## v0.2 Future tasks
+
+- [ ] Public Roadmap
+- [ ] Changelogs
+- [ ] Embeddable Changelog Widget
+- [ ] Embeddable Public Roadmap Widget
+- [ ] Public Pages
+
+## v0.3 Future tasks
+
+- [ ] User management
+- [ ] Team management
+- [ ] Integrations
+- [ ] Webhooks
+
+## Cloud release
+
+- [ ] Subscriptions using Stripe - Free and Paid plans
+
+## If you want to setup the project locally
 
 Pre-requisites:
 
@@ -69,9 +104,11 @@ Start the development server on `http://localhost:3000`:
 
 ```bash
 # yarn
-yarn migrate # You only need to run this the first time and when you make changes to the database schema
+yarn db:migrate # You only need to run this the first time and when you make changes to the database schema
 
 yarn dev # For starting the development server
+
+yarn db:deploy # For deploying the migrations to your turso
 ```
 
 ## Production
@@ -79,17 +116,11 @@ yarn dev # For starting the development server
 Build the application for production:
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
 # yarn
 yarn build
 ```
 
-## Environment Variables
+## Environment variables needed
 
 | Variable Name               | Description                |
 | --------------------------- | -------------------------- |
@@ -138,5 +169,5 @@ You can read more about Turso DB [here](https://docs.turso.tech/reference/turso-
 
 Before you deploy the application to production
 
-1. Make sure you have pushed the migration files to your production server, you can do so using `yarn push`, Drizzle ORM will read the config and run the migrations on your production server.
+1. Make sure you have pushed the migration files to your production server, you can do so using `yarn db:deploy`, Drizzle ORM will read the config and run the migrations on your production database, i.e Turso DB.
 2. Make sure you have set the environment variables on your production server.
