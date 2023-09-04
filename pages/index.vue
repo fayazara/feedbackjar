@@ -11,9 +11,12 @@
 
 <script setup>
 const { loggedIn } = useUserSession();
-const { data } = useFetch("https://api.github.com/repos/fayazara/feedbackjar", {
-  pick: ["stargazers_count"],
-});
+// const { data } = useFetch("https://api.github.com/repos/fayazara/feedbackjar", {
+//   pick: ["stargazers_count"],
+// });
+const data = {
+  stargazers_count: 84
+}
 </script>
 
 <style scoped>
