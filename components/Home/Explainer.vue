@@ -17,7 +17,7 @@
       <div class="card group">
         <Icon
           name="solar:archive-down-minimlistic-bold-duotone"
-          class="icon group-hover:text-indigo-600 transition-all group-hover:rotate-6"
+          class="h-12 w-12 dark:text-gray-200 group-hover:text-indigo-500 dark:group-hover:text-indigo-500 transition-all group-hover:rotate-6"
         />
         <div class="mt-auto">
           <h3>Incoming Feedback</h3>
@@ -32,7 +32,7 @@
       <div class="card group">
         <Icon
           name="solar:map-arrow-square-bold-duotone"
-          class="icon group-hover:text-indigo-600 transition-all group-hover:rotate-6"
+          class="h-12 w-12 dark:text-gray-200 group-hover:text-indigo-500 dark:group-hover:text-indigo-500 transition-all group-hover:rotate-6"
         />
         <div class="mt-auto">
           <h3>Roadmaps</h3>
@@ -47,7 +47,7 @@
       <div class="card group">
         <Icon
           name="solar:volume-loud-bold-duotone"
-          class="icon group-hover:text-indigo-600 transition-all group-hover:rotate-6"
+          class="h-12 w-12 dark:text-gray-200 group-hover:text-indigo-500 dark:group-hover:text-indigo-500 transition-all group-hover:rotate-6"
         />
         <div class="mt-auto">
           <h3>Changelogs</h3>
@@ -76,9 +76,5 @@ h3 {
 
 .description {
   @apply text-gray-600 dark:text-gray-400 leading-6;
-}
-
-.icon {
-  @apply h-12 w-12 dark:text-gray-200;
 }
 </style>

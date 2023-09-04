@@ -1,9 +1,9 @@
 <template>
   <main class="home">
-    <HomeNavbar :loggedIn="loggedIn" :stars="data.repo.stars" />
+    <HomeNavbar :loggedIn="loggedIn" :stars="data.stargazers_count" />
     <HomeHero :loggedIn="loggedIn" />
     <HomeExplainer />
-    <HomeOpenSource :stars="data.repo.stars" />
+    <HomeOpenSource :stars="data.stargazers_count" />
     <HomeIntegrations />
     <HomeFooter />
   </main>
@@ -11,7 +11,9 @@
 
 <script setup>
 const { loggedIn } = useUserSession();
-const { data } = useFetch("https://ungh.cc/repos/fayazara/feedbackjar");
+const { data } = useFetch("https://api.github.com/repos/fayazara/feedbackjar", {
+  pick: ["stargazers_count"],
+});
 </script>
 
 <style scoped>

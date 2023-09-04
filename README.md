@@ -7,7 +7,7 @@ Unlike Open source projects, Github acts as a de facto feedback management platf
 ![Feedbackjar preview](https://feedbackjar.app/feedbackjar-dashboard.png)
 
 > **NOTE**
-> This project was initially named Emailjar and was intended to be an imaniary app for collecting email addresses, a simple CRUD app. It was inspired by [@shadcn's](https://twitter.com/shadcn) Taxonomy [Project](https://tx.shadcn.com/), see this [tweet](https://twitter.com/fayazara/status/1673915381499727872). I wanted to build something similar with Nuxt 3, Turso, and Vue. However, after receiving feedback from some people and considering the lack of real-world use cases for Emailjar, I have decided to pivot the project to a actual platform that solves something. The new project, Feedbackjar, will be an alternative to Canny.io, Beamer, Frill etc.
+> The initial project, named Emailjar, was envisioned as a fictional app aimed at collecting email addresses, functioning as a simple CRUD application. It drew inspiration from [@shadcn's](https://twitter.com/shadcn) Taxonomy [Project](https://tx.shadcn.com/), as mentioned in this [tweet](https://twitter.com/fayazara/status/1673915381499727872). I wanted to build something similar with Nuxt 3, Turso, and Vue. However, after receiving feedback from some people and considering the lack of real-world use cases for Emailjar, I have decided to pivot the project towards an actual platform that solves a genuine problem. The new project, Feedbackjar, will be an alternative to Canny.io, Beamer, Frill etc.
 
 ## What does this platform actually do?
 

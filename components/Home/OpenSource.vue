@@ -17,6 +17,7 @@
           icon="i-mdi-github"
           color="black"
           size="xl"
+          :ui="{ rounded: 'rounded-lg' }"
           target="_blank"
           to="https://github.com/fayazara/feedbackjar"
         />
