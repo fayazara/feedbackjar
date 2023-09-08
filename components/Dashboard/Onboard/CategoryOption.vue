@@ -15,7 +15,8 @@
       />
     </div>
     <div>
-      <p class="font-medium">{{ title }}</p>
+      <p :class="checked ? 'text-slate-800' : 'text-white' "
+      class="font-medium">{{ title }}</p>
       <p class="text-sm text-gray-600">{{ description }}</p>
     </div>
     <icon
