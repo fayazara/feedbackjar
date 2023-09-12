@@ -19,6 +19,9 @@ export default defineNuxtConfig({
       name: "nuxt-session",
       password: "",
     },
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+    }
   },
 
   plugins: ["~/plugins/session.server.ts"],
