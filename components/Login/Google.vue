@@ -1,50 +1,53 @@
 <template>
-  <div
-    id="g_id_onload"
-    :data-client_id="config.public.googleClientId"
-    data-context="signin"
-    data-ux_mode="popup"
-    data-callback="googleLoginCallback"
-    data-auto_select="true"
-    data-itp_support="true"
-  ></div>
-
-  <div
-    class="g_id_signin"
-    data-type="standard"
-    data-shape="pill"
-    data-theme="outline"
-    data-text="continue_with"
-    data-size="large"
-    data-logo_alignment="left"
-  ></div>
+  <div class="mt-4">
+    <div class="flex relative justify-center">
+      <div id="buttonDiv" class="mx-auto" />
+      <div
+        v-if="submitting"
+        class="absolute inset-0 bg-gray-300 rounded-full opacity-50"
+      />
+    </div>
+  </div>
 </template>
-<script setup>
-useHead({
-  script: [
-    {
-      async: true,
-      src: "https://accounts.google.com/gsi/client",
-      defer: true,
-    },
-  ],
-});
-const config = useRuntimeConfig();
+<script setup lang="ts">
+import { loadScript } from "~/lib/helper";
 
-if (process.client) {
-  if (process.client) {
-    window.googleLoginCallback = (userData) => {
-      console.log("ud", userData);
-      $fetch(`/api/auth/google`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {
-            credential: userData.credential
-        },
-      });
-    };
-  }
-}
+const submitting = ref(false);
+
+const config = useRuntimeConfig();
+const router = useRouter()
+
+console.log(config)
+const loadGoogleIdentityLibrary = async () => {
+  await loadScript("https://accounts.google.com/gsi/client");
+  google.accounts.id.initialize({
+    client_id: config.public.google.clientId,
+    callback: loginCallback,
+  });
+  google.accounts.id.renderButton(document.getElementById("buttonDiv"), {
+    theme: "outline",
+    size: "large",
+    shape: "rectangular",
+    type: "standard",
+  });
+};
+onMounted(() => {
+  loadGoogleIdentityLibrary();
+});
+const loginCallback = async (googleResponse: { credential: any }) => {
+  const payload = {
+    credential: googleResponse.credential,
+  };
+  submitting.value = true;
+  const response = await $fetch("/api/auth/google", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: payload,
+  });
+  const { redirectTo } = response;
+  submitting.value = false;
+  window.location.href = redirectTo;
+};
 </script>

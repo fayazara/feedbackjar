@@ -1,6 +1,8 @@
 import { insertUser, getUser } from "../../db/query/users";
 import { sendError, createError, sendRedirect } from "h3";
 import { Config, Code, GithubUser } from "@/lib/types/github";
+import { eq } from "drizzle-orm";
+import { users } from "../../db/schema";
 
 async function fetchAccessToken(config: Config, code: Code) {
   try {
@@ -77,7 +79,8 @@ export default eventHandler(async (event) => {
     let redirectTo = "/dashboard";
     const accessToken = await fetchAccessToken(config, code);
     const ghUser: GithubUser = await fetchGitHubUser(config, accessToken);
-    let user = await getUser(ghUser.id);
+    const filterBy = eq(users.email, (ghUser.email as string))
+    let user = await getUser(filterBy);
     if (!user) {
       user = await insertUser(ghUser);
     }
