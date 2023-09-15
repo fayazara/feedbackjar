@@ -13,11 +13,8 @@
 import { loadScript } from "~/lib/helper";
 
 const submitting = ref(false);
-
 const config = useRuntimeConfig();
-const router = useRouter()
 
-console.log(config)
 const loadGoogleIdentityLibrary = async () => {
   await loadScript("https://accounts.google.com/gsi/client");
   google.accounts.id.initialize({
@@ -34,6 +31,7 @@ const loadGoogleIdentityLibrary = async () => {
 onMounted(() => {
   loadGoogleIdentityLibrary();
 });
+
 const loginCallback = async (googleResponse: { credential: any }) => {
   const payload = {
     credential: googleResponse.credential,
