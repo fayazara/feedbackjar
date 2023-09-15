@@ -1,0 +1,7 @@
+{
+  "*.{vue,ts,tsx,js,jsx,cjs}": ["eslint --fix"],
+  "*.css": ["stylelint --allow-empty-input --fix"],
+  "*": [
+    "prettier --ignore-unknown --write"
+  ]
+}
