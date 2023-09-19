@@ -1,0 +1,7 @@
+version: 3
+updates:
+- package-ecosystem: "yarn"
+  directory: "/"
+  schedule:
+    interval: "weekly"
+  open-pull-requests-limit: 10
