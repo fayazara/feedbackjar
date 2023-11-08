@@ -13,9 +13,10 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <LoginGithub/>
-      <LoginGoogle/>
-
+      <div class="grid grid-cols-1 gap-4">
+        <LoginGithub/>
+        <LoginGoogle/>
+      </div>
       <p class="mt-10 text-sm text-center">
         <UButton to="/" variant="soft" icon="i-heroicons-chevron-left-20-solid">
           Back

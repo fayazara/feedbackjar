@@ -22,6 +22,8 @@ logs
 .env.*
 !.env.example
 
+# VS Code
+.vscode/
 
 nuxt.d.ts
 .history

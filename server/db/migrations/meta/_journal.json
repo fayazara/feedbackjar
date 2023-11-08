@@ -22,6 +22,13 @@
       "when": 1693681533430,
       "tag": "0002_clumsy_strong_guy",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1699436664839,
+      "tag": "0003_thin_sabretooth",
+      "breakpoints": true
     }
   ]
 }
