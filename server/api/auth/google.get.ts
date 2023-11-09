@@ -13,7 +13,6 @@ function mapGoogleUserToDBUser(payload: any) {
 export default oauth.googleEventHandler({
   async onSuccess(event: any, { user }: any) {
     const filterBy = eq(users.email, user.email as string);
-    console.log('user,', user)
     let userDb = await getUser(filterBy);
     if (!userDb) {
       userDb = await insertUser(mapGoogleUserToDBUser(user));
