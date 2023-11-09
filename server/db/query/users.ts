@@ -1,55 +1,30 @@
 import { eq } from "drizzle-orm";
 import { users } from "../schema";
-import { z } from "h3-zod";
-import { GithubUser } from "@/lib/types/github";
 
 export const allUsers = async () => await useDb().select().from(users).all();
 
-export const getUser = async (githubId: number) => {
-  const id = z.number().parse(githubId);
-
-  const results = await useDb()
-    .select()
-    .from(users)
-    .where(eq(users.githubId, id))
-    .all();
+export const getUser = async (filterBy: any) => {
+  const results = await useDb().select().from(users).where(filterBy).all();
   return results[0];
 };
 
-export const insertUser = async (data: GithubUser) => {
-  const {
-    id,
-    login,
+export const insertUser = async (data: any) => {
+  const { name, email, avatarUrl } = data;
+
+  const payload: any = {
     name,
     email,
     avatarUrl,
-    twitterUsername,
-    bio,
-    blog,
-    company,
-    location,
-    githubUrl,
-  } = data;
+    createdAt: new Date(),
+  };
 
-  const user = await useDb()
-    .insert(users)
-    .values({
-      createdAt: new Date(),
-      githubId: id,
-      githubUsername: login,
-      name,
-      email,
-      avatarUrl: avatarUrl,
-      twitterUsername: twitterUsername,
-      githubUrl: githubUrl,
-      bio,
-      blog,
-      company,
-      location,
-    })
-    .returning()
-    .get();
-  return user;
+  try {
+    const user = await useDb().insert(users).values(payload).returning().get();
+    return user;
+  } catch (err) {
+    console.log("Failed to create user", err);
+    return null;
+  }
 };
 
 export const onBoardUser = async (userId: number) => {

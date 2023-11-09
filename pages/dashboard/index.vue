@@ -26,11 +26,11 @@
     </div>
 
     <div
-      class="sticky h-14 top-0 z-40 md:pl-60 flex items-center justify-between gap-x-4 bg-white dark:bg-gray-950 dark:border-b border-gray-900 px-4 py-4 shadow-sm sm:px-6"
+      class="flex sticky top-0 z-40 gap-x-4 justify-between items-center px-4 py-4 h-14 bg-white border-gray-900 shadow-sm md:pl-60 dark:bg-gray-950 dark:border-b sm:px-6"
     >
-      <div class="flex items-center gap-x-2 md:hidden">
-        <Logo class="h-6 w-auto" />
-        <p class="font-medium text-lg">Feedbackjar</p>
+      <div class="flex gap-x-2 items-center md:hidden">
+        <Logo class="w-auto h-6" />
+        <p class="text-lg font-medium">Feedbackjar</p>
       </div>
       <div class="flex-grow"></div>
       <UButton
@@ -52,7 +52,7 @@
     </div>
 
     <div class="lg:pl-60">
-      <NuxtPage v-if="user.onboarded" />
+      <NuxtPage v-if="user?.onboarded" />
       <DashboardOnboard v-else />
     </div>
     <UNotifications />
