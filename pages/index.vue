@@ -15,7 +15,7 @@ const { loggedIn } = useUserSession();
 //   pick: ["stargazers_count"],
 // });
 const data = {
-  stargazers_count: 84
+  stargazers_count: 107
 }
 </script>
 
