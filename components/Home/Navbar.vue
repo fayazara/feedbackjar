@@ -1,13 +1,13 @@
 <template>
   <nav
-    class="h-16 max-w-4xl mx-auto flex items-center justify-between px-6 lg:px-0"
+    class="flex justify-between items-center px-6 mx-auto max-w-4xl h-16 lg:px-0"
   >
-    <div class="flex items-center gap-x-2">
-      <Logo class="h-8 w-auto" />
+    <div class="flex gap-x-2 items-center">
+      <Logo class="w-auto h-8" />
       <span class="text-lg font-bold font-display">Feedbackjar</span>
     </div>
     <div>
-      <div class="items-center gap-x-4 hidden md:flex">
+      <div class="hidden gap-x-4 items-center md:flex">
         <UButton
           variant="ghost"
           color="gray"
@@ -40,7 +40,7 @@
           variant="ghost"
           color="gray"
           class="transition-transform active:scale-[0.98]"
-          :to="loggedIn ? '/dashboard' : '/api/auth/github'"
+          :to="loggedIn ? '/dashboard' : '/login'"
           external
           >{{ loggedIn ? "Dashboard &rarr;" : "Login &rarr;" }}</UButton
         >

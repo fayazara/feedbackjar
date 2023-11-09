@@ -2,18 +2,18 @@ import { sqliteTable, text, integer, blob } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
   id: integer("id").primaryKey(),
-  githubId: integer("github_id").notNull(), // GitHub Id
-  login: text("login"),
+  // githubId: integer("github_id").notNull(), // GitHub Id
+  // login: text("login"),
   name: text("name"),
   email: text("email"),
   avatarUrl: text("avatarUrl"),
-  githubUrl: text("githubUrl"),
-  githubUsername: text("githubUsername"),
-  twitterUsername: text("twitterUsername"),
-  bio: text("bio"),
-  blog: text("blog"),
-  company: text("company"),
-  location: text("location"),
+  // githubUrl: text("githubUrl"),
+  // githubUsername: text("githubUsername"),
+  // twitterUsername: text("twitterUsername"),
+  // bio: text("bio"),
+  // blog: text("blog"),
+  // company: text("company"),
+  // location: text("location"),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   status: text("status").notNull().default("active"),
   onboarded: integer("onboarded", { mode: "boolean" }).notNull().default(false),
