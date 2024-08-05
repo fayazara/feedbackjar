@@ -1,3 +1,5 @@
+[<img src="https://github.com/user-attachments/assets/60e89805-26fd-4074-8ced-447fb148c7e6">](http://supersaas.dev?ref=github)
+
 # Feedbackjar
 
 An open source feedback management, public roadmap, and changelog platform. The goal of feedbackjar is to empower product teams to effortlessly gather feedback, track issues, and seamlessly manage them with public roadmaps and provide updates via changelogs.
